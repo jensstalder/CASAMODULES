@@ -1,7 +1,7 @@
 {
-    "name": "casasoft/zf2-modules",
+    "name": "casasoft/casamodules",
     "type": "library",
-    "description": "Casasoft Modules for Zend Framework 2 implementations.",
+    "description": "Casasoft Modules for Zend Framework 2 (PSR7) implementations.",
     "keywords": [
         "zf2"
     ],
