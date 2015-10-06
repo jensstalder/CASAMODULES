@@ -44,8 +44,4 @@
     },
     "prefer-stable": true,
     "minimum-stability": "dev"
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> release/1.0.1
