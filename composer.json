@@ -41,5 +41,7 @@
             "CasasoftMessenger\\": "src/",
             "CasasoftGeo\\": "src/"
         }
-    }
+    },
+    "prefer-stable": true,
+    "minimum-stability": "dev"
 }
