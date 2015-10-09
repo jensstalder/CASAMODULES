@@ -98,7 +98,10 @@ class NumvalService implements FactoryInterface {
                     /*'cubature_gva' => array(
                         'required' => false,
                     ),*/
-                    'cubature_sia' => array(
+                    /*'cubature_sia' => array(
+                        'required' => false,
+                    ),*/
+                    'volume_sia_gv' => array(
                         'required' => false,
                     ),
                 )
@@ -554,18 +557,21 @@ class NumvalService implements FactoryInterface {
 
 
             //OLD?
-            'cubature_gva' => array(
+            'volume_gva' => array(
                 'label' => $this->translator->translate('Cubature GVA', 'casasoft-standards'),
                 'icon' => '',
                 'type' => 'int',
                 'si' => 'm3',
             ),
-            'cubature_sia' => array( //SIA GV (Nettogebäudevolumen ngv)
+            'volume_sia116_gv' => array(
                 'label' => $this->translator->translate('Cubature SIA', 'casasoft-standards'),
                 'icon' => '',
                 'type' => 'int',
                 'si' => 'm3',
             ),
+
+
+            
             'utilization_number' => array(
                 'label' => $this->translator->translate('Utilization number', 'casasoft-standards'),
                 'icon' => '',
