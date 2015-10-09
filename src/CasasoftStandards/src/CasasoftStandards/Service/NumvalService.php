@@ -436,31 +436,31 @@ class NumvalService implements FactoryInterface {
             │      ANV      │  AVV  │  AFV  │   Nutzvolumen + Verkehrsvolumen + Funktionsvolumen
             └───────────────┴───────┴───────┘
             */
-            'area_sia_gv' => array(
+            'volume_sia_gv' => array(
                 'label' => $this->translator->translate('SIA-GV', 'casasoft-standards'), //Bruttogeschossvolumen oder Aussen-Geschossvolume
                 'icon' => 'fa fa-retweet',
                 'type' => 'int',
                 'si' => 'm3',
             ),
-                'area_sia_angf' => array(
+                'volume_sia_angf' => array(
                     'label' => $this->translator->translate('SIA-ANGV', 'casasoft-standards'), //Aussen-Nettogeschossvolume
                     'icon' => 'fa fa-retweet',
                     'type' => 'int',
                     'si' => 'm3',
                 ),
-                    'area_sia_anf' => array(
+                    'volume_sia_anf' => array(
                         'label' => $this->translator->translate('SIA-ANV', 'casasoft-standards'), //Aussen-Nutzvolume
                         'icon' => 'fa fa-retweet',
                         'type' => 'int',
                         'si' => 'm3',
                     ),
-                    'area_sia_avf' => array(
+                    'volume_sia_avf' => array(
                         'label' => $this->translator->translate('SIA-AVV', 'casasoft-standards'), //Aussen-Verkehrsvolume
                         'icon' => 'fa fa-retweet',
                         'type' => 'int',
                         'si' => 'm3',
                     ),
-                    'area_sia_aff' => array(
+                    'volume_sia_aff' => array(
                         'label' => $this->translator->translate('SIA-AFV', 'casasoft-standards'), //Aussen-Funktionsvolume
                         'icon' => 'fa fa-retweet',
                         'type' => 'int',
@@ -468,7 +468,7 @@ class NumvalService implements FactoryInterface {
                     ),
 
 
-                'area_sia_akf' => array(
+                'volume_sia_akf' => array(
                     'label' => $this->translator->translate('SIA-AFV', 'casasoft-standards'), //Aussen-Konstruktionsvolume
                     'icon' => 'fa fa-retweet',
                     'type' => 'int',
