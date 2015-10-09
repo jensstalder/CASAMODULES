@@ -89,7 +89,10 @@ class NumvalService implements FactoryInterface {
                     'area_nwf' => array(
                         'required' => false,
                     ),
-                    'area_property_land' => array(
+                    /*'area_property_land' => array(
+                        'required' => false,
+                    ),*/
+                    'area_sia_gsf' => array(
                         'required' => false,
                     ),
                     /*'cubature_gva' => array(
