@@ -7,12 +7,10 @@ use Zend\Http\Client as HttpClient;
 use Zend\Json\Json;
 
 class LogService {
-    protected $viewRender;
     protected $config = array();
     protected $stack = array();
 
-    public function __construct($viewRender){
-        $this->viewRender = $viewRender;
+    public function __construct(){
     }
 
     public function setConfig($config){
@@ -119,7 +117,6 @@ class LogService {
         ));
         
         $client->setMethod('POST');
-        
         $client->setRawBody(Json::encode($this->stack));
         $client->setEncType(HttpClient::ENC_FORMDATA);
         $client->setAuth($this->config['username'], $this->config['password'], \Zend\Http\Client::AUTH_BASIC);
