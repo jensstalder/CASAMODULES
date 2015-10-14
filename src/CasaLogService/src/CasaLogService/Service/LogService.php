@@ -224,7 +224,9 @@ class LogService implements \Zend\Log\Writer\WriterInterface {
      * @return WriterInterface
      */
     public function write(array $event){
-        $this->stageMsg($event['message'], $event['priority']);
+        if (!$this->config['zend_logger_cap'] || $event['priority'] <= $this->config['zend_logger_cap']) {
+            $this->stageMsg($event['message'], $event['priority']);
+        }
     }
 
     /**
