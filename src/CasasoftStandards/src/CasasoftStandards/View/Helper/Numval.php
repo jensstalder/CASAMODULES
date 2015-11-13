@@ -6,23 +6,35 @@ use Zend\View\Model\ViewModel;
 
 class Numval extends AbstractHelper{ 
     public $numvalService = false;
-    public function __construct($numvalService){
+    function __construct($numvalService){
        $this->numvalService = $numvalService;
     }
 
-    public function __invoke($input, $seek = 'label', $options = array()){
-        $item = false;
-        try {
-            $item = $this->numvalService->getItem($input);
-        } catch (\Exception $e) {
+    public function __invoke($item, $seek = 'label', $value = null, $options = array()){
+        if (is_string($item)) {
+            try {
+                $item = $this->numvalService->getItem($item);
+                $item->setValue($value);
+            } catch (\Exception $e) {
+                return '';
+            }
+        } elseif (!is_object($item)) {
             return '';
         }
+
         switch ($seek) {
             case 'label':
                 return $item->getLabel();
                 break;
             case 'value':
-                return $item->getKey();
+                $val = $item->getValue();
+                switch ($item->getSi()) {
+                    case 'm': $val = $val . ' m'; break;
+                    case 'm2': $val = $val . ' m<sup>2</sup>'; break;
+                    case 'm3': $val = $val . ' m<sup>3</sup>'; break;
+                }
+
+                return $val;
                 break;
             case 'icon':
                 return $item->getIcon();
