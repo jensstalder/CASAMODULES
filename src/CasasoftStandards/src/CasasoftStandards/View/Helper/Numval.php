@@ -11,6 +11,9 @@ class Numval extends AbstractHelper{
     }
 
     public function __invoke($item, $seek = 'label', $value = null, $options = array()){
+        $options = array_merge(array(
+            'km_convert_at' => 501
+        ), $options);
         if (is_string($item)) {
             try {
                 $item = $this->numvalService->getItem($item);
@@ -22,16 +25,24 @@ class Numval extends AbstractHelper{
             return '';
         }
 
+        $number_filter = new \Zend\I18n\Filter\NumberFormat("de_CH");
+
         switch ($seek) {
             case 'label':
                 return $item->getLabel();
                 break;
             case 'value':
                 $val = $item->getValue();
+                $km = false;
                 switch ($item->getSi()) {
-                    case 'm': $val = $val . ' m'; break;
-                    case 'm2': $val = $val . ' m<sup>2</sup>'; break;
-                    case 'm3': $val = $val . ' m<sup>3</sup>'; break;
+                    case 'm': case 'm2': case 'm3':
+                        if ($options['km_convert_at'] && $val >= $options['km_convert_at']) {
+                            $val = $val/1000;
+                            $km = true;
+                        }
+                    case 'm': $val = $number_filter->filter($val) . ' ' . ($km ? 'km' : 'm'); break;
+                    case 'm2': $val = $number_filter->filter($val) . ' ' . ($km ? 'km' : 'm').'<sup>2</sup>'; break;
+                    case 'm3': $val = $number_filter->filter($val) . ' ' . ($km ? 'km' : 'm').'<sup>3</sup>'; break;
                 }
 
                 return $val;
