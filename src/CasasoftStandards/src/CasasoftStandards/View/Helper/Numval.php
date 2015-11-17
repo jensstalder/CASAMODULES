@@ -34,15 +34,19 @@ class Numval extends AbstractHelper{
             case 'value':
                 $val = $item->getValue();
                 $km = false;
+
+                //km conversion
+                if (in_array($item->getSi(), array('m', 'm2', 'm3'))) {
+                    if ($options['km_convert_at'] && $val >= $options['km_convert_at']) {
+                        $val = $val/1000;
+                        $km = true;
+                    }
+                }
+
                 switch ($item->getSi()) {
-                    case 'm': case 'm2': case 'm3':
-                        if ($options['km_convert_at'] && $val >= $options['km_convert_at']) {
-                            $val = $val/1000;
-                            $km = true;
-                        }
                     case 'm': $val = $number_filter->filter($val) . ' ' . ($km ? 'km' : 'm'); break;
-                    case 'm2': $val = $number_filter->filter($val) . ' ' . ($km ? 'km' : 'm').'<sup>2</sup>'; break;
-                    case 'm3': $val = $number_filter->filter($val) . ' ' . ($km ? 'km' : 'm').'<sup>3</sup>'; break;
+                    case 'm2': $val = $number_filter->filter($val) . ' ' . ($km ? 'km' : 'm') . '<sup>2</sup>'; break;
+                    case 'm3': $val = $number_filter->filter($val) . ' ' . ($km ? 'km' : 'm') . '<sup>3</sup>'; break;
                 }
 
                 return $val;
