@@ -36,7 +36,7 @@ class Numval extends AbstractHelper{
                 $km = false;
 
                 //km conversion
-                if (in_array($item->getSi(), array('m', 'm2', 'm3'))) {
+                if (in_array($item->getSi(), array('m'))) {
                     if ($options['km_convert_at'] && $val >= $options['km_convert_at']) {
                         $val = $val/1000;
                         $km = true;
