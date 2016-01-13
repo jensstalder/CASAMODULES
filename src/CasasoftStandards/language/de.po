@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Shala\n"
 "POT-Creation-Date: 2015-12-10 10:29+0100\n"
-"PO-Revision-Date: 2015-12-10 10:31+0100\n"
+"PO-Revision-Date: 2016-01-13 15:15+0100\n"
 "Last-Translator: Jens Stalder <js@casasoft.ch>\n"
 "Language-Team: CasaSoft <info@casasoft.ch>\n"
 "Language: de\n"
@@ -97,7 +97,7 @@ msgstr "Grundstück"
 
 #: src/CasasoftStandards/Service/CategoryService.php:110
 msgid "Roof flat"
-msgstr "Attikawohnung"
+msgstr "Dachwohnung"
 
 #: src/CasasoftStandards/Service/CategoryService.php:114
 msgid "Row house"
