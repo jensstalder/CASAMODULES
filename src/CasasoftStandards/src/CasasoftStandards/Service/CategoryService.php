@@ -10,6 +10,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 class CategoryService implements FactoryInterface {
 
     public $items = array();
+    public $groups = array();
 
     public function __construct($translator){
         $this->translator = $translator;
@@ -22,6 +23,8 @@ class CategoryService implements FactoryInterface {
             $category->setKey($key);
             $this->addItem($category, $key);
         }
+
+        $this->groups = $this->getDefaultGroupOptions();
     }
 
     public function createService(ServiceLocatorInterface $serviceLocator){
@@ -150,10 +153,6 @@ class CategoryService implements FactoryInterface {
                 'label' => $this->translator->translate('Studio', 'casasoft-standards'),
                 'icon' => '',
             ),
-            'house' => array(
-                'label' => $this->translator->translate('House', 'casasoft-standards'),
-                'icon' => '',
-            ),
             'covered-slot' => array(
                 'label' => $this->translator->translate('Covered slot', 'casasoft-standards'),
                 'icon' => '',
@@ -249,6 +248,59 @@ class CategoryService implements FactoryInterface {
         );
     }
 
+    public function getDefaultGroupOptions(){
+        $groups = array(
+            'house-group' => array(
+                'label' => $this->translator->translate('House', 'casasoft-standards'),
+                'category_slugs' => array(
+                    'bifamiliar-house',
+                    'farm-house',
+                    'farm',
+                    'house',
+                    'mountain-farm',
+                    'row-house',
+                    'villa',
+                    'hotel',
+                    'chalet',
+                ),
+            ),
+            'apartment-group' => array(
+                'label' => $this->translator->translate('Apartment', 'casasoft-standards'),
+                'category_slugs' => array(
+                    'apartment',
+                    'flat',
+                    'ground-floor-flat',
+                    'attic-flat',
+                    'bachelor-flat',
+                    'loft',
+                    'roof-flat',
+                    'terrace-flat',
+                    'maisonette',
+                )
+            )
+        );
+
+        return $groups;
+    }
+
+    public function hasSlugInGroup($slug, $groupslug){
+        if (array_key_exists($groupslug, $this->groups)) {
+            if (in_array($slug, $this->groups[$groupslug]['category_slugs'])) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function hasASlugInGroup($slugs, $groupslug){
+        foreach ($slugs as $slug) {
+            if ($this->hasSlugInGroup($slug, $groupslug)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public function addItem($obj, $key = null) {
         if ($key == null) {
             $this->items[] = $obj;
@@ -280,12 +332,21 @@ class CategoryService implements FactoryInterface {
     //     return false;
     // }
 
+    public function getGroup($key) {
+        if (isset($this->groups[$key])) {
+            return $this->groups[$key];
+        }
+        else {
+            return false;
+        }
+    }
+
     public function getItem($key) {
         if (isset($this->items[$key])) {
             return $this->items[$key];
         }
         else {
-            throw new \Exception("Invalid key $key.");
+            return false;
         }
     }
 
