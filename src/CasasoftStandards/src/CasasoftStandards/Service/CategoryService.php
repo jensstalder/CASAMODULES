@@ -257,6 +257,7 @@ class CategoryService implements FactoryInterface {
                     'farm-house',
                     'farm',
                     'house',
+                    'single-house',
                     'mountain-farm',
                     'row-house',
                     'villa',
