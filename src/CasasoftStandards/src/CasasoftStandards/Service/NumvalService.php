@@ -54,6 +54,9 @@ class NumvalService implements FactoryInterface {
                     'property_land_price' => array(
                         'required' => false,
                     ),
+                    'year_built' => array(
+                        'required' => false,
+                    ),
                     
                 )
             ),
