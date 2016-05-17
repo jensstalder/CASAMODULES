@@ -244,7 +244,11 @@ class CategoryService implements FactoryInterface {
                 'icon' => '',
             ),
 
-            
+            'rustico' => array(
+                'label' => $this->translator->translate('Rustico', 'casasoft-standards'),
+                'icon' => '',
+            ),
+
         );
     }
 

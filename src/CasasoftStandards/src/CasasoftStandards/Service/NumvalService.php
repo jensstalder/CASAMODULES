@@ -617,13 +617,13 @@ class NumvalService implements FactoryInterface {
             'year_built' => array(
                 'label' => $this->translator->translate('Year built', 'casasoft-standards'),
                 'icon' => 'glyphicon-lg glyphicon-lg-settings',
-                'type' => 'plain',
+                'type' => 'int',
                 'si' => '',
             ),
             'year_last_renovated' => array(
                 'label' => $this->translator->translate('Year of last renovation', 'casasoft-standards'),
                 'icon' => '',
-                'type' => 'plain',
+                'type' => 'int',
                 'si' => '',
             ),
             'ceiling_height' => array(
