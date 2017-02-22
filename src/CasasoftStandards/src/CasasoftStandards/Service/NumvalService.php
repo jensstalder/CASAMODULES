@@ -60,6 +60,9 @@ class NumvalService implements FactoryInterface {
                     'year_built' => array(
                         'required' => false,
                     ),
+                    'rental_deposit' => array(
+                        'required' => false,
+                    ),
 
                 )
             ),
@@ -682,6 +685,15 @@ class NumvalService implements FactoryInterface {
                 'type' => 'int',
                 'si' => '',
             ),
+
+            'rental_deposit' => array(
+                'label' => $this->translator->translate('Rental deposit', 'casasoft-standards'),
+                'icon' => '',
+                'type' => 'int',
+                'si' => '',
+            ),
+
+            
         );
     }
 
