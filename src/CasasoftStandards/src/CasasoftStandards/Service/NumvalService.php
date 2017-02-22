@@ -39,6 +39,9 @@ class NumvalService implements FactoryInterface {
                     'year_last_renovated' => array(
                         'required' => false,
                     ),
+                    'year_renovated' => array( //depricated
+                        'required' => false,
+                    ),
                     'ceiling_height' => array(
                         'required' => false,
                     ),
@@ -57,7 +60,7 @@ class NumvalService implements FactoryInterface {
                     'year_built' => array(
                         'required' => false,
                     ),
-                    
+
                 )
             ),
             'number_of' => array(
@@ -70,6 +73,9 @@ class NumvalService implements FactoryInterface {
                         'required' => true,
                     ),
                     'number_of_bathrooms' => array(
+                        'required' => true,
+                    ),
+                    'number_of_apartments' => array(
                         'required' => true,
                     ),
                 )
@@ -86,9 +92,9 @@ class NumvalService implements FactoryInterface {
                     'area_sia_nf' => array(
                         'required' => false,
                     ),
-                    /*'area_bwf' => array(
+                    'area_bwf' => array(
                         'required' => true,
-                    ),*/
+                    ),
                     'area_nwf' => array(
                         'required' => false,
                     ),
@@ -304,12 +310,12 @@ class NumvalService implements FactoryInterface {
                 'icon' => 'fa fa-retweet',
                 'type' => 'int',
                 'si' => 'm2',
-            ),  
+            ),
 
 
 
 
-            /* SIA 
+            /* SIA
             ┌───────────────────────────────────────────────┐
             │                       GF                      │ Geschossfläche
             ├───────────────────────────────┰───────────────┧
@@ -384,7 +390,7 @@ class NumvalService implements FactoryInterface {
                         'si' => 'm2',
                     ),
 
-            /* SIA 
+            /* SIA
             ┌───────────────────────────────────────────────┐
             │                      AGF                      │ Aussen-Geschossfläche
             ├───────────────────────────────┰───────────────┧
@@ -445,7 +451,7 @@ class NumvalService implements FactoryInterface {
                     ),
 
 
-            /* SIA 
+            /* SIA
             ┌───────────────────────────────────────────────┐
             │                      GV                       │ Gebäudevolumen
             ├───────────────────────────────┬───────────────┤
@@ -494,7 +500,7 @@ class NumvalService implements FactoryInterface {
                 ),
 
 
-            /* SIA 
+            /* SIA
             ┌───────────────────────────────────────────────┐
             │                      GSF                      │ Grundstückfläche
             ├───────────────────────────────┬───────────────┤
@@ -549,19 +555,19 @@ class NumvalService implements FactoryInterface {
                 'si' => 'm2',
             ),
             'area_sia_bmz' => array( // Baumassenziffer ?
-                'label' => $this->translator->translate('SIA-BMZ', 'casasoft-standards'), 
+                'label' => $this->translator->translate('SIA-BMZ', 'casasoft-standards'),
                 'icon' => 'fa fa-retweet',
                 'type' => 'int',
                 'si' => 'm2',
             ),
             'area_sia_uz' => array( // Uberbauungsziffer ?
-                'label' => $this->translator->translate('SIA-BMZ', 'casasoft-standards'), 
+                'label' => $this->translator->translate('SIA-BMZ', 'casasoft-standards'),
                 'icon' => 'fa fa-retweet',
                 'type' => 'int',
                 'si' => 'm2',
             ),
             'area_sia_gz' => array( // Gebäudefläche / Grundstückfläche = Gebäudeflächeziffer ?
-                'label' => $this->translator->translate('SIA-BMZ', 'casasoft-standards'), 
+                'label' => $this->translator->translate('SIA-BMZ', 'casasoft-standards'),
                 'icon' => 'fa fa-retweet',
                 'type' => 'int',
                 'si' => 'm2',
@@ -583,7 +589,7 @@ class NumvalService implements FactoryInterface {
             ),
 
 
-            
+
             'utilization_number' => array(
                 'label' => $this->translator->translate('Utilization number', 'casasoft-standards'),
                 'icon' => '',
@@ -611,7 +617,7 @@ class NumvalService implements FactoryInterface {
             //aka nicht wohnfläche (manchmall komischerweise als Nutzfläche deklariert)  = NNF
 
 
-            
+
 
 
             'year_built' => array(
@@ -621,6 +627,12 @@ class NumvalService implements FactoryInterface {
                 'si' => '',
             ),
             'year_last_renovated' => array(
+                'label' => $this->translator->translate('Year of last renovation', 'casasoft-standards'),
+                'icon' => '',
+                'type' => 'int',
+                'si' => '',
+            ),
+            'year_renovated' => array( //depricated
                 'label' => $this->translator->translate('Year of last renovation', 'casasoft-standards'),
                 'icon' => '',
                 'type' => 'int',
@@ -691,7 +703,7 @@ class NumvalService implements FactoryInterface {
         if (isset($this->items[$key])) {
             unset($this->items[$key]);
         }
-        else {            
+        else {
             throw new \Exception("Invalid key $key.");
         }
     }
@@ -727,7 +739,7 @@ class NumvalService implements FactoryInterface {
         } else {
             return false;
         }
-        
+
 
     }
 
