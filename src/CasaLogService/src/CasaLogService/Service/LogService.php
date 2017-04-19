@@ -106,6 +106,49 @@ class LogService implements \Zend\Log\Writer\WriterInterface {
             return false;
         }
         
+
+        //slack reporting
+        if ($this->config['slack_hook']) {
+            $priotocolor = array(
+              'EMERG'  => '#D50200',
+              'ALERT'  => '#D50200',
+              'CRIT'   => '#D50200',
+              'ERR'    => '#DF9E30',
+              'WARN'   => '#DF9E30',
+              'NOTICE' => '#27D7E5',
+              'INFO'   => '#30A44F',
+              'DEBUG' => '#444444',
+            );
+            foreach ($this->stack as $message) {
+              $request = new \cURL\Request($this->config['slack_hook']);
+              $request->getOptions()
+                  ->set(CURLOPT_TIMEOUT, 5)
+                  ->set(CURLOPT_RETURNTRANSFER, true)
+                  ->set(CURLOPT_POST, 1)
+                  ->set(CURLOPT_POSTFIELDS, json_encode(
+                    array(
+                        //'text' => $message['message'],
+                        //"icon_emoji" => ":ghost:"
+                        "attachments" => array(
+                          array(
+                            "color" => $priotocolor[$message['create']['priorityName']],
+                            "text" => $message['create']['priorityName'] . ': ' . $message['create']['message']
+                          )
+                        )
+                    )))
+                  ->set(CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+              $request->addListener('complete', function (\cURL\Event $event) {
+                //$response = $event->response;
+              });
+
+              while ($request->socketPerform()) {
+                  // do anything else when the requests are processed
+                  $request->socketSelect();
+                  // line below pauses execution until there's new data on socket
+              }
+            }
+        }
+
         $config = array(
             'adapter'   => 'Zend\Http\Client\Adapter\Curl',
             'curloptions' => array(
