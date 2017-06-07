@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Casamodules\n"
-"POT-Creation-Date: 2017-06-06 14:11+0200\n"
-"PO-Revision-Date: 2017-06-06 14:11+0200\n"
+"POT-Creation-Date: 2017-06-07 14:24+0200\n"
+"PO-Revision-Date: 2017-06-07 14:28+0200\n"
 "Last-Translator: Jens Stalder <js@casasoft.ch>\n"
 "Language-Team: CasaSoft <info@casasoft.ch>\n"
 "Language: de\n"
@@ -153,6 +153,7 @@ msgid "Flat"
 msgstr "Etagenwohnung"
 
 #: src/CasasoftStandards/Service/CategoryService.php:73
+#: src/CasasoftStandards/Service/FeatureService.php:339
 msgid "Ground floor"
 msgstr "Erdgeschoss"
 
@@ -295,6 +296,7 @@ msgid "Rental deposit guarantee"
 msgstr "Mietkautionsgarantie"
 
 #: src/CasasoftStandards/Service/FeatureService.php:88
+#: src/CasasoftStandards/Service/FeatureService.php:351
 msgid "Raised ground floor"
 msgstr "Hochparterre"
 
@@ -494,6 +496,30 @@ msgstr "Erstwohnung"
 #: src/CasasoftStandards/Service/FeatureService.php:329
 msgid "Foreign quota"
 msgstr "Ausländerkontingent"
+
+#: src/CasasoftStandards/Service/FeatureService.php:335
+msgid "Attic"
+msgstr "Dachgeschoss"
+
+#: src/CasasoftStandards/Service/FeatureService.php:343
+msgid "Basement"
+msgstr "Untergeschoss"
+
+#: src/CasasoftStandards/Service/FeatureService.php:347
+msgid "Garden level"
+msgstr "Gartengeschoss"
+
+#: src/CasasoftStandards/Service/FeatureService.php:355
+msgid "Cellar level"
+msgstr "Kellergeschoss"
+
+#: src/CasasoftStandards/Service/FeatureService.php:359
+msgid "Recessed ground floor"
+msgstr "Tiefparterre"
+
+#: src/CasasoftStandards/Service/FeatureService.php:363
+msgid "Ground floor and first floor"
+msgstr "Erdgeschoss, Obergeschoss"
 
 #: src/CasasoftStandards/Service/IntegratedOfferService.php:42
 msgid "External parking space"
