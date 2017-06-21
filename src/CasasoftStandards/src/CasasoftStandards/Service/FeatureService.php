@@ -7,7 +7,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
-class FeatureService implements FactoryInterface {
+class FeatureService {
 
     public $items = array();
 
@@ -88,7 +88,7 @@ class FeatureService implements FactoryInterface {
                 'label' => $this->translator->translate('Raised ground floor', 'casasoft-standards'),
                 'icon' => '',
             ),
-            
+
             'has-elevator' => array(
                 'label' => $this->translator->translate('Has elevator', 'casasoft-standards'),
                 'icon' => '',
@@ -114,29 +114,29 @@ class FeatureService implements FactoryInterface {
             'is-sunny' => array(
                 'label' => $this->translator->translate('Sunny', 'casasoft-standards'),
                 'icon' => '',
-            ), 
+            ),
 
 
             //alpha
             'is-quiet' => array(
                 'label' => $this->translator->translate('Quiet', 'casasoft-standards'),
                 'icon' => '',
-            ), 
+            ),
 
             //alpha
             'is_projection' => array(
                 'label' => $this->translator->translate('Projected construction (not yet realized)', 'casasoft-standards'),
                 'icon' => '',
-            ), 
+            ),
 
             //alpha
             'has_demolition_property' => array(
                 'label' => $this->translator->translate('Contains demolition structure', 'casasoft-standards'),
                 'icon' => '',
-            ), 
+            ),
 
 
-            
+
             'is-child-friendly' => array(
                 'label' => $this->translator->translate('Child friendly', 'casasoft-standards'),
                 'icon' => '',
@@ -201,9 +201,9 @@ class FeatureService implements FactoryInterface {
                 'label' => $this->translator->translate('Animal friendly', 'casasoft-standards'),
                 'icon' => '',
             ),
-            
-            
-            
+
+
+
             'has-restrooms' => array(
                 'label' => $this->translator->translate('Restrooms', 'casasoft-standards'),
                 'icon' => '',
@@ -224,7 +224,7 @@ class FeatureService implements FactoryInterface {
                 'label' => $this->translator->translate('Gas supply', 'casasoft-standards'),
                 'icon' => '',
             ),
-            
+
             'is-corner-house' => array(
                 'label' => $this->translator->translate('Corner house', 'casasoft-standards'),
                 'icon' => '',
@@ -233,9 +233,9 @@ class FeatureService implements FactoryInterface {
                 'label' => $this->translator->translate('Middle house', 'casasoft-standards'),
                 'icon' => '',
             ),
-            
-            
-            
+
+
+
             'is-new' => array(
                 'label' => $this->translator->translate('New', 'casasoft-standards'),
                 'icon' => '',
@@ -248,7 +248,7 @@ class FeatureService implements FactoryInterface {
                 'label' => $this->translator->translate('has building law restrictions', 'casasoft-standards'),
                 'icon' => '',
             ),
-            
+
             'has-swimmingpool' => array(
                 'label' => $this->translator->translate('Swimmingpool', 'casasoft-standards'),
                 'icon' => '',
@@ -283,11 +283,11 @@ class FeatureService implements FactoryInterface {
         if (isset($this->items[$key])) {
             unset($this->items[$key]);
         }
-        else {            
+        else {
             throw new \Exception("Invalid key $key.");
         }
     }
-     
+
     public function getItem($key) {
         if (isset($this->items[$key])) {
             return $this->items[$key];
