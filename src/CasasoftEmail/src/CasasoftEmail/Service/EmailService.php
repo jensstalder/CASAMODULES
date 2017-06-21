@@ -168,6 +168,9 @@ class EmailService {
         if ($emailOptions['cc']) {
             $message->addCc($emailOptions['cc']);
         }
+        if ($emailOptions['replyto']) {
+            $message->addReplyTo($emailOptions['replyto']);
+        }
 
         if ($this->html) {
             // HTML part

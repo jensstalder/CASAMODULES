@@ -69,6 +69,7 @@ class LogServiceFactory implements FactoryInterface
             'username' => '',
             'password' => '',
             'zend_logger_cap' => 6,
+            'slack_hook' => false,
             'shutdown' => [
                 'activate' => true,
                 'report_rogue_entries' => true,
