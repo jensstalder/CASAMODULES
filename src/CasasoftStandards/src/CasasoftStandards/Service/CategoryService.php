@@ -287,13 +287,16 @@ class CategoryService {
                     'villa',
                     'hotel',
                     'chalet',
+                    'terrace-house',
                 ),
             ),
             'apartment-group' => array(
                 'label' => $this->translator->translate('Apartment', 'casasoft-standards'),
                 'category_slugs' => array(
+                    'penthouse',
                     'apartment',
                     'flat',
+                    'granny-flat',
                     'ground-floor-flat',
                     'attic-flat',
                     'bachelor-flat',
