@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Casamodules\n"
-"POT-Creation-Date: 2017-07-07 16:08+0200\n"
-"PO-Revision-Date: 2017-07-07 16:08+0200\n"
+"POT-Creation-Date: 2017-07-19 16:20+0200\n"
+"PO-Revision-Date: 2017-07-19 16:20+0200\n"
 "Last-Translator: Jens Stalder <js@casasoft.ch>\n"
 "Language-Team: CasaSoft <info@casasoft.ch>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.12\n"
+"X-Generator: Poedit 2.0.2\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;translate;translatePlural:1,2\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 
 #: src/CasasoftStandards/Service/CategoryService.php:37
-#: src/CasasoftStandards/Service/CategoryService.php:293
+#: src/CasasoftStandards/Service/CategoryService.php:294
 msgid "Apartment"
 msgstr "Wohnung"
 
@@ -983,7 +983,7 @@ msgstr "Ferien"
 
 #: src/CasasoftStandards/Service/UtilityService.php:46
 msgid "Agricultural"
-msgstr "Landwirtschafts&#173;betrieb"
+msgstr "Landwirtschaftsbetrieb"
 
 #: src/CasasoftStandards/Service/UtilityService.php:50
 msgid "Industrial"
