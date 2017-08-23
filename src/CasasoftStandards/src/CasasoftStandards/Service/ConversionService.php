@@ -5,6 +5,16 @@ use Zend\Http\Request;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
+/*
+  echo $this->casasoftConversion->getLabel('number_of_rooms');
+  echo $this->casasoftConversion->getLabel('number_of_rooms', 'numeric_value');
+  echo $this->casasoftConversion->getValue($gateway_response, 'number_of_rooms', 'numeric_value');
+  echo $this->casasoftConversion->getValue($gateway_response, 'number_of_rooms');
+  echo $this->casasoftConversion->getRenderedValue($gateway_response, 'number_of_rooms', 'numeric_value');
+  echo $this->casasoftConversion->getRenderedValue($gateway_response, 'number_of_rooms');
+  print_r($this->casasoftConversion->getList($gateway_response, 'key-facts'));
+  var_dump($this->casasoftConversion->getList($gateway_response, [['number_of_rooms', 'numeric_value'],['is-new', 'feature']]));
+*/
 class ConversionService {
 
     public function __construct($translator, $numvalService, $categoryService, $featureService, $utilityService){
@@ -162,8 +172,8 @@ class ConversionService {
                     'is-new-construction',
                     'is-partially-renovation-indigent',
                     'is-partially-refurbished',
-                    'is-refurbished']
-                  ) ) {
+                    'is-refurbished'
+                  ] ) ) {
                       $conditions[] = $this->getLabel($feature['key'], 'feature');
                   }
                 }
@@ -182,6 +192,26 @@ class ConversionService {
             }
             break;
           case 'Erschliessung':
+            $features = array();
+            if (isset($offerEntity['_embedded']['property']['_embedded']['features'])) {
+                foreach ($offerEntity['_embedded']['property']['_embedded']['features'] as $feature) {
+                  if (in_array($feature['key'], [
+                    'has-water-supply',
+                    'has-sewage-supply',
+                    'has-power-supply',
+                    'has-gas-supply',
+                  ] ) ) {
+                      $features[] = $this->getLabel($feature['key'], 'feature');
+                  }
+                }
+            }
+            if (count($features) == 4) {
+              $this->translator->translate('Fully ***');
+            } elseif (count($features)) {
+              $this->translator->translate('Partialy ***');
+            } else {
+              $this->translator->translate('NOT ***');
+            }
             return '';
             break;
           case 'zoneTypes':
