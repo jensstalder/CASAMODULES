@@ -6,16 +6,19 @@ use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 /*
+  echo $this->casasoftConversion->setOfferEntity(['array_of_property']);
   echo $this->casasoftConversion->getLabel('number_of_rooms');
   echo $this->casasoftConversion->getLabel('number_of_rooms', 'numeric_value');
-  echo $this->casasoftConversion->getValue($gateway_response, 'number_of_rooms', 'numeric_value');
-  echo $this->casasoftConversion->getValue($gateway_response, 'number_of_rooms');
-  echo $this->casasoftConversion->getRenderedValue($gateway_response, 'number_of_rooms', 'numeric_value');
-  echo $this->casasoftConversion->getRenderedValue($gateway_response, 'number_of_rooms');
-  print_r($this->casasoftConversion->getList($gateway_response, 'key-facts'));
-  var_dump($this->casasoftConversion->getList($gateway_response, [['number_of_rooms', 'numeric_value'],['is-new', 'feature']]));
+  echo $this->casasoftConversion->getValue('number_of_rooms', 'numeric_value');
+  echo $this->casasoftConversion->getValue('number_of_rooms');
+  echo $this->casasoftConversion->getRenderedValue('number_of_rooms', 'numeric_value');
+  echo $this->casasoftConversion->getRenderedValue('number_of_rooms');
+  print_r($this->casasoftConversion->getList('key-facts'));
+  var_dump($this->casasoftConversion->getList([['number_of_rooms', 'numeric_value'],['is-new', 'feature']]));
 */
 class ConversionService {
+
+    public $property = null;
 
     public function __construct($translator, $numvalService, $categoryService, $featureService, $utilityService){
         $this->translator = $translator;
@@ -23,6 +26,40 @@ class ConversionService {
         $this->categoryService = $categoryService;
         $this->featureService = $featureService;
         $this->utilityService = $utilityService;
+
+        $this->setProperty([]);
+    }
+
+
+    public function setProperty(Array $data){
+      $this->property = $data;
+
+      if (isset($data['_embedded']['property'])) {
+          $this->property = $data['_embedded']['property'];
+      } elseif (isset($data['_embedded']['provider'])) {
+        $this->property = $data;
+      }
+
+      //ensure
+      if (!isset($this->property['features']) || !$this->property['features']) {
+        $this->property['features'] = [];
+      }
+      if (!isset($this->property['numeric_values']) || !$this->property['numeric_values']) {
+        $this->property['numeric_values'] = [];
+      }
+
+      //simplify
+      if ($this->property['_embedded']['numeric_values']) {
+        $this->property['numeric_values'] = $this->property['_embedded']['numeric_values'];
+        unset($this->property['_embedded']['numeric_values']);
+      }
+      if ($this->property['_embedded']['features']) {
+        $this->property['features'] = [];
+        foreach ($this->property['_embedded']['features'] as $embfeature) {
+          $this->property['features'][] = $embfeature['key'];
+        }
+        unset($this->property['_embedded']['features']);
+      }
     }
 
     public $templates = [
@@ -59,6 +96,23 @@ class ConversionService {
     }
 
     public function getLabel($key, $context = 'smart'){
+      if ($context == 'smart' || $context == 'special') {
+        switch ($key) {
+          case 'visualReferenceId': return $this->translator->translate('Reference ID'); break;
+          case 'categories': return $this->translator->translate('Categories'); break;
+          case 'start': return $this->translator->translate('Available from'); break;
+          case 'condition': return $this->translator->translate('Condition'); break;
+          case 'Wärmeerzeugung': return 'Wärmeerzeugung'; break;
+          case 'Wärmeverteilung': return 'Wärmeverteilung'; break;
+          case 'parcelNumbers': return $this->translator->translate('Pracel number'); break;
+          case 'Erschliessung': return 'Erschliessung'; break;
+          case 'zoneTypes': return $this->translator->translate('Zone type'); break;
+          case 'key-facts': return $this->translator->translate('Key facts'); break;
+          case 'areas': return $this->translator->translate('Areas'); break;
+          case 'features': return $this->translator->translate('Features'); break;
+        }
+      }
+
       if ($context == 'smart' || $context == 'numeric_value') {
         $numval = $this->numvalService->getItem($key);
         if ($numval) {return $numval->getLabel();}
@@ -79,34 +133,35 @@ class ConversionService {
         if ($utility) {return $utility->getLabel();}
       }
 
-      if ($context == 'smart' || $context == 'special') {
-        switch ($key) {
-          case 'visualReferenceId': return $this->translator->translate('Reference ID'); break;
-          case 'categories': return $this->translator->translate('Categories'); break;
-          case 'start': return $this->translator->translate('Available from'); break;
-          case 'condition': return $this->translator->translate('Condition'); break;
-          case 'Wärmeerzeugung': return 'Wärmeerzeugung'; break;
-          case 'Wärmeverteilung': return 'Wärmeverteilung'; break;
-          case 'parcelNumbers': return 'parcelNumbers'; break;
-          case 'Erschliessung': return 'Erschliessung'; break;
-          case 'zoneTypes': return 'zoneTypes'; break;
-        }
-      }
+
 
       return $key;
     }
 
-    public function getRenderedValue($offerEntity, $key, $context = 'smart'){
-      $value = $this->getValue($offerEntity, $key, $context);
-      return $value;
-    }
-
-    public function getValue($offerEntity, $key, $context = 'smart'){
+    public function getRenderedValue($key, $context = 'smart'){
       if ($context == 'smart' || $context == 'numeric_value') {
         $numval = $this->numvalService->getItem($key);
         if ($numval) {
-          if (isset($offerEntity['_embedded']['property']['_embedded']['numeric_values'])) {
-            foreach ($offerEntity['_embedded']['property']['_embedded']['numeric_values'] as $propnumval) {
+          if (isset($this->property['numeric_values'])) {
+            foreach ($this->property['numeric_values'] as $propnumval) {
+              if ($propnumval['key'] == $key) {
+                $numval->setValue($propnumval['value']);
+              }
+            }
+          }
+          return $numval->getRenderedValue();
+        }
+      }
+      $value = $this->getValue($key, $context);
+      return $value;
+    }
+
+    public function getValue($key, $context = 'smart'){
+      if ($context == 'smart' || $context == 'numeric_value') {
+        $numval = $this->numvalService->getItem($key);
+        if ($numval) {
+          if (isset($this->property['numeric_values'])) {
+            foreach ($this->property['numeric_values'] as $propnumval) {
               if ($propnumval['key'] == $key) {
                 $numval->setValue($propnumval['value']);
               }
@@ -119,64 +174,55 @@ class ConversionService {
       if ($context == 'smart' || $context == 'feature') {
         $feature = $this->featureService->getItem($key);
         if ($feature) {
-          if (isset($offerEntity['_embedded']['property']['_embedded']['features'])) {
-            foreach ($offerEntity['_embedded']['property']['_embedded']['features'] as $propfeature) {
-              if ($propfeature['key'] == $key) {
-                return true;
-              }
-            }
-          }
-          return false;
+          return in_array($key, $this->property['features']);
         }
       }
 
       if ($context == 'smart' || $context == 'special') {
         switch ($key) {
           case 'visualReferenceId':
-            if (isset($offerEntity['_embedded']['property']['visual_reference_id'])) {
-              return $offerEntity['_embedded']['property']['visual_reference_id'];
+            if (isset($this->property['visual_reference_id'])) {
+              return $this->property['visual_reference_id'];
             }
-            if (isset($offerEntity['_embedded']['property']['id'])) {
-              return $offerEntity['_embedded']['property']['id'];
+            if (isset($this->property['id'])) {
+              return $this->property['id'];
             }
             break;
           case 'categories':
             $categories = array();
-            if (isset($offerEntity['_embedded']['property']['_embedded']['property_categories'])) {
-                foreach ($offerEntity['_embedded']['property']['_embedded']['property_categories'] as $cat_item) {
+            if (isset($this->property['_embedded']['property_categories'])) {
+                foreach ($this->property['_embedded']['property_categories'] as $cat_item) {
                     $categories[] = $this->getLabel($cat_item['category_id'], 'category');
                 }
             }
             return str_replace(' ', '-', implode('-', $categories));
             break;
           case 'start':
-            if (isset($offerEntity['_embedded']['property']['start'])) {
-              return $offerEntity['_embedded']['property']['start'];
+            if (isset($this->property['start'])) {
+              return $this->property['start'];
             } else {
               return $this->translator->translate('On Request');
             }
             break;
           case 'condition':
             $conditions = array();
-            if (isset($offerEntity['_embedded']['property']['_embedded']['features'])) {
-                foreach ($offerEntity['_embedded']['property']['_embedded']['features'] as $feature) {
-                  if (in_array($feature['key'], [
-                    'is-demolition-property',
-                    'is-dilapidated',
-                    'is-gutted',
-                    'is-first-time-occupancy',
-                    'is-well-tended',
-                    'is-modernized',
-                    'is-renovation-indigent',
-                    'is-shell-construction',
-                    'is-new-construction',
-                    'is-partially-renovation-indigent',
-                    'is-partially-refurbished',
-                    'is-refurbished'
-                  ] ) ) {
-                      $conditions[] = $this->getLabel($feature['key'], 'feature');
-                  }
-                }
+            foreach ($this->property['features'] as $featureKey) {
+              if (in_array($featureKey, [
+                'is-demolition-property',
+                'is-dilapidated',
+                'is-gutted',
+                'is-first-time-occupancy',
+                'is-well-tended',
+                'is-modernized',
+                'is-renovation-indigent',
+                'is-shell-construction',
+                'is-new-construction',
+                'is-partially-renovation-indigent',
+                'is-partially-refurbished',
+                'is-refurbished'
+              ] ) ) {
+                  $conditions[] = $this->getLabel($featureKey, 'feature');
+              }
             }
             return str_replace(' ', '-', implode('-', $conditions));
             break;
@@ -187,23 +233,21 @@ class ConversionService {
             return '';
             break;
           case 'parcelNumbers':
-            if (isset($offerEntity['_embedded']['property']['parcelNumbers'])) {
-              return $offerEntity['_embedded']['property']['parcelNumbers'];
+            if (isset($this->property['parcelNumbers'])) {
+              return $this->property['parcelNumbers'];
             }
             break;
           case 'Erschliessung':
             $features = array();
-            if (isset($offerEntity['_embedded']['property']['_embedded']['features'])) {
-                foreach ($offerEntity['_embedded']['property']['_embedded']['features'] as $feature) {
-                  if (in_array($feature['key'], [
-                    'has-water-supply',
-                    'has-sewage-supply',
-                    'has-power-supply',
-                    'has-gas-supply',
-                  ] ) ) {
-                      $features[] = $this->getLabel($feature['key'], 'feature');
-                  }
-                }
+            foreach ($this->property['features'] as $featureKey) {
+              if (in_array($featureKey, [
+                'has-water-supply',
+                'has-sewage-supply',
+                'has-power-supply',
+                'has-gas-supply',
+              ] ) ) {
+                  $features[] = $this->getLabel($featureKey, 'feature');
+              }
             }
             if (count($features) == 4) {
               $this->translator->translate('Fully ***');
@@ -215,8 +259,8 @@ class ConversionService {
             return '';
             break;
           case 'zoneTypes':
-            if (isset($offerEntity['_embedded']['property']['zoneTypes'])) {
-              return $offerEntity['_embedded']['property']['zoneTypes'];
+            if (isset($this->property['zoneTypes'])) {
+              return $this->property['zoneTypes'];
             }
             break;
         }
@@ -226,38 +270,68 @@ class ConversionService {
       return null;
     }
 
-    public function getList($offerEntity, $template = 'key-facts', $filtered = false){
+    public function getList($templateMixed = 'key-facts', $filtered = false){
       $list = [];
-
-      if (is_string($template)) {
-        if (array_key_exists($template, $this->templates)) {
-          $template = $this->templates[$template];
+      $template = [];
+      if (is_string($templateMixed)) {
+        if (array_key_exists($templateMixed, $this->templates)) {
+          $template = $this->templates[$templateMixed];
+        } elseif ($template === 'areas') {
+          $template = [];
+          foreach ($this->numvalService->getDefaultOptions() as $key => $options) {
+            if(strpos($key, 'area_') !== false) {
+              $template[] = [$key, 'numeric_value'];
+            }
+          }
+        } elseif ($templateMixed === 'distances') {
+          $template = [];
+          foreach ($this->numvalService->getDefaultOptions() as $key => $options) {
+            if(strpos($key, 'distance_') !== false) {
+              $template[] = [$key, 'numeric_value'];
+            }
+          }
+        } elseif ($templateMixed === 'features') {
+          $template = [];
+          foreach ($this->featureService->getDefaultOptions() as $key => $options) {
+            $template[] = [$key, 'feature'];
+          }
         } else {
           return $list;
         }
+      } else {
+        if (!is_array($template)) {
+          return $list;
+        } else {
+          $template = $templateMixed;
+        }
       }
 
-      if (!is_array($template)) {
-        return $list;
-      }
+
 
       foreach ($template as $field) {
-        $field = [
+        $rfield = [
           'key' => $field[0],
           'context' => ($field[1] ? $field[1] : 'smart'),
           'label' => $this->getLabel($field[0], ($field[1] ? $field[1] : 'smart')),
-          'value' => $this->getValue($offerEntity, $field[0], ($field[1] ? $field[1] : 'smart')),
-          'renderedValue' => $this->getRenderedValue($offerEntity, $field[0], ($field[1] ? $field[1] : 'smart')),
+          'value' => $this->getValue($field[0], ($field[1] ? $field[1] : 'smart')),
+          'renderedValue' => $this->getRenderedValue($field[0], ($field[1] ? $field[1] : 'smart')),
         ];
-        if ($filtered && !$field['value']) {
+        if ($filtered && !$rfield['value']) {
 
         } else {
-            $list[] = $field;
+            $list[] = $rfield;
         }
+      }
 
+      if ($templateMixed == 'features') {
+        usort($list, function($a, $b) {
+            return strcmp($a["label"], $b["label"]);
+        });
       }
 
       return $list;
+
+
     }
 
 
