@@ -98,18 +98,18 @@ class ConversionService {
     public function getLabel($key, $context = 'smart'){
       if ($context == 'smart' || $context == 'special') {
         switch ($key) {
-          case 'visualReferenceId': return $this->translator->translate('Reference ID'); break;
-          case 'categories': return $this->translator->translate('Categories'); break;
-          case 'start': return $this->translator->translate('Available from'); break;
-          case 'condition': return $this->translator->translate('Condition'); break;
+          case 'visualReferenceId': return $this->translator->translate('Reference no.', 'casasoft-standards'); break;
+          case 'categories': return $this->translator->translate('Categories', 'casasoft-standards'); break;
+          case 'start': return $this->translator->translate('Available from', 'casasoft-standards'); break;
+          case 'condition': return $this->translator->translate('Condition', 'casasoft-standards'); break;
           case 'Wärmeerzeugung': return 'Wärmeerzeugung'; break;
           case 'Wärmeverteilung': return 'Wärmeverteilung'; break;
-          case 'parcelNumbers': return $this->translator->translate('Pracel number'); break;
+          case 'parcelNumbers': return $this->translator->translate('Plot no.', 'casasoft-standards'); break;
           case 'Erschliessung': return 'Erschliessung'; break;
-          case 'zoneTypes': return $this->translator->translate('Zone type'); break;
-          case 'key-facts': return $this->translator->translate('Key facts'); break;
-          case 'areas': return $this->translator->translate('Areas'); break;
-          case 'features': return $this->translator->translate('Features'); break;
+          case 'zoneTypes': return $this->translator->translate('Zone type', 'casasoft-standards'); break;
+          case 'key-facts': return $this->translator->translate('Key facts', 'casasoft-standards'); break;
+          case 'areas': return $this->translator->translate('Areas', 'casasoft-standards'); break;
+          case 'features': return $this->translator->translate('Features', 'casasoft-standards'); break;
         }
       }
 
@@ -132,9 +132,6 @@ class ConversionService {
         $utility = $this->utilityService->getItem($key);
         if ($utility) {return $utility->getLabel();}
       }
-
-
-
       return $key;
     }
 
@@ -201,7 +198,7 @@ class ConversionService {
             if (isset($this->property['start'])) {
               return $this->property['start'];
             } else {
-              return $this->translator->translate('On Request');
+              return $this->translator->translate('On Request', 'casasoft-standards');
             }
             break;
           case 'condition':
@@ -250,11 +247,11 @@ class ConversionService {
               }
             }
             if (count($features) == 4) {
-              $this->translator->translate('Fully ***');
+              $this->translator->translate('Fully ***', 'casasoft-standards');
             } elseif (count($features)) {
-              $this->translator->translate('Partialy ***');
+              $this->translator->translate('Partialy ***', 'casasoft-standards');
             } else {
-              $this->translator->translate('NOT ***');
+              $this->translator->translate('NOT ***', 'casasoft-standards');
             }
             return '';
             break;
