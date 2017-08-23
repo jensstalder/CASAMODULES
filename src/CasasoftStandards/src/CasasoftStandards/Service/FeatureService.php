@@ -414,6 +414,7 @@ class FeatureService {
             return $this->items[$key];
         }
         else {
+          return null;
             throw new \Exception("Invalid key $key.");
         }
     }

@@ -725,7 +725,7 @@ class NumvalService {
             return $this->items[$key];
         }
         else {
-            throw new \Exception("Invalid key $key.");
+          return false;
         }
     }
 

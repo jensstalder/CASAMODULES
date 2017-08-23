@@ -16,16 +16,17 @@ return array(
             'CasasoftNumval'          => 'CasasoftStandards\Service\NumvalServiceFactory',
             'CasasoftUtility'         => 'CasasoftStandards\Service\UtilityServiceFactory',
             'CasasoftIntegratedOffer' => 'CasasoftStandards\Service\IntegratedOfferServiceFactory',
+            'CasasoftConversion'      => 'CasasoftStandards\Service\ConversionServiceFactory',
         )
     ),
-    'translator' => array( 
-        'translation_file_patterns' => array( 
-            array( 
+    'translator' => array(
+        'translation_file_patterns' => array(
+            array(
                 'type'        => 'gettext',
-                'base_dir'    => __DIR__ . '/../language', 
+                'base_dir'    => __DIR__ . '/../language',
                 'pattern'     => '%s.mo',
-                'text_domain' => 'casasoft-standards', 
-            ), 
-        ), 
-    ), 
+                'text_domain' => 'casasoft-standards',
+            ),
+        ),
+    ),
 );
