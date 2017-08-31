@@ -1050,3 +1050,43 @@ msgstr ""
 msgid "Investment"
 msgstr "Investment"
 
+#: 
+msgid "Gross rent / m² / month"
+msgstr "Affitto lordo / m² / mese"
+
+#: 
+msgid "Gross rent / m² / year"
+msgstr "Affitto lordo / m² / anno"
+
+#: 
+msgid "Gross rent / month"
+msgstr "Affitto lordo / mese"
+
+#: 
+msgid "Gross rent / year"
+msgstr "Affitto netto / anno"
+
+#: 
+msgid "Gross price"
+msgstr "Prezzo lordo"
+
+#: 
+msgid "Net rent / m² / month"
+msgstr "Affitto netto / m² / mese"
+
+#: 
+msgid "Net rent / m² / year"
+msgstr "Affitto netto / m² / anno"
+
+#: 
+msgid "Net rent / year"
+msgstr "Affitto netto / anno"
+
+#: 
+msgid "Net rent / month"
+msgstr "Affitto netto / mese"
+
+#: 
+msgid "Net price"
+msgstr "Prezzo netto"
+
