@@ -135,6 +135,9 @@ class ConversionService {
             case 'y':
               $time = $this->translator->translate('Jahr');
               break;
+            default:
+              $time = 1;
+              break;
           }
 
           if($input['property_segment'] == 'm'){
@@ -184,7 +187,7 @@ class ConversionService {
       }
     }
 
-    private function getCalculatedPrices(){
+    private function getCalculatedPrices($type='rent'){
       $prices = [];
       $areas = $this->getList('areas');
       $area_seek = ['area_sia_gf', 'area_sia_nf', 'area_nwf', 'area_sia_gsf', 'volume_sia_gv'];
@@ -197,204 +200,178 @@ class ConversionService {
           $area = '';
         }
       }
+      if($type === 'buy'){
+        $price['price']['key'] = 'price';
+        $price['price']['context'] = '';
+        $price['price']['label'] = $this->getLabel('price');
+        $price['price']['value'] = round($this->transformPrice([
+          'value' => $this->property['price'],
+          'property_segment' => $this->property['price_property_segment'],
+          'time_segment' => 'infinite',
+          'area' => $area
+        ], [
+          'property_segment' => 'all',
+          'time_segment' => 'infinite'
+        ]));
+        $price['price']['renderedValue'] = $this->renderPrice([
+          'price' => $price['price']['value'],
+          'property_segment' => 'all',
+          'time_segment' => 'infinite'
+        ]);
 
-      $price['price']['key'] = 'price';
-      $price['price']['context'] = '';
-      $price['price']['label'] = $this->getLabel('price');
-      $price['price']['value'] = round($this->transformPrice([
-  			'value' => $this->property['price'],
-  			'property_segment' => $this->property['price_property_segment'],
-  			'time_segment' => 'infinite',
-  			'area' => $area
-  		], [
-  			'property_segment' => 'all',
-  			'time_segment' => 'infinite'
-  		]));
-      $price['price']['renderedValue'] = $this->renderPrice([
-        'price' => $price['price']['value'],
-        'property_segment' => 'all',
-  			'time_segment' => 'infinite'
-      ]);
+        $price['pricePerSqm']['key'] = 'pricePerSqm';
+        $price['pricePerSqm']['context'] = '';
+        $price['pricePerSqm']['label'] = $this->getLabel('pricePerSqm');
+        $price['pricePerSqm']['value'] = round($this->transformPrice([
+          'value' => $this->property['price'],
+          'property_segment' => $this->property['price_property_segment'],
+          'time_segment' => 'infinite',
+          'area' => $area
+        ], [
+          'property_segment' => 'm',
+          'time_segment' => 'infinite'
+        ]));
+        $price['pricePerSqm']['renderedValue'] = $this->renderPrice([
+          'price' => $price['pricePerSqm']['value'],
+          'property_segment' => 'm',
+          'time_segment' => 'infinite'
+        ]);
 
-      $price['pricePerSqm']['key'] = 'pricePerSqm';
-      $price['pricePerSqm']['context'] = '';
-      $price['pricePerSqm']['label'] = $this->getLabel('pricePerSqm');
-  		$price['pricePerSqm']['value'] = round($this->transformPrice([
-  			'value' => $this->property['price'],
-  			'property_segment' => $this->property['price_property_segment'],
-  			'time_segment' => 'infinite',
-  			'area' => $area
-  		], [
-  			'property_segment' => 'm',
-  			'time_segment' => 'infinite'
-  		]));
-      $price['pricePerSqm']['renderedValue'] = $this->renderPrice([
-        'price' => $price['pricePerSqm']['value'],
-        'property_segment' => 'm',
-  			'time_segment' => 'infinite'
-      ]);
+    		$nullcheck = [
+    			'price',
+    			'pricePerSqm'
+        ];
 
-      $price['priceBruttoPerSqmPerMonth']['key'] = 'priceBruttoPerSqmPerMonth';
-      $price['priceBruttoPerSqmPerMonth']['context'] = '';
-      $price['priceBruttoPerSqmPerMonth']['label'] = $this->getLabel('priceBruttoPerSqmPerMonth');
-  		$price['priceBruttoPerSqmPerMonth']['value'] = round($this->transformPrice([
-  			'value' => $this->property['gross_price'],
-  			'property_segment' => $this->property['gross_price_property_segment'],
-  			'time_segment' => $this->property['gross_price_time_segment'],
-  			'area' => $area
-  		], [
-  			'property_segment' => 'm',
-  			'time_segment' => 'm'
-  		]));
-      $price['priceBruttoPerSqmPerMonth']['renderedValue'] = $this->renderPrice([
-        'price' => $price['priceBruttoPerSqmPerMonth']['value'],
-        'property_segment' => 'm',
-  			'time_segment' => 'm'
-      ]);
+      }
+      elseif($type === 'rent'){
 
-      $price['priceBruttoPerSqmPerYear']['key'] = 'priceBruttoPerSqmPerYear';
-      $price['priceBruttoPerSqmPerYear']['context'] = '';
-      $price['priceBruttoPerSqmPerYear']['label'] = $this->getLabel('priceBruttoPerSqmPerYear');
-  		$price['priceBruttoPerSqmPerYear']['value'] = round($this->transformPrice([
-  			'value' => $this->property['gross_price'],
-  			'property_segment' => $this->property['gross_price_property_segment'],
-  			'time_segment' => $this->property['gross_price_time_segment'],
-  			'area' => $area
-  		], [
-  			'property_segment' => 'm',
-  			'time_segment' => 'y'
-  		]));
-      $price['priceBruttoPerSqmPerMonth']['renderedValue'] = $this->renderPrice([
-        'price' => $price['priceBruttoPerSqmPerMonth']['value'],
-        'property_segment' => 'm',
-  			'time_segment' => 'y'
-      ]);
+        $price_utilities = [
+          'commercial', 'industrial', 'storage', 'gastronomy'
+        ];
+        $show_prices = false;
+        if (isset($this->property['utilities'])):
+          $utilities = explode(',',$this->property['utilities']);
+          foreach ($utilities as $key => $utility):
+            if(in_array($utility, $price_utilities)):
+              $show_prices = true;
+              break;
+            endif;
+          endforeach;
+        endif;
 
+        if(!$show_prices){
+          $price['priceBruttoTotalPerMonth']['key'] = 'priceBruttoTotalPerMonth';
+          $price['priceBruttoTotalPerMonth']['context'] = '';
+          $price['priceBruttoTotalPerMonth']['label'] = $this->getLabel('priceBruttoTotalPerMonth');
+          $price['priceBruttoTotalPerMonth']['value'] = round($this->transformPrice([
+            'value' => $this->property['gross_price'],
+            'property_segment' => $this->property['gross_price_property_segment'],
+            'time_segment' => $this->property['gross_price_time_segment'],
+            'area' => $area
+          ], [
+            'property_segment' => 'all',
+            'time_segment' => 'm'
+          ]));
+          $price['priceBruttoTotalPerMonth']['renderedValue'] = $this->renderPrice([
+            'price' => $price['priceBruttoTotalPerMonth']['value'],
+            'property_segment' => 'all',
+            'time_segment' => 'm'
+          ]);
 
-      $price['priceBruttoTotalPerMonth']['key'] = 'priceBruttoTotalPerMonth';
-      $price['priceBruttoTotalPerMonth']['context'] = '';
-      $price['priceBruttoTotalPerMonth']['label'] = $this->getLabel('priceBruttoTotalPerMonth');
-  		$price['priceBruttoTotalPerMonth']['value'] = round($this->transformPrice([
-  			'value' => $this->property['gross_price'],
-  			'property_segment' => $this->property['gross_price_property_segment'],
-  			'time_segment' => $this->property['gross_price_time_segment'],
-  			'area' => $area
-  		], [
-  			'property_segment' => 'all',
-  			'time_segment' => 'm'
-  		]));
-      $price['priceBruttoTotalPerMonth']['renderedValue'] = $this->renderPrice([
-        'price' => $price['priceBruttoTotalPerMonth']['value'],
-        'property_segment' => 'all',
-  			'time_segment' => 'm'
-      ]);
+          $price['priceNettoTotalPerMonth']['key'] = 'priceNettoTotalPerMonth';
+          $price['priceNettoTotalPerMonth']['context'] = '';
+          $price['priceNettoTotalPerMonth']['label'] = $this->getLabel('priceNettoTotalPerMonth');
+          $price['priceNettoTotalPerMonth']['value'] = round($this->transformPrice([
+            'value' => $this->property['net_price'],
+            'property_segment' => $this->property['net_price_property_segment'],
+            'time_segment' => $this->property['net_price_time_segment'],
+            'area' => $area
+          ], [
+            'property_segment' => 'all',
+            'time_segment' => 'm'
+          ]));
+          $price['priceNettoTotalPerMonth']['renderedValue'] = $this->renderPrice([
+            'price' => $price['priceNettoTotalPerMonth']['value'],
+            'property_segment' => 'all',
+            'time_segment' => 'm'
+          ]);
 
+          $nullcheck = [
+            'priceBruttoTotalPerMonth',
+            'priceNettoTotalPerMonth'
+          ];
+        }
+        elseif($show_prices){
 
-      $price['priceBruttoTotalPerYear']['key'] = 'priceBruttoTotalPerYear';
-      $price['priceBruttoTotalPerYear']['context'] = '';
-      $price['priceBruttoTotalPerYear']['label'] = $this->getLabel('priceBruttoTotalPerYear');
-  		$price['priceBruttoTotalPerYear']['value'] = round($this->transformPrice([
-  			'value' => $this->property['gross_price'],
-  			'property_segment' => $this->property['gross_price_property_segment'],
-  			'time_segment' => $this->property['gross_price_time_segment'],
-  			'area' => $area
-  		], [
-  			'property_segment' => 'all',
-  			'time_segment' => 'y'
-  		]));
-      $price['priceBruttoTotalPerYear']['renderedValue'] = $this->renderPrice([
-        'price' => $price['priceBruttoTotalPerYear']['value'],
-        'property_segment' => 'all',
-  			'time_segment' => 'y'
-      ]);
+          $price['priceNettoPerSqmPerMonth']['key'] = 'priceNettoPerSqmPerMonth';
+          $price['priceNettoPerSqmPerMonth']['context'] = '';
+          $price['priceNettoPerSqmPerMonth']['label'] = $this->getLabel('priceNettoPerSqmPerMonth');
+          $price['priceNettoPerSqmPerMonth']['value'] = round($this->transformPrice([
+            'value' => $this->property['net_price'],
+            'property_segment' => $this->property['net_price_property_segment'],
+            'time_segment' => $this->property['net_price_time_segment'],
+            'area' => $area
+          ], [
+            'property_segment' => 'm',
+            'time_segment' => 'm'
+          ]));
+          $price['priceNettoPerSqmPerMonth']['renderedValue'] = $this->renderPrice([
+            'price' => $price['priceNettoPerSqmPerMonth']['value'],
+            'property_segment' => 'm',
+            'time_segment' => 'm'
+          ]);
 
-
-      $price['priceNettoPerSqmPerMonth']['key'] = 'priceNettoPerSqmPerMonth';
-      $price['priceNettoPerSqmPerMonth']['context'] = '';
-      $price['priceNettoPerSqmPerMonth']['label'] = $this->getLabel('priceNettoPerSqmPerMonth');
-  		$price['priceNettoPerSqmPerMonth']['value'] = round($this->transformPrice([
-  			'value' => $this->property['gross_price'],
-  			'property_segment' => $this->property['gross_price_property_segment'],
-  			'time_segment' => $this->property['gross_price_time_segment'],
-  			'area' => $area
-  		], [
-  			'property_segment' => 'm',
-  			'time_segment' => 'm'
-  		]));
-      $price['priceNettoPerSqmPerMonth']['renderedValue'] = $this->renderPrice([
-        'price' => $price['priceNettoPerSqmPerMonth']['value'],
-        'property_segment' => 'm',
-  			'time_segment' => 'm'
-      ]);
-
-      $price['priceNettoPerSqmPerYear']['key'] = 'priceNettoPerSqmPerYear';
-      $price['priceNettoPerSqmPerYear']['context'] = '';
-      $price['priceNettoPerSqmPerYear']['label'] = $this->getLabel('priceNettoPerSqmPerYear');
-  		$price['priceNettoPerSqmPerYear']['value'] = round($this->transformPrice([
-  			'value' => $this->property['gross_price'],
-  			'property_segment' => $this->property['gross_price_property_segment'],
-  			'time_segment' => $this->property['gross_price_time_segment'],
-  			'area' => $area
-  		], [
-  			'property_segment' => 'm',
-  			'time_segment' => 'y'
-  		]));
-      $price['priceNettoPerSqmPerMonth']['renderedValue'] = $this->renderPrice([
-        'price' => $price['priceNettoPerSqmPerMonth']['value'],
-        'property_segment' => 'm',
-  			'time_segment' => 'y'
-      ]);
+          $price['priceNettoPerSqmPerYear']['key'] = 'priceNettoPerSqmPerYear';
+          $price['priceNettoPerSqmPerYear']['context'] = '';
+          $price['priceNettoPerSqmPerYear']['label'] = $this->getLabel('priceNettoPerSqmPerYear');
+          $price['priceNettoPerSqmPerYear']['value'] = round($this->transformPrice([
+            'value' => $this->property['net_price'],
+            'property_segment' => $this->property['net_price_property_segment'],
+            'time_segment' => $this->property['net_price_time_segment'],
+            'area' => $area
+          ], [
+            'property_segment' => 'm',
+            'time_segment' => 'y'
+          ]));
+          $price['priceNettoPerSqmPerYear']['renderedValue'] = $this->renderPrice([
+            'price' => $price['priceNettoPerSqmPerYear']['value'],
+            'property_segment' => 'm',
+            'time_segment' => 'y'
+          ]);
 
 
-      $price['priceNettoTotalPerMonth']['key'] = 'priceNettoTotalPerMonth';
-      $price['priceNettoTotalPerMonth']['context'] = '';
-      $price['priceNettoTotalPerMonth']['label'] = $this->getLabel('priceNettoTotalPerMonth');
-  		$price['priceNettoTotalPerMonth']['value'] = round($this->transformPrice([
-  			'value' => $this->property['gross_price'],
-  			'property_segment' => $this->property['gross_price_property_segment'],
-  			'time_segment' => $this->property['gross_price_time_segment'],
-  			'area' => $area
-  		], [
-  			'property_segment' => 'all',
-  			'time_segment' => 'm'
-  		]));
-      $price['priceNettoTotalPerMonth']['renderedValue'] = $this->renderPrice([
-        'price' => $price['priceNettoTotalPerMonth']['value'],
-        'property_segment' => 'all',
-  			'time_segment' => 'm'
-      ]);
 
 
-      $price['priceNettoTotalPerYear']['key'] = 'priceNettoTotalPerYear';
-      $price['priceNettoTotalPerYear']['context'] = '';
-      $price['priceNettoTotalPerYear']['label'] = $this->getLabel('priceNettoTotalPerYear');
-  		$price['priceNettoTotalPerYear']['value'] = round($this->transformPrice([
-  			'value' => $this->property['gross_price'],
-  			'property_segment' => $this->property['gross_price_property_segment'],
-  			'time_segment' => $this->property['gross_price_time_segment'],
-  			'area' => $area
-  		], [
-  			'property_segment' => 'all',
-  			'time_segment' => 'y'
-  		]));
-      $price['priceNettoTotalPerYear']['renderedValue'] = $this->renderPrice([
-        'price' => $price['priceNettoTotalPerYear']['value'],
-        'property_segment' => 'all',
-  			'time_segment' => 'y'
-      ]);
+          $price['priceNettoTotalPerYear']['key'] = 'priceNettoTotalPerYear';
+          $price['priceNettoTotalPerYear']['context'] = '';
+          $price['priceNettoTotalPerYear']['label'] = $this->getLabel('priceNettoTotalPerYear');
+          $price['priceNettoTotalPerYear']['value'] = round($this->transformPrice([
+            'value' => $this->property['net_price'],
+            'property_segment' => $this->property['net_price_property_segment'],
+            'time_segment' => $this->property['net_price_time_segment'],
+            'area' => $area
+          ], [
+            'property_segment' => 'all',
+            'time_segment' => 'y'
+            ]));
+            $price['priceNettoTotalPerYear']['renderedValue'] = $this->renderPrice([
+            'price' => $price['priceNettoTotalPerYear']['value'],
+            'property_segment' => 'all',
+            'time_segment' => 'y'
+            ]);
 
-  		$nullcheck = [
-  			'price',
-  			'pricePerSqm',
-  			'priceBruttoPerSqmPerMonth',
-  			'priceBruttoPerSqmPerYear',
-  			'priceBruttoTotalPerMonth',
-  			'priceBruttoTotalPerYear',
-  			'priceNettoPerSqmPerMonth',
-  			'priceNettoPerSqmPerYear',
-  			'priceNettoTotalPerMonth',
-  			'priceNettoTotalPerYear',
-  		];
+            $nullcheck_addition = [
+              'priceNettoPerSqmPerMonth',
+              'priceNettoPerSqmPerYear',
+              'priceNettoTotalPerYear'#
+            ];
+
+            $nullcheck = array_merge($nullcheck, $nullcheck_addition);
+        }
+
+
+      }
+
   		foreach ($nullcheck as $key) {
   			if (!$price[$key]) {
   				$price[$key] = null;
@@ -430,9 +407,14 @@ class ConversionService {
           ['carrying_capacity_crane','numeric_value'],
           ['carrying_capacity_elevator','numeric_value']
       ],
-      'prices' => [
+      'prices-buy' => [
         ['price', 'special'],
-        ['priceNettoPerSqm', 'renders'],
+        ['pricePerSqm', 'renders'],
+        ['extraCosts', 'special'],
+        ['has-rental-deposit-guarantee', 'feature'],
+        ['rental_deposit', 'numeric_value']
+      ],
+      'prices-rent' => [
         ['priceBruttoTotalPerMonth', 'renders'],
         ['priceNettoPerSqmPerMonth', 'renders'],
         ['priceNettoPerSqmPerYear', 'renders'],
@@ -464,15 +446,15 @@ class ConversionService {
           case 'areas': return $this->translator->translate('Areas', 'casasoft-standards'); break;
           case 'features': return $this->translator->translate('Features', 'casasoft-standards'); break;
           case 'price': return $this->translator->translate('Price', 'casasoft-standards'); break;
-          case 'pricePerSqm': return $this->translator->translate('pricePerSqm', 'casasoft-standards'); break;
+          case 'pricePerSqm': return $this->translator->translate('Price per sqm', 'casasoft-standards'); break;
     			case 'priceBruttoPerSqmPerMonth': return $this->translator->translate('priceBruttoPerSqmPerMonth', 'casasoft-standards'); break;
     			case 'priceBruttoPerSqmPerYear': return $this->translator->translate('priceBruttoPerSqmPerYear', 'casasoft-standards'); break;
-    			case 'priceBruttoTotalPerMonth': return $this->translator->translate('priceBruttoTotalPerMonth', 'casasoft-standards'); break;
+    			case 'priceBruttoTotalPerMonth': return $this->translator->translate('Gross rent / month', 'casasoft-standards'); break;
     			case 'priceBruttoTotalPerYear': return $this->translator->translate('priceBruttoTotalPerYear', 'casasoft-standards'); break;
-    			case 'priceNettoPerSqmPerMonth': return $this->translator->translate('priceNettoPerSqmPerMonth', 'casasoft-standards'); break;
-    			case 'priceNettoPerSqmPerYear': return $this->translator->translate('priceNettoPerSqmPerYear', 'casasoft-standards'); break;
-    			case 'priceNettoTotalPerMonth': return $this->translator->translate('priceNettoTotalPerMonth', 'casasoft-standards'); break;
-    			case 'priceNettoTotalPerYear': return $this->translator->translate('priceNettoTotalPerYear', 'casasoft-standards'); break;
+    			case 'priceNettoPerSqmPerMonth': return $this->translator->translate('Net rent / m<sup>2</sup> / month', 'casasoft-standards'); break;
+    			case 'priceNettoPerSqmPerYear': return $this->translator->translate('Net rent / m<sup>2</sup> / year', 'casasoft-standards'); break;
+    			case 'priceNettoTotalPerMonth': return $this->translator->translate('Net rent / month', 'casasoft-standards'); break;
+    			case 'priceNettoTotalPerYear': return $this->translator->translate('Net rent / year', 'casasoft-standards'); break;
         }
       }
 
@@ -696,8 +678,11 @@ class ConversionService {
         });
       }
 
-      if($templateMixed == 'prices'){
-        $list = array_merge($list, $this->getCalculatedPrices());
+      if($templateMixed == 'prices-rent'){
+        $list = array_merge($this->getCalculatedPrices('rent'), $list);
+      }
+      if($templateMixed == 'prices-buy'){
+        $list = array_merge($this->getCalculatedPrices('buy'), $list);
       }
 
       return $list;
