@@ -22,7 +22,7 @@ msgstr "Studio"
 
 #: src/CasasoftStandards/Service/CategoryService.php:40
 msgid "Bifamiliar house"
-msgstr "Doppel&#173;einfamilien&#173;haus"
+msgstr "Doppeleinfamilienhaus"
 
 #: src/CasasoftStandards/Service/CategoryService.php:41
 msgid "Building land"
@@ -1048,4 +1048,44 @@ msgstr "Bauen"
 #: src/CasasoftStandards/Service/UtilityService.php:70
 msgid "Investment"
 msgstr "Investitionsobjekt"
+
+#: 
+msgid "Gross rent / m² / month"
+msgstr "Bruttomiete / m² / Monat"
+
+#: 
+msgid "Gross rent / m² / year"
+msgstr "Bruttomiete / m² / Jahr"
+
+#: 
+msgid "Gross rent / month"
+msgstr "Bruttomiete / Monat"
+
+#: 
+msgid "Gross rent / year"
+msgstr "Bruttomiete / Jahr"
+
+#: 
+msgid "Gross price"
+msgstr "Bruttopreis"
+
+#: 
+msgid "Net rent / m² / month"
+msgstr "Nettomiete / m² / Monat"
+
+#: 
+msgid "Net rent / m² / year"
+msgstr "Nettomiete / m² / Jahr"
+
+#: 
+msgid "Net rent / year"
+msgstr "Nettomiete / Jahr"
+
+#: 
+msgid "Net rent / month"
+msgstr "Nettomiete / Monat"
+
+#: 
+msgid "Net price"
+msgstr "Nettopreis"
 
