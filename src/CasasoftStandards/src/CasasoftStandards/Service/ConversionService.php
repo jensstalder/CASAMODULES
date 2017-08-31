@@ -249,9 +249,9 @@ class ConversionService {
           'commercial', 'industrial', 'storage', 'gastronomy'
         ];
         $show_prices = false;
-        if (isset($this->property['utilities'])):
-          $utilities = explode(',',$this->property['utilities']);
-          foreach ($utilities as $key => $utility):
+        if (isset($this->property['property_utilities'])):
+          // $utilities = explode(',',$this->property['property_utilities']);
+          foreach ($this->property['property_utilities'] as $key => $utility):
             if(in_array($utility, $price_utilities)):
               $show_prices = true;
               break;
