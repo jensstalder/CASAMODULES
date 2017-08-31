@@ -1050,3 +1050,43 @@ msgstr "Bâtiment"
 msgid "Investment"
 msgstr "Investissement"
 
+#: 
+msgid "Gross rent / m² / month"
+msgstr "Loyer brut / m² / mois"
+
+#: 
+msgid "Gross rent / m² / year"
+msgstr "Loyer brut / m² / année"
+
+#: 
+msgid "Gross rent / month"
+msgstr "Loyer brut / mois"
+
+#: 
+msgid "Gross rent / year"
+msgstr "Loyer brut / année"
+
+#: 
+msgid "Gross price"
+msgstr "Prix brut"
+
+#: 
+msgid "Net rent / m² / month"
+msgstr "Loyer net / m² / mois"
+
+#: 
+msgid "Net rent / m² / year"
+msgstr "Loyer net / m² / année"
+
+#: 
+msgid "Net rent / year"
+msgstr "Loyer net / année"
+
+#: 
+msgid "Net rent / month"
+msgstr "Loyer net / mois"
+
+#: 
+msgid "Net price"
+msgstr "Prix net"
+
