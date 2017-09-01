@@ -127,13 +127,13 @@ class ConversionService {
         else if($input['time_segment']){
           switch ($input['time_segment']) {
             case 'w':
-              $time = $this->translator->translate('Woche');
+              $time = $this->translator->translate('week');
               break;
             case 'm':
-              $time = $this->translator->translate('Monat');
+              $time = $this->translator->translate('month');
               break;
             case 'y':
-              $time = $this->translator->translate('Jahr');
+              $time = $this->translator->translate('year');
               break;
             default:
               $time = 1;
@@ -152,7 +152,7 @@ class ConversionService {
           }
         }
       }
-      return isset($price) ? $price : $this->translator->translate('Auf Anfrage');
+      return isset($price) ? $price : $this->translator->translate('On Request');
     }
 
 
@@ -249,17 +249,17 @@ class ConversionService {
           'commercial', 'industrial', 'storage', 'gastronomy'
         ];
         $show_prices = false;
-        if (isset($this->property['property_utilities'])):
+        if (isset($this->property['_embedded']['property_utilities'])):
 
-          foreach ($this->property['property_utilities']   as $key => $utility):
-            if(in_array($utility, $price_utilities)):
+          foreach ($this->property['_embedded']['property_utilities'] as $key => $utility):
+            if(in_array($utility['utility_id'], $price_utilities)):
               $show_prices = true;
               break;
             endif;
           endforeach;
         endif;
 
-        if(!$show_prices){
+        // if(!$show_prices){
           $price['priceBruttoTotalPerMonth']['key'] = 'priceBruttoTotalPerMonth';
           $price['priceBruttoTotalPerMonth']['context'] = '';
           $price['priceBruttoTotalPerMonth']['label'] = $this->getLabel('priceBruttoTotalPerMonth');
@@ -300,8 +300,8 @@ class ConversionService {
             'priceBruttoTotalPerMonth',
             'priceNettoTotalPerMonth'
           ];
-        }
-        elseif($show_prices){
+        // }
+        if($show_prices){
 
           $price['priceNettoPerSqmPerMonth']['key'] = 'priceNettoPerSqmPerMonth';
           $price['priceNettoPerSqmPerMonth']['context'] = '';
@@ -446,6 +446,7 @@ class ConversionService {
           case 'areas': return $this->translator->translate('Areas', 'casasoft-standards'); break;
           case 'features': return $this->translator->translate('Features', 'casasoft-standards'); break;
           case 'price': return $this->translator->translate('Price', 'casasoft-standards'); break;
+          case 'on-request': return $this->translator->translate('On Request', 'casasoft-standards'); break;
           case 'pricePerSqm': return $this->translator->translate('Price per sqm', 'casasoft-standards'); break;
     			case 'priceBruttoPerSqmPerMonth': return $this->translator->translate('priceBruttoPerSqmPerMonth', 'casasoft-standards'); break;
     			case 'priceBruttoPerSqmPerYear': return $this->translator->translate('priceBruttoPerSqmPerYear', 'casasoft-standards'); break;
