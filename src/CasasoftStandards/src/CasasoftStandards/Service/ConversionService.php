@@ -278,28 +278,7 @@ class ConversionService {
             'time_segment' => 'm'
           ]);
 
-          $price['priceNettoTotalPerMonth']['key'] = 'priceNettoTotalPerMonth';
-          $price['priceNettoTotalPerMonth']['context'] = '';
-          $price['priceNettoTotalPerMonth']['label'] = $this->getLabel('priceNettoTotalPerMonth');
-          $price['priceNettoTotalPerMonth']['value'] = round($this->transformPrice([
-            'value' => $this->property['net_price'],
-            'property_segment' => $this->property['net_price_property_segment'],
-            'time_segment' => $this->property['net_price_time_segment'],
-            'area' => $area
-          ], [
-            'property_segment' => 'all',
-            'time_segment' => 'm'
-          ]));
-          $price['priceNettoTotalPerMonth']['renderedValue'] = $this->renderPrice([
-            'price' => $price['priceNettoTotalPerMonth']['value'],
-            'property_segment' => 'all',
-            'time_segment' => 'm'
-          ]);
 
-          $nullcheck = [
-            'priceBruttoTotalPerMonth',
-            'priceNettoTotalPerMonth'
-          ];
         // }
         if($show_prices){
 
@@ -339,8 +318,33 @@ class ConversionService {
             'time_segment' => 'y'
           ]);
 
+        }
+
+        $price['priceNettoTotalPerMonth']['key'] = 'priceNettoTotalPerMonth';
+        $price['priceNettoTotalPerMonth']['context'] = '';
+        $price['priceNettoTotalPerMonth']['label'] = $this->getLabel('priceNettoTotalPerMonth');
+        $price['priceNettoTotalPerMonth']['value'] = round($this->transformPrice([
+          'value' => $this->property['net_price'],
+          'property_segment' => $this->property['net_price_property_segment'],
+          'time_segment' => $this->property['net_price_time_segment'],
+          'area' => $area
+        ], [
+          'property_segment' => 'all',
+          'time_segment' => 'm'
+        ]));
+        $price['priceNettoTotalPerMonth']['renderedValue'] = $this->renderPrice([
+          'price' => $price['priceNettoTotalPerMonth']['value'],
+          'property_segment' => 'all',
+          'time_segment' => 'm'
+        ]);
+
+        $nullcheck = [
+          'priceBruttoTotalPerMonth',
+          'priceNettoTotalPerMonth'
+        ];
 
 
+        if($show_prices){
 
           $price['priceNettoTotalPerYear']['key'] = 'priceNettoTotalPerYear';
           $price['priceNettoTotalPerYear']['context'] = '';
@@ -353,21 +357,22 @@ class ConversionService {
           ], [
             'property_segment' => 'all',
             'time_segment' => 'y'
-            ]));
-            $price['priceNettoTotalPerYear']['renderedValue'] = $this->renderPrice([
+          ]));
+          $price['priceNettoTotalPerYear']['renderedValue'] = $this->renderPrice([
             'price' => $price['priceNettoTotalPerYear']['value'],
             'property_segment' => 'all',
             'time_segment' => 'y'
-            ]);
+          ]);
 
-            $nullcheck_addition = [
-              'priceNettoPerSqmPerMonth',
-              'priceNettoPerSqmPerYear',
-              'priceNettoTotalPerYear'#
-            ];
+          $nullcheck_addition = [
+            'priceNettoPerSqmPerMonth',
+            'priceNettoPerSqmPerYear',
+            'priceNettoTotalPerYear'#
+          ];
 
-            $nullcheck = array_merge($nullcheck, $nullcheck_addition);
+          $nullcheck = array_merge($nullcheck, $nullcheck_addition);
         }
+
 
 
       }
