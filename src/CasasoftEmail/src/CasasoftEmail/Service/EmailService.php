@@ -36,10 +36,11 @@ class EmailService {
         'title' => 'Email Service Title'
     );
 
-    public function __construct($translator, $viewRender, $resolver){
+    public function __construct($translator, $viewRender, $resolver, $casasoftMailTemplate){
         $this->translator = $translator;
         $this->viewRender = $viewRender;
         $this->resolver = $resolver;
+        $this->casasoftMailTemplate = $casasoftMailTemplate;
 
         //$this->config['domain'] = $_SERVER['HTTP_HOST'];
     }
@@ -65,41 +66,167 @@ class EmailService {
 
     public function renderEmail($template = 'message', $emailOptions = array()){
         $emailOptions = array_merge($this->defaultEmailOptions, $emailOptions);
+        if ($this->casasoftMailTemplate && ($this->templateGroup == 'icasa-beta') && isset($emailOptions['msg'])) {
+            //$casaMailTemplate  = $this->getServiceLocator()->get('CasasoftMailTemplate');
 
-        $layout = new ViewModel($emailOptions);
-        if ($this->html) {
-            if ($this->resolver->resolve("email/".$this->templateGroup."/layout")) {
-                $layout->setTemplate("email/".$this->templateGroup."/layout");
-            } elseif ($this->resolver->resolve("email/default/layout")) {
-                $layout->setTemplate("email/default/layout");
-            } else {
-                throw new \Exception("neither " . "email/".$this->templateGroup."/layout" . ' or ' . "email/default/layout" . ' is available', 1);
+            if ($emailOptions['msg']->getLang() == 'en') {
+                $this->translator->setLocale('en_US');
             }
-        } else {
-            if ($this->resolver->resolve("email/".$this->templateGroup."/layout_plain")) {
-                $layout->setTemplate("email/".$this->templateGroup."/layout_plain");
-            } elseif ($this->resolver->resolve("email/default/layout_plain")) {
-                $layout->setTemplate("email/default/layout_plain");
-            } else {
-                throw new \Exception("neither " . "email/".$this->templateGroup."/layout_plain" . ' or ' . "email/default/layout_plain" . ' is available', 1);
+
+            // $service_name = 'SBB Immobilien';
+         //    $service_website = 'sbb-immobilienprojekte.ch';
+         //    $service_logo = 'https://sbb-immobilienprojekte.ch/images/SBB_POS_2F_RGB_100.svg';
+         //    if (isset($posteddata['from_service'])) {
+         //      switch ($posteddata['from_service']) {
+         //        case 'icasa':
+         //          $service_name = 'iCasa.ch';
+         //          $service_website = 'icasa.ch';
+         //          $service_logo = 'https://beta.icasa.ch/img/logo.svg';
+         //          break;
+         //      }
+         //    }
+
+            $person = [];
+            if ($emailOptions['msg']->getFirstname()) {
+                $person[] = ["key" => 'First name', "value" => $emailOptions['msg']->getFirstname()];
             }
-        }
+            if ($emailOptions['msg']->getLastname()){
+                $person[] = ["key" => 'Last name', "value" => $emailOptions['msg']->getLastname()];
+            }
+            if ($emailOptions['msg']->getLegal_name()){
+                $person[] = ["key" => 'Company', "value" => $emailOptions['msg']->getLegal_name()];
+            }
+            if ($emailOptions['msg']->getStreet()){
+                $person[] = ["key" => 'Street', "value" => $emailOptions['msg']->getStreet()];
+            }
+            if ($emailOptions['msg']->getLocality()){
+                $person[] = ["key" => 'City', "value" => $emailOptions['msg']->getLocality()];
+            }
+            if ($emailOptions['msg']->getPhone()){
+                $person[] = ["key" => 'Phone', "value" => $emailOptions['msg']->getPhone()];
+            }
+            if ($emailOptions['msg']->getEmail()){
+                $person[] = ["key" => 'Email', "value" => $emailOptions['msg']->getEmail()];
+            }
 
-        $contentView = null;
-        if ($this->resolver->resolve("email/".$this->templateGroup . "/" . $template)) {
-            $contentView = $this->viewRender->render("email/".$this->templateGroup . "/" . $template, $emailOptions);
-        } elseif ($this->resolver->resolve("email/default/".$template)) {
-            $contentView = $this->viewRender->render("email/default/" . $template, $emailOptions);
+            $property = [];
+            if ($emailOptions['msg']->getProperty_reference()) {
+                $property[] = ["key" => 'Object-Ref.', "value" => $emailOptions['msg']->getProperty_reference()];
+            }
+            if ($emailOptions['msg']->getProject_reference()) {
+                $property[] = ["key" => 'Project-Ref.', "value" => $emailOptions['msg']->getProject_reference()];
+            }
+            if ($emailOptions['msg']->getProperty_street()) {
+                $property[] = ["key" => 'Street', "value" => $emailOptions['msg']->getProperty_street()];
+            }
+            if (trim($emailOptions['msg']->getProperty_postal_code().$emailOptions['msg']->getProperty_locality())) {
+                $property[] = ["key" => 'City', "value" => trim($emailOptions['msg']->getProperty_postal_code().' '.$emailOptions['msg']->getProperty_locality())];
+            }
+            if ($emailOptions['msg']->getProperty_type()) {
+                $property[] = ["key" => 'Sales Type', "value" => $emailOptions['msg']->getProperty_type()];
+            }
+            if ($emailOptions['msg']->getProperty_category()) {
+                $property[] = ["key" => 'Category', "value" => $emailOptions['msg']->getProperty_category()];
+            }
+            if ($emailOptions['msg']->getProperty_country()) {
+                $property[] = ["key" => 'Country', "value" => $emailOptions['msg']->getProperty_country()];
+            }
+            if ($emailOptions['msg']->getProperty_rooms()) {
+                $property[] = ["key" => 'Rooms', "value" => $emailOptions['msg']->getProperty_rooms()];
+            }
+            if ($emailOptions['msg']->getProperty_price()) {
+                $property[] = ["key" => 'Price', "value" => $emailOptions['msg']->getProperty_price()];
+            }
+
+            $extra_data = [];
+            $searchProfile = [];
+            if ($emailOptions['msg']->getExtra_data()) {
+                $extra_data_arr = json_decode($emailOptions['msg']->getExtra_data());
+                if ($extra_data_arr) {
+                    foreach ($extra_data_arr as $key => $value) {
+                        if (!in_array($key, ['searchProfile'])) {
+                            $extra_data[] = ["key" => $key, "value" => $value];
+                        }
+                        if ($key == 'searchProfile' && is_array($value)) {
+                            foreach ($value as $spkey => $spvalue) {
+                                $searchProfile[] = ["key" => $spkey, "value" => $spvalue];
+                            }
+                        }
+                    }
+                }
+            }
+
+            $data = [
+                "logo" => "https://beta.icasa.ch/img/logo.svg",
+                "message" => [
+                    'header' => 'Message',
+                    'txt' => $emailOptions['msg']->getMessage_plain(),
+                ]
+            ];
+
+            if ($person) {
+                $data['person'] = [
+                    'header' => 'Requestor',
+                    'data' => $person
+                ];
+            }
+            if ($property) {
+                $data['property'] = [
+                    'header' => 'Immobilie',
+                    'data' => $property
+                ];
+            }
+            if ($searchProfile) {
+                $data['searchProfile'] = [
+                    'header' => 'Search profile',
+                    'data' => $searchProfile
+                ];
+            }
+            if ($extra_data) {
+                $data['extraData'] = [
+                    'header' => 'More information',
+                    'data' => $extra_data
+                ];
+            }
+
+
+            $content = $this->casasoftMailTemplate->renderTemplate('request', $data);
         } else {
-            throw new \Exception("neither " . "email/".$this->templateGroup."/".$template . ' or ' . "email/default/".$template . ' is available', 1);
+            $layout = new ViewModel($emailOptions);
+            if ($this->html) {
+
+                if ($this->resolver->resolve("email/".$this->templateGroup."/layout")) {
+                    $layout->setTemplate("email/".$this->templateGroup."/layout");
+                } elseif ($this->resolver->resolve("email/default/layout")) {
+                    $layout->setTemplate("email/default/layout");
+                } else {
+                    throw new \Exception("neither " . "email/".$this->templateGroup."/layout" . ' or ' . "email/default/layout" . ' is available', 1);
+                }
+            } else {
+                if ($this->resolver->resolve("email/".$this->templateGroup."/layout_plain")) {
+                    $layout->setTemplate("email/".$this->templateGroup."/layout_plain");
+                } elseif ($this->resolver->resolve("email/default/layout_plain")) {
+                    $layout->setTemplate("email/default/layout_plain");
+                } else {
+                    throw new \Exception("neither " . "email/".$this->templateGroup."/layout_plain" . ' or ' . "email/default/layout_plain" . ' is available', 1);
+                }
+            }
+
+            $contentView = null;
+            if ($this->resolver->resolve("email/".$this->templateGroup . "/" . $template)) {
+                $contentView = $this->viewRender->render("email/".$this->templateGroup . "/" . $template, $emailOptions);
+            } elseif ($this->resolver->resolve("email/default/".$template)) {
+                $contentView = $this->viewRender->render("email/default/" . $template, $emailOptions);
+            } else {
+                throw new \Exception("neither " . "email/".$this->templateGroup."/".$template . ' or ' . "email/default/".$template . ' is available', 1);
+            }
+            
+            $layout->setVariable("content", $contentView);
+
+            $content = $this->viewRender->render($layout);
+            //replace domain with url
+            $content = str_replace('{{domain}}', 'http://'.$emailOptions['domain'], $content);
         }
-        
-        $layout->setVariable("content", $contentView);
-
-        $content = $this->viewRender->render($layout);
-
-        //replace domain with url
-        $content = str_replace('{{domain}}', 'http://'.$emailOptions['domain'], $content);
 
         return $content;
     }
@@ -250,7 +377,6 @@ class EmailService {
             } else {
               $transport = new SendmailTransport();
             }
-
             try {
                 $transport->send($message);
             } catch (\Exception $e) {
@@ -259,7 +385,6 @@ class EmailService {
                 $transport = new SendmailTransport();
                 $transport->send($message);
               }
-
             }
         } else {
             echo '<h1>E-Mail <strong>NOT</strong> sent</h1>';
