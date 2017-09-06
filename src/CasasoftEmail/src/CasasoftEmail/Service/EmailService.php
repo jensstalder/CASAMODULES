@@ -6,6 +6,8 @@ use Zend\View\Model\ViewModel;
 
 use Zend\Mail\Message as Message;
 use Zend\Mail\Transport\Sendmail as SendmailTransport;
+use Zend\Mail\Transport\SmtpOptions as SmtpOptions;
+use Zend\Mail\Transport\Smtp as SmtpTransport;
 
 use Zend\Mime\Message as MimeMessage;
 use Zend\Mime\Part as MimePart;
