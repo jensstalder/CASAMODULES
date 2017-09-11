@@ -70,7 +70,7 @@ class EmailService {
 
     public function renderEmail($template = 'message', $emailOptions = array()){
         $emailOptions = array_merge($this->defaultEmailOptions, $emailOptions);
-        if ($this->casasoftMailTemplate && ($this->templateGroup == 'icasa-beta') && isset($emailOptions['msg'])) {
+        if ($this->html && $this->casasoftMailTemplate && ($this->templateGroup == 'icasa-beta') && isset($emailOptions['msg'])) {
             //$casaMailTemplate  = $this->getServiceLocator()->get('CasasoftMailTemplate');
 
             if ($emailOptions['msg']->getLang() == 'en') {
