@@ -305,6 +305,10 @@ class EmailService {
             $message->addReplyTo($emailOptions['replyto']);
         }
 
+        if ($this->encoding == 'iso-8859-1') {
+            $content = mb_convert_encoding($content, 'iso-8859-1', 'UTF-8');
+        }
+
         if ($this->html) {
             // HTML part
             $htmlPart           = new MimePart($content);
