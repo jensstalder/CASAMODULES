@@ -20,7 +20,7 @@ class EmailService {
     protected $defaultEmailOptions = array();
     protected $defaultTemplateVariables = array();
     protected $defaultLayoutVariables = array();
-
+    protected $encoding = 'UTF-8';
 
     protected $config = array(
         'debug' => false,
@@ -43,6 +43,10 @@ class EmailService {
         $this->casasoftMailTemplate = $casasoftMailTemplate;
 
         //$this->config['domain'] = $_SERVER['HTTP_HOST'];
+    }
+
+    public function setEncoding($encoding){
+        $this->encoding = $encoding;
     }
 
     public function setConfig($config){
@@ -305,14 +309,14 @@ class EmailService {
             // HTML part
             $htmlPart           = new MimePart($content);
             $htmlPart->encoding = Mime::ENCODING_QUOTEDPRINTABLE;
-            $htmlPart->type     = "text/html; charset=UTF-8";    
+            $htmlPart->type     = "text/html; charset=".$this->encoding;    
         }
         
 
         // Plain text part
         $textPart           = new MimePart(strip_tags($content));
         $textPart->encoding = Mime::ENCODING_QUOTEDPRINTABLE;
-        $textPart->type     = "text/plain; charset=UTF-8";
+        $textPart->type     = "text/plain; charset=".$this->encoding;
 
         $body = new MimeMessage();
         if ($attachments) {
@@ -357,7 +361,7 @@ class EmailService {
         // attach the body to the message and set the content-type
         $message->setBody($body);
         $message->getHeaders()->get('content-type')->setType($messageType);
-        $message->setEncoding('UTF-8');
+        $message->setEncoding($this->encoding);
 
         if ($emailOptions['send']) {
             if (isset($emailOptions['smtp']) && $emailOptions['smtp'] == 'google') {
