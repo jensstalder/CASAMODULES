@@ -168,6 +168,14 @@ class NumvalService {
         );
     }
 
+    public function resetService(){
+        $numval_options = $this->getDefaultOptions();
+        foreach ($numval_options as $key => $options) {
+            $numval = $this->getItem($key);
+            $numval->setValue(null);
+        }
+    }
+
     public function createService(ServiceLocatorInterface $serviceLocator){
         return $this;
     }

@@ -158,6 +158,8 @@ class ConversionService {
 
     public function setProperty(Array $data){
       $this->property = $data;
+      $this->numvalService->resetService();
+
 
       if (isset($data['_embedded']['property'])) {
           $this->property = $data['_embedded']['property'];
@@ -176,6 +178,7 @@ class ConversionService {
       //simplify
       if ($this->property['_embedded']['numeric_values']) {
         $this->property['numeric_values'] = $this->property['_embedded']['numeric_values'];
+
         unset($this->property['_embedded']['numeric_values']);
       }
       if ($this->property['_embedded']['features']) {
@@ -450,6 +453,7 @@ class ConversionService {
           case 'key-facts': return $this->translator->translate('Key facts', 'casasoft-standards'); break;
           case 'areas': return $this->translator->translate('Areas', 'casasoft-standards'); break;
           case 'features': return $this->translator->translate('Features', 'casasoft-standards'); break;
+          case 'distances': return $this->translator->translate('Distances', 'casasoft-standards'); break;
           case 'price': return $this->translator->translate('Price', 'casasoft-standards'); break;
           case 'on-request': return $this->translator->translate('On Request', 'casasoft-standards'); break;
           case 'pricePerSqm': return $this->translator->translate('Price per sqm', 'casasoft-standards'); break;
