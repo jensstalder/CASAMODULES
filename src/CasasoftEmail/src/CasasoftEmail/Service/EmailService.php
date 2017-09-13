@@ -235,10 +235,13 @@ class EmailService {
         return $content;
     }
 
-    public function sendEmail($template = 'message', $emailOptions = array()){
+    public function sendEmail($template = 'message', $emailOptions = array(), $content = null){
         $emailOptions = array_merge($this->config, $emailOptions);
 
-        $content = $this->renderEmail($template, $emailOptions);
+        if (!$content) {
+            $content = $this->renderEmail($template, $emailOptions);
+        }
+        
 
         if ($emailOptions['debug']) {
             $displays = array();
