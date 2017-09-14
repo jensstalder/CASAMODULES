@@ -431,7 +431,7 @@ msgstr "In Wohngemeinschaft"
 
 #: ../src/CasasoftStandards/Service/FeatureService.php:69
 msgid "Connected building land"
-msgstr "Angeschlossenes Bauland"
+msgstr "Bauland erschlossen"
 
 #: ../src/CasasoftStandards/Service/FeatureService.php:73
 msgid "Gardenhouse"
@@ -989,7 +989,7 @@ msgstr "Renovationsjahr"
 
 #: ../src/CasasoftStandards/Service/NumvalService.php:645
 msgid "Ceiling height"
-msgstr "Deckenhöhe"
+msgstr "Raumhöhe"
 
 #: ../src/CasasoftStandards/Service/NumvalService.php:651
 msgid "Hall height"
