@@ -1014,7 +1014,7 @@ msgstr "Grundstückspreis"
 
 #: ../src/CasasoftStandards/Service/NumvalService.php:691
 msgid "Gross premium"
-msgstr "Bruttoprämie"
+msgstr "Bruttorendite"
 
 #: ../src/CasasoftStandards/Service/NumvalService.php:698
 msgid "Rental deposit"
