@@ -690,8 +690,8 @@ class NumvalService {
             'gross_premium' => array(
                 'label' => $this->translator->translate('Gross premium', 'casasoft-standards'),
                 'icon' => '',
-                'type' => 'int',
-                'si' => '',
+                'type' => 'float',
+                'si' => '%',
             ),
 
             'rental_deposit' => array(
