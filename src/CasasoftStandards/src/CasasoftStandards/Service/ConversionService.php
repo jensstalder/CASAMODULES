@@ -405,33 +405,32 @@ class ConversionService {
           ['volume_gva','numeric_value'],
           ['Wärmeerzeugung','special'],
           ['Wärmeverteilung','special'],
-          ['granny-flat','category'],
+          //['granny-flat','category'], Wrong!! this whould be a feature
           ['parcelNumbers','special'],
           ['Erschliessung','special'],
           ['Auflagen','Auflagen'],
           ['zoneTypes','special'],
-          ['construction_utilization_number','numeric_value'],
+          ['utilization_number','numeric_value'],
           ['hall_height','numeric_value'],
           ['maximal_floor_loading','numeric_value'],
           ['carrying_capacity_crane','numeric_value'],
           ['carrying_capacity_elevator','numeric_value']
       ],
       'prices-buy' => [
-        ['price', 'special'],
-        ['pricePerSqm', 'renders'],
-        ['extraCosts', 'special'],
-        ['has-rental-deposit-guarantee', 'feature'],
-        ['rental_deposit', 'numeric_value']
+          ['price', 'special'],
+          ['pricePerSqm', 'renders'],
+          ['extraCosts', 'special'],
+          ['gross_premium', 'numeric_value'],
       ],
       'prices-rent' => [
-        ['priceBruttoTotalPerMonth', 'renders'],
-        ['priceNettoPerSqmPerMonth', 'renders'],
-        ['priceNettoPerSqmPerYear', 'renders'],
-        ['priceNettoPerTotalPerMonth', 'renders'],
-        ['priceNettoPerTotalPerYear', 'renders'],
-        ['extraCosts', 'special'],
-        ['has-rental-deposit-guarantee', 'feature'],
-        ['rental_deposit', 'numeric_value']
+          ['priceBruttoTotalPerMonth', 'renders'],
+          ['priceNettoPerSqmPerMonth', 'renders'],
+          ['priceNettoPerSqmPerYear', 'renders'],
+          ['priceNettoPerTotalPerMonth', 'renders'],
+          ['priceNettoPerTotalPerYear', 'renders'],
+          ['extraCosts', 'special'],
+          ['has-rental-deposit-guarantee', 'feature'],
+          ['rental_deposit', 'numeric_value']
       ]
     ];
 
@@ -455,7 +454,7 @@ class ConversionService {
           case 'areas': return $this->translator->translate('Areas', 'casasoft-standards'); break;
           case 'features': return $this->translator->translate('Features', 'casasoft-standards'); break;
           case 'distances': return $this->translator->translate('Distances', 'casasoft-standards'); break;
-          case 'price': return $this->translator->translate('Price', 'casasoft-standards'); break;
+          case 'price': return $this->translator->translate('Sales price', 'casasoft-standards'); break;
           case 'on-request': return $this->translator->translate('On Request', 'casasoft-standards'); break;
           case 'pricePerSqm': return $this->translator->translate('Price per sqm', 'casasoft-standards'); break;
     			case 'priceBruttoPerSqmPerMonth': return $this->translator->translate('priceBruttoPerSqmPerMonth', 'casasoft-standards'); break;
@@ -598,24 +597,24 @@ class ConversionService {
             }
             break;
           case 'Erschliessung':
-            $features = array();
-            foreach ($this->property['features'] as $featureKey) {
-              if (in_array($featureKey, [
-                'has-water-supply',
-                'has-sewage-supply',
-                'has-power-supply',
-                'has-gas-supply',
-              ] ) ) {
-                  $features[] = $this->getLabel($featureKey, 'feature');
-              }
-            }
-            if (count($features) == 4) {
-              $this->translator->translate('Fully ***', 'casasoft-standards');
-            } elseif (count($features)) {
-              $this->translator->translate('Partialy ***', 'casasoft-standards');
-            } else {
-              $this->translator->translate('NOT ***', 'casasoft-standards');
-            }
+            // $features = array(); //that is wrong!!!
+            // foreach ($this->property['features'] as $featureKey) {
+            //   if (in_array($featureKey, [
+            //     'has-water-supply',
+            //     'has-sewage-supply',
+            //     'has-power-supply',
+            //     'has-gas-supply',
+            //   ] ) ) {
+            //       $features[] = $this->getLabel($featureKey, 'feature');
+            //   }
+            // }
+            // if (count($features) == 4) {
+            //   return $this->translator->translate('Fully connected to utilities', 'casasoft-standards');
+            // } elseif (count($features)) {
+            //   return $this->translator->translate('Partialy connected to utilities', 'casasoft-standards');
+            // } else {
+            //   return $this->translator->translate('Not connected to utilities', 'casasoft-standards');
+            // }
             return '';
             break;
           case 'zoneTypes':
