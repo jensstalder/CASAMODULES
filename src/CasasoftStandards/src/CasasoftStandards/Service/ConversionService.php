@@ -583,7 +583,7 @@ class ConversionService {
                   $conditions[] = $this->getLabel($featureKey, 'feature');
               }
             }
-            return str_replace(' ', '-', implode('-', $conditions));
+            return implode(', ', $conditions);
             break;
           case 'Wärmeerzeugung':
             return '';
