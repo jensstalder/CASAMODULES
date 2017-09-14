@@ -393,6 +393,7 @@ class ConversionService {
           ['visualReferenceId', 'special'],
           ['categories', 'special'],
           ['start', 'special'],
+          ['floor', 'numeric_value'],
           ['number_of_rooms', 'numeric_value'],
           ['number_of_bathrooms', 'numeric_value'],
           ['number_of_apartments','numeric_value'],
