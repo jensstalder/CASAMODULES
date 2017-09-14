@@ -547,7 +547,9 @@ class ConversionService {
                     $categories[] = $this->getLabel($cat_item['category_id'], 'category');
                 }
             }
-            return array_values(array_slice($categories, -1))[0];
+            if ($categories) {
+              return array_values(array_slice($categories, -1))[0];
+            }
             break;
           case 'start':
             if (isset($this->property['start'])) {
