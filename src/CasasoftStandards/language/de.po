@@ -956,11 +956,11 @@ msgstr "Baumassenziffer"
 
 #: ../src/CasasoftStandards/Service/NumvalService.php:582
 msgid "Cubature GVA"
-msgstr "Kubatur GVA"
+msgstr "Gebäudevolumen"
 
 #: ../src/CasasoftStandards/Service/NumvalService.php:588
 msgid "Cubature SIA"
-msgstr "Kubatur SIA"
+msgstr "Gebäudevolumen"
 
 #: ../src/CasasoftStandards/Service/NumvalService.php:597
 msgid "Utilization number"
