@@ -221,29 +221,45 @@ class ConversionService {
           'property_segment' => 'all',
           'time_segment' => 'infinite'
         ]);
+        $show_price_per_sqm = false;
+        if (isset($this->property['_embedded']['property_utilities'])):
 
-        $price['pricePerSqm']['key'] = 'pricePerSqm';
-        $price['pricePerSqm']['context'] = '';
-        $price['pricePerSqm']['label'] = $this->getLabel('pricePerSqm');
-        $price['pricePerSqm']['value'] = round($this->transformPrice([
-          'value' => $this->property['price'],
-          'property_segment' => $this->property['price_property_segment'],
-          'time_segment' => 'infinite',
-          'area' => $area
-        ], [
-          'property_segment' => 'm',
-          'time_segment' => 'infinite'
-        ]));
-        $price['pricePerSqm']['renderedValue'] = $this->renderPrice([
-          'price' => $price['pricePerSqm']['value'],
-          'property_segment' => 'm',
-          'time_segment' => 'infinite'
-        ]);
+          foreach ($this->property['_embedded']['property_utilities'] as $key => $utility):
+            if($utility['utility_id'] == 'building'):
+              $show_price_per_sqm = true;
+              break;
+            endif;
+          endforeach;
+        endif;
+        if($show_price_per_sqm){
+          $price['pricePerSqm']['key'] = 'pricePerSqm';
+          $price['pricePerSqm']['context'] = '';
+          $price['pricePerSqm']['label'] = $this->getLabel('pricePerSqm');
+          $price['pricePerSqm']['value'] = round($this->transformPrice([
+            'value' => $this->property['price'],
+            'property_segment' => $this->property['price_property_segment'],
+            'time_segment' => 'infinite',
+            'area' => $area
+          ], [
+            'property_segment' => 'm',
+            'time_segment' => 'infinite'
+          ]));
+          $price['pricePerSqm']['renderedValue'] = $this->renderPrice([
+            'price' => $price['pricePerSqm']['value'],
+            'property_segment' => 'm',
+            'time_segment' => 'infinite'
+          ]);
+          $nullcheck = [
+            'price',
+            'pricePerSqm'
+          ];
+        }
+        else{
+          $nullcheck = [
+            'price',
+          ];
+        }
 
-    		$nullcheck = [
-    			'price',
-    			'pricePerSqm'
-        ];
 
       }
       elseif($type === 'rent'){
@@ -419,7 +435,6 @@ class ConversionService {
       'prices-buy' => [
           ['price', 'special'],
           ['pricePerSqm', 'renders'],
-          ['extraCosts', 'special'],
           ['gross_premium', 'numeric_value'],
       ],
       'prices-rent' => [
