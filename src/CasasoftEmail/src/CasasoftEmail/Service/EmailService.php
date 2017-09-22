@@ -85,7 +85,7 @@ class EmailService {
          //        case 'icasa':
          //          $service_name = 'iCasa.ch';
          //          $service_website = 'icasa.ch';
-         //          $service_logo = 'https://beta.icasa.ch/img/logo.svg';
+         //          $service_logo = 'https://icasa.ch/img/logo.svg';
          //          break;
          //      }
          //    }
@@ -161,7 +161,7 @@ class EmailService {
             }
 
             $data = [
-                "logo" => "https://beta.icasa.ch/img/logo.svg",
+                "logo" => "https://icasa.ch/img/logo.svg",
                 "message" => [
                     'header' => 'Message',
                     'txt' => $emailOptions['msg']->getMessage_plain(),
