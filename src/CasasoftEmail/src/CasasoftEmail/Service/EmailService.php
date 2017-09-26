@@ -73,8 +73,17 @@ class EmailService {
         if ($this->html && $this->casasoftMailTemplate && ($this->templateGroup == 'icasa') && isset($emailOptions['msg'])) {
             //$casaMailTemplate  = $this->getServiceLocator()->get('CasasoftMailTemplate');
 
+            if ($emailOptions['msg']->getLang() == 'de') {
+                $this->translator->setLocale('de_CH');
+            }
             if ($emailOptions['msg']->getLang() == 'en') {
                 $this->translator->setLocale('en_US');
+            }
+            if ($emailOptions['msg']->getLang() == 'fr') {
+                $this->translator->setLocale('fr_CH');
+            }
+            if ($emailOptions['msg']->getLang() == 'it') {
+                $this->translator->setLocale('it_CH');
             }
 
             // $service_name = 'SBB Immobilien';
