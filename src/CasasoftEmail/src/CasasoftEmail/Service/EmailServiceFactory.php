@@ -15,7 +15,14 @@ class EmailServiceFactory implements FactoryInterface
 
         $resolver = $serviceLocator->get('Zend\View\Resolver\TemplatePathStack');
 
-        $service = new EmailService($translator, $viewRenderer, $resolver);
+        try {
+            $casasoftMailTemplate = $serviceLocator->get('CasasoftMailTemplate');
+        } catch (\Exception $e) {
+            $casasoftMailTemplate = false;
+        }
+        
+
+        $service = new EmailService($translator, $viewRenderer, $resolver, $casasoftMailTemplate);
         
         $config = $serviceLocator->get('config');
         $r_config = array();
