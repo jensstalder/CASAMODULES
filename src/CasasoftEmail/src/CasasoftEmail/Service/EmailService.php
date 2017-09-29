@@ -46,7 +46,7 @@ class EmailService {
     }
 
     public function setEncoding($encoding){
-        $this->encoding = $encoding;
+    	$this->encoding = $encoding;
     }
 
     public function setConfig($config){
@@ -76,9 +76,9 @@ class EmailService {
             if ($emailOptions['msg']->getLang() == 'de') {
                 $this->translator->setLocale('de_CH');
             }
-            if ($emailOptions['msg']->getLang() == 'en') {
-                $this->translator->setLocale('en_US');
-            }
+        	if ($emailOptions['msg']->getLang() == 'en') {
+        		$this->translator->setLocale('en_US');
+        	}
             if ($emailOptions['msg']->getLang() == 'fr') {
                 $this->translator->setLocale('fr_CH');
             }
@@ -170,7 +170,7 @@ class EmailService {
             }
 
             $data = [
-                "logo" => "https://icasa.ch/img/logo.svg",
+                "logo" => "https://icasa.ch/img/logo.jpg",
                 "message" => [
                     'header' => 'Message',
                     'txt' => $emailOptions['msg']->getMessage_plain(),
@@ -317,12 +317,13 @@ class EmailService {
             $message->addReplyTo($emailOptions['replyto']);
         }
 
+
         if ($this->encoding == 'iso-8859-1') {
-            $content = mb_convert_encoding($content, 'iso-8859-1', 'UTF-8');
-        }
+    		$content = mb_convert_encoding($content, 'iso-8859-1', 'UTF-8');
+    	}
 
         if ($this->html) {
-            // HTML part
+            // HTML part iso-8859-1
             $htmlPart           = new MimePart($content);
             $htmlPart->encoding = Mime::ENCODING_QUOTEDPRINTABLE;
             $htmlPart->type     = "text/html; charset=".$this->encoding;    
@@ -333,6 +334,8 @@ class EmailService {
         $textPart           = new MimePart(strip_tags($content));
         $textPart->encoding = Mime::ENCODING_QUOTEDPRINTABLE;
         $textPart->type     = "text/plain; charset=".$this->encoding;
+
+        //mb_convert_encoding($string, 'ISO-2022-JP', 'UTF-8')
 
         $body = new MimeMessage();
         if ($attachments) {
