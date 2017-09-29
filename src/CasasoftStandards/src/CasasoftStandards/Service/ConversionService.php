@@ -176,12 +176,15 @@ class ConversionService {
       }
 
       //simplify
-      if ($this->property['_embedded']['numeric_values']) {
+      if (isset($this->property['_embedded']) && array_key_exists('numeric_values', $this->property['_embedded']) && $this->property['_embedded']['numeric_values']) {
         $this->property['numeric_values'] = $this->property['_embedded']['numeric_values'];
 
         unset($this->property['_embedded']['numeric_values']);
       }
-      if ($this->property['_embedded']['features']) {
+      else{
+        $this->property['numeric_values'] = [];        
+      }
+      if (isset($this->property['_embedded']) && array_key_exists('features', $this->property['_embedded']) && $this->property['_embedded']['features']) {
         $this->property['features'] = [];
         foreach ($this->property['_embedded']['features'] as $embfeature) {
           $this->property['features'][] = $embfeature['key'];
@@ -457,7 +460,7 @@ class ConversionService {
       if ($context == 'smart' || $context == 'special') {
         switch ($key) {
           case 'visualReferenceId': return $this->translator->translate('Reference no.', 'casasoft-standards'); break;
-          case 'categories': return $this->translator->translate('Categories', 'casasoft-standards'); break;
+          case 'categories': return $this->translator->translate('Category', 'casasoft-standards'); break;
           case 'start': return $this->translator->translate('Available from', 'casasoft-standards'); break;
           case 'condition': return $this->translator->translate('Condition', 'casasoft-standards'); break;
           case 'Wärmeerzeugung': return 'Wärmeerzeugung'; break;
