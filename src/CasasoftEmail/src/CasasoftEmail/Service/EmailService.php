@@ -27,6 +27,7 @@ class EmailService {
         'send' => true,
         'subject' => 'No Subject Defined',
         'from' => 'robot@domain.com',
+        'from_name' => 'robot',
         'replyto' => 'robot@domain.com',
         'to' => 'recipient@domain.com',
         'cc' => '',
@@ -46,7 +47,7 @@ class EmailService {
     }
 
     public function setEncoding($encoding){
-        $this->encoding = $encoding;
+    	$this->encoding = $encoding;
     }
 
     public function setConfig($config){
@@ -70,11 +71,20 @@ class EmailService {
 
     public function renderEmail($template = 'message', $emailOptions = array()){
         $emailOptions = array_merge($this->defaultEmailOptions, $emailOptions);
-        if ($this->html && $this->casasoftMailTemplate && ($this->templateGroup == 'icasa-beta') && isset($emailOptions['msg'])) {
+        if ($this->html && $this->casasoftMailTemplate && ($this->templateGroup == 'icasa') && isset($emailOptions['msg'])) {
             //$casaMailTemplate  = $this->getServiceLocator()->get('CasasoftMailTemplate');
 
-            if ($emailOptions['msg']->getLang() == 'en') {
-                $this->translator->setLocale('en_US');
+            if ($emailOptions['msg']->getLang() == 'de') {
+                $this->translator->setLocale('de_CH');
+            }
+        	if ($emailOptions['msg']->getLang() == 'en') {
+        		$this->translator->setLocale('en_US');
+        	}
+            if ($emailOptions['msg']->getLang() == 'fr') {
+                $this->translator->setLocale('fr_CH');
+            }
+            if ($emailOptions['msg']->getLang() == 'it') {
+                $this->translator->setLocale('it_CH');
             }
 
             // $service_name = 'SBB Immobilien';
@@ -85,7 +95,7 @@ class EmailService {
          //        case 'icasa':
          //          $service_name = 'iCasa.ch';
          //          $service_website = 'icasa.ch';
-         //          $service_logo = 'https://beta.icasa.ch/img/logo.svg';
+         //          $service_logo = 'https://icasa.ch/img/logo.svg';
          //          break;
          //      }
          //    }
@@ -161,7 +171,7 @@ class EmailService {
             }
 
             $data = [
-                "logo" => "https://beta.icasa.ch/img/logo.svg",
+                "logo" => "https://icasa.ch/img/logo.jpg",
                 "message" => [
                     'header' => 'Message',
                     'txt' => $emailOptions['msg']->getMessage_plain(),
@@ -235,59 +245,55 @@ class EmailService {
         return $content;
     }
 
-    public function sendEmail($template = 'message', $emailOptions = array()){
-        $emailOptions = array_merge($this->config, $emailOptions);
-
-        $content = $this->renderEmail($template, $emailOptions);
-
-        if ($emailOptions['debug']) {
-            $displays = array();
-            foreach ($emailOptions as $key => $value) {
-                if ($key  !== 'message' && $key != 'attachments') {
-                    if (!is_object($value)) {
-                        $displays[] = $key . ': <strong>' . (is_array($value) ? implode(',', $value) : $value) . '</strong>';
-                    } else {
-                        $displays[] = $key . ': <strong>OBJ</strong>';
-                    }
-                    
-                    
-                }
+    public function sendMandrill($template = 'message', $emailOptions = array(), $content = null){
+        try {
+            $mandrill = new \Mandrill($emailOptions['mandrill']['key']); 
+            $message = array(
+                'html' => $content,
+                'subject' => $emailOptions['subject'],
+                //'from_email' => $emailOptions['from'],
+                //'from_email' => $this->config['from'],
+                'from_email' => $this->config['mandrill']['from_email'],
+                'from_name' => $this->config['mandrill']['from_name'],
+                'headers' => [],
+                'important' => false,
+                'track_opens' => true,
+                'track_clicks' => true,
+                'auto_text' => true,
+                'inline_css' => true,
+                'tags' => array('casamail', 'msg'),
+                //'metadata' => array('website' => $service_website),
+            );
+            if ($emailOptions['bcc']) {
+                $message['bcc_address'] = $emailOptions['bcc'];
             }
-            echo '<div style="
-                        background-color: #444; 
-                        padding: 50px;
-                        box-shadow: 1px 1px 10px rgba(0,0,0,0.8) inset;
-                ">
-                    <div style="
-                                width:80%; 
-                                margin:10px auto; 
-                                background-color:#ffffff; 
-                                box-shadow:1px 2px 5px rgba(0,0,0,0.5);
-                                padding: 15px;
-                    " >
-                        '.implode(' ; ', $displays).'
-                    </div>
-                    <div style="
-                                width:80%; 
-                                margin:10px auto; 
-                                background-color:#ffffff; 
-                                box-shadow:1px 2px 5px rgba(0,0,0,0.5);
-                    " >'
-                        .$content
-                    .'</div>'
-                    .(isset($emailOptions['attachments']) && $emailOptions['attachments'] ? '<div style="
-                                width:80%; 
-                                margin:10px auto; 
-                                background-color:#ffffff; 
-                                box-shadow:1px 2px 5px rgba(0,0,0,0.5);
-                                padding: 15px;
-                    " >Mit Anhang</div>' : '')
-                .'</div>';
-            
-            
+            // if ($emailOptions['cc']) {
+            //     $message->addCc($emailOptions['cc']);
+            // }
+            if ($emailOptions['replyto']) {
+                $message['headers']['Reply-To'] = $emailOptions['replyto'];
+            }
+            $message['to'] = array(
+                array(
+                    'email' => $emailOptions['to'],
+                    'name' => $emailOptions['to'],
+                    'type' => 'to'
+                )
+            );
+            $async = false;
+            $ip_pool = 'Main Pool';
+            $now = new \DateTime('Now');
+            $send_at = $now->format('c');
+            $mandrill_result = $mandrill->messages->send($message, $async, $ip_pool, $send_at);
+            //print_r($mandrill_result);
+            //print_r($message);
+        } catch (\Exception $e) {
+            $this->sendSMTP($template, $emailOptions, $content);
         }
+       
+    }
 
-
+    public function sendSMTP($template = 'message', $emailOptions = array(), $content = null){
         $attachments = (isset($emailOptions['attachments']) && $emailOptions['attachments'] && is_array($emailOptions['attachments']) ? $emailOptions['attachments'] : array() );
 
         $message = new Message();
@@ -305,12 +311,13 @@ class EmailService {
             $message->addReplyTo($emailOptions['replyto']);
         }
 
+
         if ($this->encoding == 'iso-8859-1') {
             $content = mb_convert_encoding($content, 'iso-8859-1', 'UTF-8');
         }
 
         if ($this->html) {
-            // HTML part
+            // HTML part iso-8859-1
             $htmlPart           = new MimePart($content);
             $htmlPart->encoding = Mime::ENCODING_QUOTEDPRINTABLE;
             $htmlPart->type     = "text/html; charset=".$this->encoding;    
@@ -321,6 +328,8 @@ class EmailService {
         $textPart           = new MimePart(strip_tags($content));
         $textPart->encoding = Mime::ENCODING_QUOTEDPRINTABLE;
         $textPart->type     = "text/plain; charset=".$this->encoding;
+
+        //mb_convert_encoding($string, 'ISO-2022-JP', 'UTF-8')
 
         $body = new MimeMessage();
         if ($attachments) {
@@ -397,6 +406,69 @@ class EmailService {
         } else {
             echo '<h1>E-Mail <strong>NOT</strong> sent</h1>';
         }
+    }
+
+    public function sendEmail($template = 'message', $emailOptions = array(), $content = null){
+        $emailOptions = array_merge($this->config, $emailOptions);
+
+        if (!$content) {
+            $content = $this->renderEmail($template, $emailOptions);
+        }
+        
+
+        if ($emailOptions['debug']) {
+            $displays = array();
+            foreach ($emailOptions as $key => $value) {
+                if ($key  !== 'message' && $key != 'attachments') {
+                    if (!is_object($value)) {
+                        $displays[] = $key . ': <strong>' . (is_array($value) ? implode(',', $value) : $value) . '</strong>';
+                    } else {
+                        $displays[] = $key . ': <strong>OBJ</strong>';
+                    }
+                    
+                    
+                }
+            }
+            echo '<div style="
+                        background-color: #444; 
+                        padding: 50px;
+                        box-shadow: 1px 1px 10px rgba(0,0,0,0.8) inset;
+                ">
+                    <div style="
+                                width:80%; 
+                                margin:10px auto; 
+                                background-color:#ffffff; 
+                                box-shadow:1px 2px 5px rgba(0,0,0,0.5);
+                                padding: 15px;
+                    " >
+                        '.implode(' ; ', $displays).'
+                    </div>
+                    <div style="
+                                width:80%; 
+                                margin:10px auto; 
+                                background-color:#ffffff; 
+                                box-shadow:1px 2px 5px rgba(0,0,0,0.5);
+                    " >'
+                        .$content
+                    .'</div>'
+                    .(isset($emailOptions['attachments']) && $emailOptions['attachments'] ? '<div style="
+                                width:80%; 
+                                margin:10px auto; 
+                                background-color:#ffffff; 
+                                box-shadow:1px 2px 5px rgba(0,0,0,0.5);
+                                padding: 15px;
+                    " >Mit Anhang</div>' : '')
+                .'</div>';
+            
+            
+        }
+        if (isset($emailOptions['mandrill']) && $this->encoding == 'UTF-8') {
+            $this->sendMandrill($template, $emailOptions, $content);
+        } else {
+            $this->sendSMTP($template, $emailOptions, $content);
+        }
+        
+        
 
         return $content;
 

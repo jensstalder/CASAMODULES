@@ -176,12 +176,15 @@ class ConversionService {
       }
 
       //simplify
-      if ($this->property['_embedded']['numeric_values']) {
+      if (isset($this->property['_embedded']) && array_key_exists('numeric_values', $this->property['_embedded']) && $this->property['_embedded']['numeric_values']) {
         $this->property['numeric_values'] = $this->property['_embedded']['numeric_values'];
 
         unset($this->property['_embedded']['numeric_values']);
       }
-      if ($this->property['_embedded']['features']) {
+      else{
+        $this->property['numeric_values'] = [];        
+      }
+      if (isset($this->property['_embedded']) && array_key_exists('features', $this->property['_embedded']) && $this->property['_embedded']['features']) {
         $this->property['features'] = [];
         foreach ($this->property['_embedded']['features'] as $embfeature) {
           $this->property['features'][] = $embfeature['key'];
@@ -221,29 +224,45 @@ class ConversionService {
           'property_segment' => 'all',
           'time_segment' => 'infinite'
         ]);
+        $show_price_per_sqm = false;
+        if (isset($this->property['_embedded']['property_utilities'])):
 
-        $price['pricePerSqm']['key'] = 'pricePerSqm';
-        $price['pricePerSqm']['context'] = '';
-        $price['pricePerSqm']['label'] = $this->getLabel('pricePerSqm');
-        $price['pricePerSqm']['value'] = round($this->transformPrice([
-          'value' => $this->property['price'],
-          'property_segment' => $this->property['price_property_segment'],
-          'time_segment' => 'infinite',
-          'area' => $area
-        ], [
-          'property_segment' => 'm',
-          'time_segment' => 'infinite'
-        ]));
-        $price['pricePerSqm']['renderedValue'] = $this->renderPrice([
-          'price' => $price['pricePerSqm']['value'],
-          'property_segment' => 'm',
-          'time_segment' => 'infinite'
-        ]);
+          foreach ($this->property['_embedded']['property_utilities'] as $key => $utility):
+            if($utility['utility_id'] == 'building'):
+              $show_price_per_sqm = true;
+              break;
+            endif;
+          endforeach;
+        endif;
+        if($show_price_per_sqm){
+          $price['pricePerSqm']['key'] = 'pricePerSqm';
+          $price['pricePerSqm']['context'] = '';
+          $price['pricePerSqm']['label'] = $this->getLabel('pricePerSqm');
+          $price['pricePerSqm']['value'] = round($this->transformPrice([
+            'value' => $this->property['price'],
+            'property_segment' => $this->property['price_property_segment'],
+            'time_segment' => 'infinite',
+            'area' => $area
+          ], [
+            'property_segment' => 'm',
+            'time_segment' => 'infinite'
+          ]));
+          $price['pricePerSqm']['renderedValue'] = $this->renderPrice([
+            'price' => $price['pricePerSqm']['value'],
+            'property_segment' => 'm',
+            'time_segment' => 'infinite'
+          ]);
+          $nullcheck = [
+            'price',
+            'pricePerSqm'
+          ];
+        }
+        else{
+          $nullcheck = [
+            'price',
+          ];
+        }
 
-    		$nullcheck = [
-    			'price',
-    			'pricePerSqm'
-        ];
 
       }
       elseif($type === 'rent'){
@@ -393,6 +412,7 @@ class ConversionService {
           ['visualReferenceId', 'special'],
           ['categories', 'special'],
           ['start', 'special'],
+          ['floor', 'numeric_value'],
           ['number_of_rooms', 'numeric_value'],
           ['number_of_bathrooms', 'numeric_value'],
           ['number_of_apartments','numeric_value'],
@@ -404,33 +424,31 @@ class ConversionService {
           ['volume_gva','numeric_value'],
           ['Wärmeerzeugung','special'],
           ['Wärmeverteilung','special'],
-          ['granny-flat','category'],
+          //['granny-flat','category'], Wrong!! this whould be a feature
           ['parcelNumbers','special'],
           ['Erschliessung','special'],
           ['Auflagen','Auflagen'],
           ['zoneTypes','special'],
-          ['construction_utilization_number','numeric_value'],
+          ['utilization_number','numeric_value'],
           ['hall_height','numeric_value'],
           ['maximal_floor_loading','numeric_value'],
           ['carrying_capacity_crane','numeric_value'],
           ['carrying_capacity_elevator','numeric_value']
       ],
       'prices-buy' => [
-        ['price', 'special'],
-        ['pricePerSqm', 'renders'],
-        ['extraCosts', 'special'],
-        ['has-rental-deposit-guarantee', 'feature'],
-        ['rental_deposit', 'numeric_value']
+          ['price', 'special'],
+          ['pricePerSqm', 'renders'],
+          ['gross_premium', 'numeric_value'],
       ],
       'prices-rent' => [
-        ['priceBruttoTotalPerMonth', 'renders'],
-        ['priceNettoPerSqmPerMonth', 'renders'],
-        ['priceNettoPerSqmPerYear', 'renders'],
-        ['priceNettoPerTotalPerMonth', 'renders'],
-        ['priceNettoPerTotalPerYear', 'renders'],
-        ['extraCosts', 'special'],
-        ['has-rental-deposit-guarantee', 'feature'],
-        ['rental_deposit', 'numeric_value']
+          ['priceBruttoTotalPerMonth', 'renders'],
+          ['priceNettoPerSqmPerMonth', 'renders'],
+          ['priceNettoPerSqmPerYear', 'renders'],
+          ['priceNettoPerTotalPerMonth', 'renders'],
+          ['priceNettoPerTotalPerYear', 'renders'],
+          ['extraCosts', 'special'],
+          ['has-rental-deposit-guarantee', 'feature'],
+          ['rental_deposit', 'numeric_value']
       ]
     ];
 
@@ -454,7 +472,7 @@ class ConversionService {
           case 'areas': return $this->translator->translate('Areas', 'casasoft-standards'); break;
           case 'features': return $this->translator->translate('Features', 'casasoft-standards'); break;
           case 'distances': return $this->translator->translate('Distances', 'casasoft-standards'); break;
-          case 'price': return $this->translator->translate('Price', 'casasoft-standards'); break;
+          case 'price': return $this->translator->translate('Sales price', 'casasoft-standards'); break;
           case 'on-request': return $this->translator->translate('On Request', 'casasoft-standards'); break;
           case 'pricePerSqm': return $this->translator->translate('Price per sqm', 'casasoft-standards'); break;
     			case 'priceBruttoPerSqmPerMonth': return $this->translator->translate('priceBruttoPerSqmPerMonth', 'casasoft-standards'); break;
@@ -547,7 +565,9 @@ class ConversionService {
                     $categories[] = $this->getLabel($cat_item['category_id'], 'category');
                 }
             }
-            return str_replace(' ', '-', implode('-', $categories));
+            if ($categories) {
+              return array_values(array_slice($categories, -1))[0];
+            }
             break;
           case 'start':
             if (isset($this->property['start'])) {
@@ -583,7 +603,7 @@ class ConversionService {
                   $conditions[] = $this->getLabel($featureKey, 'feature');
               }
             }
-            return str_replace(' ', '-', implode('-', $conditions));
+            return implode(', ', $conditions);
             break;
           case 'Wärmeerzeugung':
             return '';
@@ -597,24 +617,24 @@ class ConversionService {
             }
             break;
           case 'Erschliessung':
-            $features = array();
-            foreach ($this->property['features'] as $featureKey) {
-              if (in_array($featureKey, [
-                'has-water-supply',
-                'has-sewage-supply',
-                'has-power-supply',
-                'has-gas-supply',
-              ] ) ) {
-                  $features[] = $this->getLabel($featureKey, 'feature');
-              }
-            }
-            if (count($features) == 4) {
-              $this->translator->translate('Fully ***', 'casasoft-standards');
-            } elseif (count($features)) {
-              $this->translator->translate('Partialy ***', 'casasoft-standards');
-            } else {
-              $this->translator->translate('NOT ***', 'casasoft-standards');
-            }
+            // $features = array(); //that is wrong!!!
+            // foreach ($this->property['features'] as $featureKey) {
+            //   if (in_array($featureKey, [
+            //     'has-water-supply',
+            //     'has-sewage-supply',
+            //     'has-power-supply',
+            //     'has-gas-supply',
+            //   ] ) ) {
+            //       $features[] = $this->getLabel($featureKey, 'feature');
+            //   }
+            // }
+            // if (count($features) == 4) {
+            //   return $this->translator->translate('Fully connected to utilities', 'casasoft-standards');
+            // } elseif (count($features)) {
+            //   return $this->translator->translate('Partialy connected to utilities', 'casasoft-standards');
+            // } else {
+            //   return $this->translator->translate('Not connected to utilities', 'casasoft-standards');
+            // }
             return '';
             break;
           case 'zoneTypes':
