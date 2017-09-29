@@ -34,7 +34,12 @@ class EmailService {
         'bcc' => '',
         'message' => 'No Message Defined',
         'domain' => 'domain.com',
-        'title' => 'Email Service Title'
+        'title' => 'Email Service Title',
+        'mandrill' => [
+            'from_email' => '',
+            'from_name' => '',
+            'tags' => []
+        ]
     );
 
     public function __construct($translator, $viewRender, $resolver, $casasoftMailTemplate){
@@ -261,7 +266,7 @@ class EmailService {
                 'track_clicks' => true,
                 'auto_text' => true,
                 'inline_css' => true,
-                'tags' => array('casamail', 'msg'),
+                'tags' => ($emailOptions['mandrill']['tags'] ? $emailOptions['mandrill']['tags'] : []),
                 //'metadata' => array('website' => $service_website),
             );
             if ($emailOptions['bcc']) {
@@ -409,7 +414,12 @@ class EmailService {
     }
 
     public function sendEmail($template = 'message', $emailOptions = array(), $content = null){
+        $mandrillOptions = [];
+        if ($emailOptions['mandrill']) {
+            $mandrillOptions = array_merge($this->config['mandrill'], $emailOptions['mandrill']);
+        }
         $emailOptions = array_merge($this->config, $emailOptions);
+        $emailOptions['mandrill'] = $mandrillOptions;
 
         if (!$content) {
             $content = $this->renderEmail($template, $emailOptions);
