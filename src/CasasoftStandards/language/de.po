@@ -43,7 +43,7 @@ msgstr "Fabrik"
 
 #: ../src/CasasoftStandards/Service/CategoryService.php:45
 msgid "Farm"
-msgstr "Farm"
+msgstr "Bauernhaus"
 
 #: ../src/CasasoftStandards/Service/CategoryService.php:46
 msgid "Farm house"
@@ -351,7 +351,7 @@ msgstr "Referenz-Nr."
 
 #: ../src/CasasoftStandards/Service/ConversionService.php:445
 msgid "Categories"
-msgstr "Kategorie"
+msgstr "Kategorien"
 
 #: ../src/CasasoftStandards/Service/ConversionService.php:446
 msgid "Available from"
@@ -1135,4 +1135,8 @@ msgstr "Nettomiete / m<sup>2</sup> / Jahr"
 #: ../src/CasasoftStandards/Service/ConversionService.php:457
 msgid "Sales price"
 msgstr "Verkaufspreis"
+
+#: 
+msgid "Category"
+msgstr "Kategorie"
 
