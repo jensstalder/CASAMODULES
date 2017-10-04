@@ -414,10 +414,26 @@ class EmailService {
     }
 
     public function sendEmail($template = 'message', $emailOptions = array(), $content = null){
+        
         $mandrillOptions = [];
         if ($emailOptions['mandrill']) {
             $mandrillOptions = array_merge($this->config['mandrill'], $emailOptions['mandrill']);
         }
+
+        $mandrillTags = [];
+        if (isset($this->config['mandrill']['tags']) && isset($emailOptions['mandrill']['tags']) && $emailOptions['mandrill']['tags']) {
+            $mandrillTags = array_merge($this->config['mandrill']['tags'], $emailOptions['mandrill']['tags']);
+        }
+        elseif(isset($this->config['mandrill']['tags']) && !isset($emailOptions['mandrill']['tags'])){
+            $mandrillTags = $this->config['mandrill']['tags'];
+        }
+        elseif(!isset($this->config['mandrill']['tags']) && isset($emailOptions['mandrill']['tags'])){
+            $mandrillTags = $emailOptions['mandrill']['tags'];
+        }
+
+
+        $mandrillOptions['tags'] = $mandrillTags;
+
         $emailOptions = array_merge($this->config, $emailOptions);
         $emailOptions['mandrill'] = $mandrillOptions;
 
