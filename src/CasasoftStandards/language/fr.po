@@ -222,7 +222,7 @@ msgstr "Appartement avec jardin"
 
 #: ../src/CasasoftStandards/Service/CategoryService.php:93
 msgid "Retail space"
-msgstr "Espace de vente"
+msgstr "Commerce"
 
 #: ../src/CasasoftStandards/Service/CategoryService.php:95
 msgid "Boat dry dock"
