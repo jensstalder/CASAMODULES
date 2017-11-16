@@ -107,6 +107,18 @@ class EmailService {
 
             $person = [];
             if ($emailOptions['msg']->getFirstname()) {
+                $gender = $emailOptions['msg']->getGender();
+                if($gender === 1) {
+                    $honorificPrefix = 'Mr';
+                } elseif($gender === 2) {
+                    $honorificPrefix = 'Mrs';
+                } else {
+                    $honorificPrefix = 'not specified';
+                }
+
+                $person[] = ["key" => 'honorificPrefix', "value" => $honorificPrefix];
+            }
+            if ($emailOptions['msg']->getFirstname()) {
                 $person[] = ["key" => 'First name', "value" => $emailOptions['msg']->getFirstname()];
             }
             if ($emailOptions['msg']->getLastname()){
