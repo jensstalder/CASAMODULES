@@ -106,7 +106,7 @@ class EmailService {
          //    }
 
             $person = [];
-            if ($emailOptions['msg']->getFirstname()) {
+            if ($emailOptions['msg']->getGender()) {
                 $gender = $emailOptions['msg']->getGender();
                 if($gender === 1) {
                     $honorificPrefix = 'Mr';
