@@ -170,8 +170,8 @@ class EmailService {
             if ($emailOptions['msg']->getProperty_price()) {
                 $property['propertyOptions'][] = ["optionDescription" => 'Price', "optionValue" => $emailOptions['msg']->getProperty_price()];
             }
-            if ($emailOptions['msg']->getProperty_price()) {
-                $property['propertyOptions'][] = ["optionDescription" => 'Link', "optionValue" => 'to website', "optionLink" => true, "optionUrl" => $emailOptions['msg']->getBacklink];
+            if ($emailOptions['msg']->getBacklink()) {
+                $property['propertyOptions'][] = ["optionDescription" => 'Link', "optionValue" => 'to website', "optionLink" => true, "optionUrl" => $emailOptions['msg']->getBacklink()];
             }
 
             $extra_data = [];
