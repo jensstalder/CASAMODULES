@@ -150,28 +150,28 @@ class EmailService {
                 $property['objectReference'] = ["text" => 'Project-Ref.', "value" => $emailOptions['msg']->getProject_reference()];
             }
             if ($emailOptions['msg']->getProperty_street()) {
-                $property['propertyOptions'] = ["optionDescription" => 'Street', "optionValue" => $emailOptions['msg']->getProperty_street()];
+                $property['propertyOptions'][] = ["optionDescription" => 'Street', "optionValue" => $emailOptions['msg']->getProperty_street()];
             }
             if (trim($emailOptions['msg']->getProperty_postal_code().$emailOptions['msg']->getProperty_locality())) {
-                $property['propertyOptions'] = ["optionDescription" => 'City', "optionValue" => trim($emailOptions['msg']->getProperty_postal_code().' '.$emailOptions['msg']->getProperty_locality())];
+                $property['propertyOptions'][] = ["optionDescription" => 'City', "optionValue" => trim($emailOptions['msg']->getProperty_postal_code().' '.$emailOptions['msg']->getProperty_locality())];
             }
             if ($emailOptions['msg']->getProperty_type()) {
-                $property['propertyOptions'] = ["optionDescription" => 'Sales Type', "optionValue" => $emailOptions['msg']->getProperty_type()];
+                $property['propertyOptions'][] = ["optionDescription" => 'Sales Type', "optionValue" => $emailOptions['msg']->getProperty_type()];
             }
             if ($emailOptions['msg']->getProperty_category()) {
-                $property['propertyOptions'] = ["optionDescription" => 'Category', "optionValue" => $emailOptions['msg']->getProperty_category()];
+                $property['propertyOptions'][] = ["optionDescription" => 'Category', "optionValue" => $emailOptions['msg']->getProperty_category()];
             }
             if ($emailOptions['msg']->getProperty_country()) {
-                $property['propertyOptions'] = ["optionDescription" => 'Country', "optionValue" => $emailOptions['msg']->getProperty_country()];
+                $property['propertyOptions'][] = ["optionDescription" => 'Country', "optionValue" => $emailOptions['msg']->getProperty_country()];
             }
             if ($emailOptions['msg']->getProperty_rooms()) {
-                $property['propertyOptions'] = ["optionDescription" => 'Rooms', "optionValue" => $emailOptions['msg']->getProperty_rooms()];
+                $property['propertyOptions'][] = ["optionDescription" => 'Rooms', "optionValue" => $emailOptions['msg']->getProperty_rooms()];
             }
             if ($emailOptions['msg']->getProperty_price()) {
-                $property['propertyOptions'] = ["optionDescription" => 'Price', "optionValue" => $emailOptions['msg']->getProperty_price()];
+                $property['propertyOptions'][] = ["optionDescription" => 'Price', "optionValue" => $emailOptions['msg']->getProperty_price()];
             }
             if ($emailOptions['msg']->getProperty_price()) {
-                $property['propertyOptions'] = ["optionDescription" => 'Link', "optionValue" => 'to website', "optionLink" => true, "optionUrl" => $emailOptions['msg']->getBacklink];
+                $property['propertyOptions'][] = ["optionDescription" => 'Link', "optionValue" => 'to website', "optionLink" => true, "optionUrl" => $emailOptions['msg']->getBacklink];
             }
 
             $extra_data = [];
