@@ -220,7 +220,8 @@ class EmailService {
             if ($property) {
                 $data['property'] = [
                     'header' => 'Immobilie',
-                    $property
+                    'objectReference' => $property['objectReference'],
+                    'propertyOptions' => $property['propertyOptions'],
                 ];
             }
             if ($searchProfile) {
