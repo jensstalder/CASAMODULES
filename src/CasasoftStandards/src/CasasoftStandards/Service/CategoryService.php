@@ -125,6 +125,8 @@ class CategoryService {
             'commercial' => array('label' => $this->translator->translate('Commercial', 'casasoft-standards'),),
             'commercial-plot' => array('label' => $this->translator->translate('Commercial plot', 'casasoft-standards'),),
             'house-part' => array('label' => $this->translator->translate('Part of a house', 'casasoft-standards'),),
+            'residential-commercial-building' => array('label' => $this->translator->translate('Residential / commercial building', 'casasoft-standards'),),
+            
         );
 
 
