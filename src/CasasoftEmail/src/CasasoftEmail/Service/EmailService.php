@@ -141,7 +141,8 @@ class EmailService {
             }
 
             $property = [
-                'propertyOptions' => []
+                'propertyOptions' => [],
+                'objectReference' => null
             ];
             if ($emailOptions['msg']->getProperty_reference()) {
                 $property['objectReference'] = ["text" => 'Object-Ref.', "value" => $emailOptions['msg']->getProperty_reference()];
@@ -217,10 +218,11 @@ class EmailService {
                     'data' => $person
                 ];
             }
-            if ($property) {
+            if ($property['propertyOptions'] || $property['objectReference']) {
                 $data['property'] = [
                     'header' => 'Immobilie',
-                    $property
+                    'propertyOptions' => $property['propertyOptions'],
+                    'objectReference' => $property['objectReference'],
                 ];
             }
             if ($searchProfile) {
