@@ -221,6 +221,7 @@ class EmailService {
             if ($property['propertyOptions'] || $property['objectReference']) {
                 $data['property'] = [
                     'header' => 'Immobilie',
+                    'objectReference' => $property['objectReference'],
                     'propertyOptions' => $property['propertyOptions'],
                     'objectReference' => $property['objectReference'],
                 ];
