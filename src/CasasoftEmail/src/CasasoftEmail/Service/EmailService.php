@@ -175,6 +175,12 @@ class EmailService {
                 $property['propertyOptions'][] = ["optionDescription" => 'Link', "optionValue" => 'to website', "optionLink" => true, "optionUrl" => $emailOptions['msg']->getBacklink()];
             }
 
+            // $property['image'] = [
+            //     'src' => 'https://casamail.com/img/property-placeholder.jpg',
+            //     'link' => $emailOptions['msg']->getBacklink(),
+            //     'alt' => 'Objektbild'
+            // ];
+
             $extra_data = [];
             $searchProfile = [];
             if ($emailOptions['msg']->getExtra_data()) {
@@ -223,7 +229,7 @@ class EmailService {
                     'header' => 'Immobilie',
                     'objectReference' => $property['objectReference'],
                     'propertyOptions' => $property['propertyOptions'],
-                    'objectReference' => $property['objectReference'],
+                    'image' => $property['image'],
                 ];
             }
             if ($searchProfile) {
