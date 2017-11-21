@@ -228,8 +228,7 @@ class EmailService {
                 $data['property'] = [
                     'header' => 'Immobilie',
                     'objectReference' => $property['objectReference'],
-                    'propertyOptions' => $property['propertyOptions'],
-                    'image' => $property['image'],
+                    'propertyOptions' => $property['propertyOptions']
                 ];
             }
             if ($searchProfile) {
