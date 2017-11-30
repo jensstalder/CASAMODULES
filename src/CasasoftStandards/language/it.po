@@ -1146,5 +1146,5 @@ msgstr "Categoria"
 
 #: 
 msgid "Part of a house"
-msgstr ""
+msgstr "Porzione di casa"
 
