@@ -505,6 +505,18 @@ class ConversionService {
         $utility = $this->utilityService->getItem($key);
         if ($utility) {return $utility->getLabel();}
       }
+
+      if ($context == 'smart' || $context == 'utility-alt') {
+        switch ($key) {
+          case 'building': return $this->translator->translate('Building land', 'casasoft-standards'); break;
+          case 'parking': return $this->translator->translate('Parking / Garage', 'casasoft-standards'); break;
+          case 'gastronomy': return $this->translator->translate('Gastronomy / Hotel', 'casasoft-standards'); break;
+          default: 
+            $utility = $this->utilityService->getItem($key);
+            if ($utility) {return $utility->getLabel();}
+          break;
+        }
+      }
       return $key;
     }
 
@@ -674,6 +686,19 @@ class ConversionService {
           foreach ($this->featureService->getDefaultOptions() as $key => $options) {
             $template[] = [$key, 'feature'];
           }
+        } elseif ($templateMixed === 'curated-utilities') {
+          $template = [
+              ['residential', 'utility'],
+              ['building', 'utility-alt'],
+              ['commercial', 'utility'],
+              ['parking', 'utility-alt'],
+              ['storage', 'utility'],
+              ['gastronomy', 'utility-alt'],
+              ['industrial', 'utility'],
+              ['investment', 'utility'],
+              ['agricultural', 'utility'],
+              ['vacation', 'utility'],
+          ];
         } else {
           return $list;
         }
