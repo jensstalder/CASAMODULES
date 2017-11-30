@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CasaNet\n"
 "POT-Creation-Date: 2017-10-13 07:57+0200\n"
-"PO-Revision-Date: 2017-10-13 07:57+0200\n"
+"PO-Revision-Date: 2017-10-13 08:07+0200\n"
 "Last-Translator: Jens Stalder <js@casasoft.ch>\n"
 "Language-Team: CasaSoft <info@casasoft.ch>\n"
 "Language: it\n"
@@ -819,7 +819,7 @@ msgstr "Distanza a scuola primaria"
 
 #: src/CasasoftStandards/Service/NumvalService.php:235
 msgid "Distance to high school"
-msgstr "Scuole superiori"
+msgstr "scuole superiori"
 
 #: src/CasasoftStandards/Service/NumvalService.php:241
 msgid "Distance to college"
@@ -859,7 +859,7 @@ msgstr "Distanza dai negozi"
 
 #: src/CasasoftStandards/Service/NumvalService.php:295
 msgid "Distance to freeway"
-msgstr "Autostrada"
+msgstr "autostrada"
 
 #: src/CasasoftStandards/Service/NumvalService.php:301
 msgid "Distance to airport"
