@@ -460,7 +460,7 @@ class ConversionService {
       if ($context == 'smart' || $context == 'special') {
         switch ($key) {
           case 'visualReferenceId': return $this->translator->translate('Reference no.', 'casasoft-standards'); break;
-          case 'categories': return $this->translator->translate('Category', 'casasoft-standards'); break;
+          case 'categories': return $this->translator->translate('Categories', 'casasoft-standards'); break;
           case 'start': return $this->translator->translate('Available from', 'casasoft-standards'); break;
           case 'condition': return $this->translator->translate('Condition', 'casasoft-standards'); break;
           case 'Wärmeerzeugung': return 'Wärmeerzeugung'; break;
