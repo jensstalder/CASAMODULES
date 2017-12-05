@@ -572,9 +572,14 @@ class ConversionService {
           case 'start':
             if (isset($this->property['start'])) {
               if(is_array($this->property['start'])){
+                $now = new \DateTime();
                 $date_time = new \DateTime($this->property['start']['date']);
 
-          			return $date_time->format('d.m.Y');
+                if ($now > $date_time) {
+                  return $this->translator->translate('Immediate', 'casasoft-standards');
+                } else {
+                  return $date_time->format('d.m.Y');
+                }
               }
               else{
                 return $this->property['start'];
