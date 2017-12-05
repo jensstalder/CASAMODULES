@@ -110,6 +110,40 @@ class GeoService implements FactoryInterface {
         return null;
     }
 
+    //gets siblings children and parents
+    public function getTree($geoid){
+        $country = 'CH';
+        $request = new Request();
+        $request->setMethod(Request::METHOD_GET);
+        // foreach ($query as $key => $value) {
+        //   $request->getQuery()->set($key, $value);
+        // }
+
+        $request->getQuery()->set('id', $geoid);
+
+        $request->getHeaders()->addHeaderLine('Accept', 'application/json');
+        switch ($country) {
+            case 'CH':
+                $request->setUri($this->config['url'].'/rpc/tree');
+                break;
+            default:
+                $request->setUri($this->config['url'].'/rpc/tree');
+                break;
+        }
+
+        $client = new Client();
+        $response = $client->send($request);
+        $body = $response->getBody();
+
+        $result = json_decode($body, true);
+        if ($result) {
+            return $result;
+        }
+
+        return null;
+
+    }
+
 
     public function findRegion($country, $query){
         $request = new Request();
