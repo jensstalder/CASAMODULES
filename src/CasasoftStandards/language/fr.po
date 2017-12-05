@@ -1143,5 +1143,9 @@ msgstr "Catégorie"
 
 #: 
 msgid "Part of a house"
-msgstr ""
+msgstr "Partie de la maison"
+
+#: 
+msgid "Immediate"
+msgstr "Immédiatement"
 
