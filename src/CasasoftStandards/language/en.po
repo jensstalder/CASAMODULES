@@ -1148,3 +1148,11 @@ msgstr ""
 msgid "Immediate"
 msgstr ""
 
+#: 
+msgid "Gastronomy / Hotel"
+msgstr ""
+
+#: 
+msgid "Parking / Garage"
+msgstr ""
+
