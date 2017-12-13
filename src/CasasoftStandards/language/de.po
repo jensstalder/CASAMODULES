@@ -1148,3 +1148,16 @@ msgstr "Hausteil"
 msgid "Immediate"
 msgstr "ab sofort"
 
+#: 
+msgid "Gastronomy / Hotel"
+msgstr "Gastronomie / Hotel"
+
+#: 
+msgid "Parking / Garage"
+msgstr "Parkplatz / Garage"
+
+#: 
+msgctxt "Nebenkosten"
+msgid "Extra Costs"
+msgstr "Nebenkosten"
+
