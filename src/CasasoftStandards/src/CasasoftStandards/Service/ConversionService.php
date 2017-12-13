@@ -300,7 +300,6 @@ class ConversionService {
             'time_segment' => 'm'
           ]);
 
-
         // }
         if($show_prices){
 
@@ -483,6 +482,8 @@ class ConversionService {
     			case 'priceNettoPerSqmPerYear': return $this->translator->translate('Net rent / m<sup>2</sup> / year', 'casasoft-standards'); break;
     			case 'priceNettoTotalPerMonth': return $this->translator->translate('Net rent / month', 'casasoft-standards'); break;
     			case 'priceNettoTotalPerYear': return $this->translator->translate('Net rent / year', 'casasoft-standards'); break;
+          case 'extraCosts': return $this->translator->translate('Extra Costs', 'casasoft-standards'); break;
+          
         }
       }
 
@@ -521,6 +522,27 @@ class ConversionService {
     }
 
     public function getRenderedValue($key, $context = 'smart'){
+      if ($context == 'smart' || $context == 'special') {
+        switch ($key) {
+          case 'extraCosts':
+            $extraCost = null;
+            foreach ($this->property['_embedded']['extracosts'] as $extracost) {
+                if (in_array($extracost['title'], ['extracosts', 'Nebenkosten']) && $extracost['cost']) {
+                  $extraCost = $extracost;
+                  break;
+                }
+              }
+            if ($extraCost) {
+              return $this->renderPrice([
+                'price' => $extraCost['cost'],
+                'time_segment' => $extraCost['time_segment'],
+                'property_segment' => $extraCost['property_segment'],
+              ]
+              );
+            }
+          break;
+        }
+      }
       if ($context == 'smart' || $context == 'numeric_value') {
         $numval = $this->numvalService->getItem($key);
         if ($numval) {
@@ -653,6 +675,16 @@ class ConversionService {
             //   return $this->translator->translate('Not connected to utilities', 'casasoft-standards');
             // }
             return '';
+            break;
+          case 'extraCosts':
+            if (isset($this->property['_embedded']['extracosts'])) {
+              foreach ($this->property['_embedded']['extracosts'] as $extracost) {
+                if (in_array($extracost['title'], ['extracosts', 'Nebenkosten']) && $extracost['cost']) {
+                  return $extracost['cost'];
+                  break;
+                }
+              }
+            }
             break;
           case 'zoneTypes':
             if (isset($this->property['zoneTypes'])) {
