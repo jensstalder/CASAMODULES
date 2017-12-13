@@ -1157,7 +1157,7 @@ msgid "Parking / Garage"
 msgstr "Parkplatz / Garage"
 
 #: 
-msgctxt "Nebenkosten"
+#, fuzzy
 msgid "Extra Costs"
 msgstr "Nebenkosten"
 
