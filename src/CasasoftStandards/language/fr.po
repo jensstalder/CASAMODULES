@@ -1149,3 +1149,16 @@ msgstr "Partie de la maison"
 msgid "Immediate"
 msgstr "Immédiatement"
 
+#: 
+msgid "Gastronomy / Hotel"
+msgstr ""
+
+#: 
+msgid "Parking / Garage"
+msgstr ""
+
+#: 
+msgctxt "Nebenkosten"
+msgid "Extra Costs"
+msgstr ""
+
