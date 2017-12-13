@@ -1156,3 +1156,8 @@ msgstr ""
 msgid "Parking / Garage"
 msgstr ""
 
+#: 
+msgctxt "Nebenkosten"
+msgid "Extra Costs"
+msgstr ""
+
