@@ -293,8 +293,8 @@ class EmailService {
                 'subject' => $emailOptions['subject'],
                 //'from_email' => $emailOptions['from'],
                 //'from_email' => $this->config['from'],
-                'from_email' => $this->config['mandrill']['from_email'],
-                'from_name' => $this->config['mandrill']['from_name'],
+                'from_email' => $emailOptions['mandrill']['from_email'],
+                'from_name' => $emailOptions['mandrill']['from_name'],
                 'headers' => [],
                 'important' => false,
                 'track_opens' => true,
@@ -328,12 +328,14 @@ class EmailService {
             $async = false;
             $ip_pool = 'Main Pool';
             $now = new \DateTime('Now');
-            $send_at = $now->format('c');
+            //$send_at = $now->format('c');
+            $send_at = null;
             $mandrill_result = $mandrill->messages->send($message, $async, $ip_pool, $send_at);
 
 
             switch ($mandrill_result[0]['status']) {
                 case 'sent':
+                case 'scheduled':
                     return 'mandrill:'.$mandrill_result[0]['status'];
                     break;
                 case 'queued':
@@ -352,7 +354,7 @@ class EmailService {
                     break;
                 
                 default:
-                    return 'mandrill:?!?'.$mandrill_result[0]['status'];
+                    return 'mandrill:?'.$mandrill_result[0]['status'];
                     break;
             }
 
