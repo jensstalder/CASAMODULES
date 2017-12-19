@@ -352,7 +352,7 @@ class EmailService {
                     break;
                 
                 default:
-                    return 'mandrill:?';
+                    return 'mandrill:?!?'.$mandrill_result[0]['status'];
                     break;
             }
 
@@ -360,7 +360,7 @@ class EmailService {
             //print_r($mandrill_result);
             //print_r($message);
         } catch (\Exception $e) {
-            $this->sendSMTP($template, $emailOptions, $content);
+            return $this->sendSMTP($template, $emailOptions, $content);
         }
        
     }
