@@ -334,7 +334,7 @@ class EmailService {
 
             switch ($mandrill_result[0]['status']) {
                 case 'sent':
-                    # code...
+                    return 'mandrill:'.$mandrill_result[0]['status'];
                     break;
                 case 'queued':
                 case 'rejected':
@@ -347,11 +347,12 @@ class EmailService {
                       'error' => print_r(array_merge($emailOptions, $mandrill_result), true),
                       'domain' => 'casamail.local'
                     ));
+                    return 'mandrill:'.$mandrill_result[0]['status'];
 
                     break;
                 
                 default:
-                    # code...
+                    return 'mandrill:?';
                     break;
             }
 
@@ -477,6 +478,8 @@ class EmailService {
         } else {
             echo '<h1>E-Mail <strong>NOT</strong> sent</h1>';
         }
+
+        return 'smtp:?';
     }
 
     public function sendEmail($template = 'message', $emailOptions = array(), $content = null){
@@ -557,14 +560,15 @@ class EmailService {
             
         }
         if (isset($emailOptions['mandrill']) && $this->encoding == 'UTF-8') {
-            $this->sendMandrill($template, $emailOptions, $content);
+            return $this->sendMandrill($template, $emailOptions, $content);
         } else {
-            $this->sendSMTP($template, $emailOptions, $content);
+            return $this->sendSMTP($template, $emailOptions, $content);
         }
         
         
 
-        return $content;
+        //return $content;
+        return true;
 
     }
 
