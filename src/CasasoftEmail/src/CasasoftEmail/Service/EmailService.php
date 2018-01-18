@@ -52,7 +52,7 @@ class EmailService {
     }
 
     public function setEncoding($encoding){
-    	$this->encoding = $encoding;
+        $this->encoding = $encoding;
     }
 
     public function setConfig($config){
@@ -82,9 +82,9 @@ class EmailService {
             if ($emailOptions['msg']->getLang() == 'de') {
                 $this->translator->setLocale('de_CH');
             }
-        	if ($emailOptions['msg']->getLang() == 'en') {
-        		$this->translator->setLocale('en_US');
-        	}
+            if ($emailOptions['msg']->getLang() == 'en') {
+                $this->translator->setLocale('en_US');
+            }
             if ($emailOptions['msg']->getLang() == 'fr') {
                 $this->translator->setLocale('fr_CH');
             }
@@ -333,6 +333,9 @@ class EmailService {
             $mandrill_result = $mandrill->messages->send($message, $async, $ip_pool, $send_at);
 
 
+            $emailOptionsSave = $emailOptions;
+            unset($emailOptionsSave['msg']);
+
             switch ($mandrill_result[0]['status']) {
                 case 'sent':
                 case 'scheduled':
@@ -346,7 +349,7 @@ class EmailService {
                       'to' => 'js@casasoft.ch',
                       'from' => 'alert@cassaoft.com',
                       'subject' => 'Mandrill Fehler',
-                      'error' => print_r(array_merge($emailOptions, $mandrill_result), true),
+                      'error' => print_r(array_merge($emailOptionsSave, $mandrill_result), true),
                       'domain' => 'casamail.local'
                     ));
                     return 'mandrill:'.$mandrill_result[0]['status'];
