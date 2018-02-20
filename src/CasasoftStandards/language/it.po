@@ -653,7 +653,7 @@ msgstr "Stufa in maiolica"
 
 #: ../src/CasasoftStandards/Service/FeatureService.php:332
 msgid "Secondary residency"
-msgstr "Quota stranieri"
+msgstr "Abitazione secondaria"
 
 #: ../src/CasasoftStandards/Service/FeatureService.php:336
 msgid "Primary residency"
@@ -1147,4 +1147,28 @@ msgstr "Categoria"
 #: 
 msgid "Part of a house"
 msgstr "Porzione di casa"
+
+#: 
+msgid "Immediate"
+msgstr "Immediata"
+
+#: 
+msgid "Gastronomy / Hotel"
+msgstr "Ristorazione / Hotel"
+
+#: 
+msgid "Parking / Garage"
+msgstr "Posti auto"
+
+#: 
+msgid "Extra Costs"
+msgstr "Costi aggiuntivi"
+
+#: 
+msgid "Engadine house"
+msgstr "Casa engadinese"
+
+#: 
+msgid "Patrician house"
+msgstr "Palazzo patrizio"
 
