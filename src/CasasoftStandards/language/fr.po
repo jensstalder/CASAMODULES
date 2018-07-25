@@ -747,7 +747,7 @@ msgstr "Etage"
 
 #: ../src/CasasoftStandards/Service/NumvalService.php:199
 msgid "Floors"
-msgstr "Etages"
+msgstr "Nombre d'étages"
 
 #: ../src/CasasoftStandards/Service/NumvalService.php:205
 msgid "Apartments"
