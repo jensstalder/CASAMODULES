@@ -751,11 +751,11 @@ msgstr "Nombre d'étages"
 
 #: ../src/CasasoftStandards/Service/NumvalService.php:205
 msgid "Apartments"
-msgstr "Appartements"
+msgstr "Appartement(s)"
 
 #: ../src/CasasoftStandards/Service/NumvalService.php:211
 msgid "Bathrooms"
-msgstr "Salles de bain"
+msgstr "Salle(s) de bain"
 
 #: ../src/CasasoftStandards/Service/NumvalService.php:217
 msgid "Numver of parcels"
