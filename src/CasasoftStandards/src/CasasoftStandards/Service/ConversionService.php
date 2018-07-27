@@ -604,6 +604,17 @@ class ConversionService {
               return array_values(array_slice($categories, -1))[0];
             }
             break;
+          case 'utilities':
+            $utilities = array();
+            if (isset($this->property['_embedded']['property_utilities'])) {
+                foreach ($this->property['_embedded']['property_utilities'] as $util_item) {
+                    $utilities[] = $this->getLabel($util_item['utility_id'], 'utility');
+                }
+            }
+            if ($utilities) {
+              return array_values(array_slice($utilities, -1))[0];
+            }
+            break;
           case 'start':
             if (isset($this->property['start'])) {
               if(is_array($this->property['start'])){
