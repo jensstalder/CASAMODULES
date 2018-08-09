@@ -628,7 +628,7 @@ class ConversionService {
                 }
               }
               else{
-                if($this->property['start']->format()){
+                if(method_exists($this->property['start'], 'format')){
                   return $this->property['start']->format('d.m.Y');
                 } else {
                   return $this->property['start'];
