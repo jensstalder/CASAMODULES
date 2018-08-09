@@ -628,7 +628,11 @@ class ConversionService {
                 }
               }
               else{
-                return $this->property['start'];
+                if($this->property['start']->format()){
+                  return $this->property['start']->format('d.m.Y');
+                } else {
+                  return $this->property['start'];
+                }
               }
             } else {
               return $this->translator->translate('On Request', 'casasoft-standards');
