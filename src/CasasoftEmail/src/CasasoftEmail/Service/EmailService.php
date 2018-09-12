@@ -131,7 +131,11 @@ class EmailService {
                 $person[] = ["key" => 'Street', "value" => $emailOptions['msg']->getStreet()];
             }
             if ($emailOptions['msg']->getLocality()){
-                $person[] = ["key" => 'City', "value" => $emailOptions['msg']->getLocality()];
+                if($emailOptions['msg']->getPostal_code()){
+                    $person[] = ["key" => 'City', "value" => $emailOptions['msg']->getPostal_code().' '.$emailOptions['msg']->getLocality()];
+                } else {
+                    $person[] = ["key" => 'City', "value" => $emailOptions['msg']->getLocality()];
+                }
             }
             if ($emailOptions['msg']->getPhone()){
                 $person[] = ["key" => 'Phone', "value" => $emailOptions['msg']->getPhone()];
