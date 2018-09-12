@@ -150,7 +150,7 @@ msgstr "Rez-de-chaussée"
 
 #: ../src/CasasoftStandards/Service/CategoryService.php:75
 msgid "Office"
-msgstr "Buro"
+msgstr "Bureau"
 
 #: ../src/CasasoftStandards/Service/CategoryService.php:76
 msgid "Exihition space"
@@ -387,7 +387,7 @@ msgstr "Fonctionnalités"
 #: ../src/CasasoftStandards/Service/ConversionService.php:458
 #: ../src/CasasoftStandards/Service/ConversionService.php:563
 msgid "On Request"
-msgstr "Prix sur demande"
+msgstr "Sur demande"
 
 #: ../src/CasasoftStandards/Service/ConversionService.php:608
 msgid "Fully ***"
@@ -526,7 +526,7 @@ msgstr "Accessible aux fauteuils roulants"
 
 #: ../src/CasasoftStandards/Service/FeatureService.php:201
 msgid "Animal friendly"
-msgstr "Respectueux des animaux"
+msgstr "Animaux domestiques admis"
 
 #: ../src/CasasoftStandards/Service/FeatureService.php:208
 msgid "Restrooms"
@@ -538,7 +538,7 @@ msgstr "Raccordement à l'eau"
 
 #: ../src/CasasoftStandards/Service/FeatureService.php:216
 msgid "Sewage supply"
-msgstr "Raccordement aux eaux usées"
+msgstr "Raccordement eaux usées"
 
 #: ../src/CasasoftStandards/Service/FeatureService.php:220
 msgid "Power supply"
@@ -646,7 +646,7 @@ msgstr "Séchoir à linge"
 
 #: ../src/CasasoftStandards/Service/FeatureService.php:328
 msgid "Kachelofen"
-msgstr "Poêle de faïence"
+msgstr "Poêle suédois"
 
 #: ../src/CasasoftStandards/Service/FeatureService.php:332
 msgid "Secondary residency"
@@ -747,15 +747,15 @@ msgstr "Etage"
 
 #: ../src/CasasoftStandards/Service/NumvalService.php:199
 msgid "Floors"
-msgstr "Etages"
+msgstr "Nombre d'étages"
 
 #: ../src/CasasoftStandards/Service/NumvalService.php:205
 msgid "Apartments"
-msgstr "Appartements"
+msgstr "Appartement(s)"
 
 #: ../src/CasasoftStandards/Service/NumvalService.php:211
 msgid "Bathrooms"
-msgstr "Salles de bain"
+msgstr "Salle(s) de bain"
 
 #: ../src/CasasoftStandards/Service/NumvalService.php:217
 msgid "Numver of parcels"
@@ -763,59 +763,59 @@ msgstr "Nombre de parcelles"
 
 #: ../src/CasasoftStandards/Service/NumvalService.php:223
 msgid "Distance to kindergarten"
-msgstr "école maternelle"
+msgstr "Ecole maternelle"
 
 #: ../src/CasasoftStandards/Service/NumvalService.php:229
 msgid "Distance to primary school"
-msgstr "école primaire"
+msgstr "Ecole primaire"
 
 #: ../src/CasasoftStandards/Service/NumvalService.php:235
 msgid "Distance to high school"
-msgstr "école secondaire"
+msgstr "Ecole secondaire"
 
 #: ../src/CasasoftStandards/Service/NumvalService.php:241
 msgid "Distance to college"
-msgstr "université"
+msgstr "Université"
 
 #: ../src/CasasoftStandards/Service/NumvalService.php:247
 msgid "Distance to bus stop"
-msgstr "arrêt de bus"
+msgstr "Arrêt de bus"
 
 #: ../src/CasasoftStandards/Service/NumvalService.php:253
 msgid "Distance to train station"
-msgstr "gare"
+msgstr "Gare"
 
 #: ../src/CasasoftStandards/Service/NumvalService.php:259
 msgid "Distance to post"
-msgstr "poste"
+msgstr "Poste"
 
 #: ../src/CasasoftStandards/Service/NumvalService.php:265
 msgid "Distance to bank"
-msgstr "banque"
+msgstr "Banque"
 
 #: ../src/CasasoftStandards/Service/NumvalService.php:271
 msgid "Distance to railway station"
-msgstr "gare ferroviaire"
+msgstr "Gare ferroviaire"
 
 #: ../src/CasasoftStandards/Service/NumvalService.php:277
 msgid "Distance to boat dock"
-msgstr "port"
+msgstr "Port"
 
 #: ../src/CasasoftStandards/Service/NumvalService.php:283
 msgid "Distance to public transport"
-msgstr "transports publics"
+msgstr "Transports publics"
 
 #: ../src/CasasoftStandards/Service/NumvalService.php:289
 msgid "Distance to shop"
-msgstr "commerces"
+msgstr "Commerces"
 
 #: ../src/CasasoftStandards/Service/NumvalService.php:295
 msgid "Distance to freeway"
-msgstr "autoroute"
+msgstr "Autoroute"
 
 #: ../src/CasasoftStandards/Service/NumvalService.php:301
 msgid "Distance to airport"
-msgstr "aéroport"
+msgstr "Aéroport"
 
 #: ../src/CasasoftStandards/Service/NumvalService.php:307
 msgid "Rooms"
@@ -958,7 +958,7 @@ msgstr ""
 
 #: ../src/CasasoftStandards/Service/NumvalService.php:590
 msgid "Cubature GVA"
-msgstr "Cubature GVA"
+msgstr "Cubage ECA"
 
 #: ../src/CasasoftStandards/Service/NumvalService.php:596
 msgid "Cubature SIA"
@@ -1099,7 +1099,7 @@ msgstr "semaine "
 
 #: ../src/CasasoftStandards/Service/ConversionService.php:133
 msgid "month"
-msgstr "mois "
+msgstr "mois"
 
 #: ../src/CasasoftStandards/Service/ConversionService.php:136
 msgid "year"
@@ -1140,4 +1140,36 @@ msgstr "Prix ​​de vente"
 #: 
 msgid "Category"
 msgstr "Catégorie"
+
+#: 
+msgid "Part of a house"
+msgstr "Partie de la maison"
+
+#: 
+msgid "Immediate"
+msgstr "Immédiatement"
+
+#: 
+msgid "Gastronomy / Hotel"
+msgstr "Gastronomie / Hôtel"
+
+#: 
+msgid "Parking / Garage"
+msgstr "Parking / Garage"
+
+#: 
+msgid "Extra Costs"
+msgstr "Coûts supplémentaires"
+
+#: 
+msgid "Engadine house"
+msgstr ""
+
+#: 
+msgid "Patrician house"
+msgstr "Maison patricienne"
+
+#: 
+msgid "Volumes"
+msgstr "Volumes"
 

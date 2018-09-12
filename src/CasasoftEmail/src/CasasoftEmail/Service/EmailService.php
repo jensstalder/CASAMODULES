@@ -52,7 +52,7 @@ class EmailService {
     }
 
     public function setEncoding($encoding){
-    	$this->encoding = $encoding;
+        $this->encoding = $encoding;
     }
 
     public function setConfig($config){
@@ -82,9 +82,9 @@ class EmailService {
             if ($emailOptions['msg']->getLang() == 'de') {
                 $this->translator->setLocale('de_CH');
             }
-        	if ($emailOptions['msg']->getLang() == 'en') {
-        		$this->translator->setLocale('en_US');
-        	}
+            if ($emailOptions['msg']->getLang() == 'en') {
+                $this->translator->setLocale('en_US');
+            }
             if ($emailOptions['msg']->getLang() == 'fr') {
                 $this->translator->setLocale('fr_CH');
             }
@@ -145,7 +145,8 @@ class EmailService {
             }
 
             $property = [
-                'propertyOptions' => []
+                'propertyOptions' => [],
+                'objectReference' => null
             ];
             if ($emailOptions['msg']->getProperty_reference()) {
                 $property['objectReference'] = ["text" => 'Object-Ref.', "value" => $emailOptions['msg']->getProperty_reference()];
@@ -177,6 +178,12 @@ class EmailService {
             if ($emailOptions['msg']->getBacklink()) {
                 $property['propertyOptions'][] = ["optionDescription" => 'Link', "optionValue" => 'to website', "optionLink" => true, "optionUrl" => $emailOptions['msg']->getBacklink()];
             }
+
+            // $property['image'] = [
+            //     'src' => 'https://casamail.com/img/property-placeholder.jpg',
+            //     'link' => $emailOptions['msg']->getBacklink(),
+            //     'alt' => 'Objektbild'
+            // ];
 
             $extra_data = [];
             $searchProfile = [];
@@ -221,10 +228,11 @@ class EmailService {
                     'data' => $person
                 ];
             }
-            if ($property) {
+            if ($property['propertyOptions'] || $property['objectReference']) {
                 $data['property'] = [
                     'header' => 'Immobilie',
-                    $property
+                    'objectReference' => $property['objectReference'],
+                    'propertyOptions' => $property['propertyOptions']
                 ];
             }
             if ($searchProfile) {
@@ -289,8 +297,8 @@ class EmailService {
                 'subject' => $emailOptions['subject'],
                 //'from_email' => $emailOptions['from'],
                 //'from_email' => $this->config['from'],
-                'from_email' => $this->config['mandrill']['from_email'],
-                'from_name' => $this->config['mandrill']['from_name'],
+                'from_email' => $emailOptions['mandrill']['from_email'],
+                'from_name' => $emailOptions['mandrill']['from_name'],
                 'headers' => [],
                 'important' => false,
                 'track_opens' => true,
@@ -324,13 +332,18 @@ class EmailService {
             $async = false;
             $ip_pool = 'Main Pool';
             $now = new \DateTime('Now');
-            $send_at = $now->format('c');
+            //$send_at = $now->format('c');
+            $send_at = null;
             $mandrill_result = $mandrill->messages->send($message, $async, $ip_pool, $send_at);
 
 
+            $emailOptionsSave = $emailOptions;
+            unset($emailOptionsSave['msg']);
+
             switch ($mandrill_result[0]['status']) {
                 case 'sent':
-                    # code...
+                case 'scheduled':
+                    return 'mandrill:'.$mandrill_result[0]['status'];
                     break;
                 case 'queued':
                 case 'rejected':
@@ -340,14 +353,15 @@ class EmailService {
                       'to' => 'js@casasoft.ch',
                       'from' => 'alert@cassaoft.com',
                       'subject' => 'Mandrill Fehler',
-                      'error' => print_r(array_merge($emailOptions, $mandrill_result), true),
+                      'error' => print_r(array_merge($emailOptionsSave, $mandrill_result), true),
                       'domain' => 'casamail.local'
                     ));
+                    return 'mandrill:'.$mandrill_result[0]['status'];
 
                     break;
                 
                 default:
-                    # code...
+                    return 'mandrill:?'.$mandrill_result[0]['status'];
                     break;
             }
 
@@ -355,7 +369,7 @@ class EmailService {
             //print_r($mandrill_result);
             //print_r($message);
         } catch (\Exception $e) {
-            $this->sendSMTP($template, $emailOptions, $content);
+            return $this->sendSMTP($template, $emailOptions, $content);
         }
        
     }
@@ -473,6 +487,8 @@ class EmailService {
         } else {
             echo '<h1>E-Mail <strong>NOT</strong> sent</h1>';
         }
+
+        return 'smtp:?';
     }
 
     public function sendEmail($template = 'message', $emailOptions = array(), $content = null){
@@ -553,14 +569,15 @@ class EmailService {
             
         }
         if (isset($emailOptions['mandrill']) && $this->encoding == 'UTF-8') {
-            $this->sendMandrill($template, $emailOptions, $content);
+            return $this->sendMandrill($template, $emailOptions, $content);
         } else {
-            $this->sendSMTP($template, $emailOptions, $content);
+            return $this->sendSMTP($template, $emailOptions, $content);
         }
         
         
 
-        return $content;
+        //return $content;
+        return true;
 
     }
 

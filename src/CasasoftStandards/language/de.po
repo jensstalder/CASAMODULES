@@ -742,11 +742,11 @@ msgstr "Distanzen"
 
 #: ../src/CasasoftStandards/Service/NumvalService.php:193
 msgid "Floor"
-msgstr "Stockwerk"
+msgstr "Etage"
 
 #: ../src/CasasoftStandards/Service/NumvalService.php:199
 msgid "Floors"
-msgstr "Stockwerke"
+msgstr "Etagen"
 
 #: ../src/CasasoftStandards/Service/NumvalService.php:205
 msgid "Apartments"
@@ -1139,4 +1139,37 @@ msgstr "Verkaufspreis"
 #: 
 msgid "Category"
 msgstr "Kategorie"
+
+#: 
+msgid "Part of a house"
+msgstr "Hausteil"
+
+#: 
+msgid "Immediate"
+msgstr "ab sofort"
+
+#: 
+msgid "Gastronomy / Hotel"
+msgstr "Gastronomie / Hotel"
+
+#: 
+msgid "Parking / Garage"
+msgstr "Parkplatz / Garage"
+
+#: 
+#, fuzzy
+msgid "Extra Costs"
+msgstr "Nebenkosten"
+
+#: 
+msgid "Engadine house"
+msgstr "Engadinerhaus"
+
+#: 
+msgid "Patrician house"
+msgstr "Patrizierhaus"
+
+#: 
+msgid "Volumes"
+msgstr "Volumen"
 
