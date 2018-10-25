@@ -1,7 +1,6 @@
 <?php
 namespace CasasoftEmail\Service;
 
-
 use Zend\View\Model\ViewModel;
 
 use Zend\Mail\Message as Message;

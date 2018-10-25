@@ -617,10 +617,9 @@ class ConversionService {
             break;
           case 'start':
             if (isset($this->property['start'])) {
+              $now = new \DateTime();
               if(is_array($this->property['start'])){
-                $now = new \DateTime();
                 $date_time = new \DateTime($this->property['start']['date']);
-
                 if ($now > $date_time) {
                   return $this->translator->translate('Immediate', 'casasoft-standards');
                 } else {
@@ -629,8 +628,13 @@ class ConversionService {
               }
               else{
                 if(method_exists($this->property['start'], 'format')){
-                  return $this->property['start']->format('d.m.Y');
+                  if ($now > $this->property['start']) {
+                    return $this->translator->translate('Immediate', 'casasoft-standards');
+                  } else {
+                    return $this->property['start']->format('d.m.Y');
+                  }
                 } else {
+                  return 'whatelse';
                   return $this->property['start'];
                 }
               }
