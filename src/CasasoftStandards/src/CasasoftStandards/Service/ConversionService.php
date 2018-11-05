@@ -145,10 +145,10 @@ class ConversionService {
           }
 
           if(isset($show_sqm) && $show_sqm){
-            $price = 'CHF '. $input['price'].'.–' . " / m<sup>2</sup> / ".$time;
+            $price = 'CHF '. number_format($input['price'], 0, '.', "'") . '.–' . " / m<sup>2</sup> / ".$time;
           }
           else{
-            $price = 'CHF '. $input['price'].'.–' . " / ".$time;
+            $price = 'CHF '. number_format($input['price'], 0, '.', "'") . '.–' . " / ".$time;
           }
         }
       }
@@ -182,7 +182,7 @@ class ConversionService {
         unset($this->property['_embedded']['numeric_values']);
       }
       else{
-        $this->property['numeric_values'] = [];        
+        $this->property['numeric_values'] = [];
       }
       if (isset($this->property['_embedded']) && array_key_exists('features', $this->property['_embedded']) && $this->property['_embedded']['features']) {
         $this->property['features'] = [];
@@ -193,7 +193,7 @@ class ConversionService {
       }
     }
 
-    private function getCalculatedPrices($type='rent'){
+    private function getCalculatedPrices($type = 'rent') {
       $prices = [];
       $areas = $this->getList('areas');
       $area_seek = ['area_sia_gf', 'area_sia_nf', 'area_nwf', 'area_sia_gsf', 'volume_sia_gv'];
@@ -234,7 +234,7 @@ class ConversionService {
             endif;
           endforeach;
         endif;
-        if($show_price_per_sqm){
+        if($show_price_per_sqm) {
           $price['pricePerSqm']['key'] = 'pricePerSqm';
           $price['pricePerSqm']['context'] = '';
           $price['pricePerSqm']['label'] = $this->getLabel('pricePerSqm');
@@ -301,7 +301,7 @@ class ConversionService {
           ]);
 
         // }
-        if($show_prices){
+        if ($show_prices) {
 
           $price['priceNettoPerSqmPerMonth']['key'] = 'priceNettoPerSqmPerMonth';
           $price['priceNettoPerSqmPerMonth']['context'] = '';
@@ -365,7 +365,7 @@ class ConversionService {
         ];
 
 
-        if($show_prices){
+        if ($show_prices) {
 
           $price['priceNettoTotalPerYear']['key'] = 'priceNettoTotalPerYear';
           $price['priceNettoTotalPerYear']['context'] = '';
@@ -388,7 +388,7 @@ class ConversionService {
           $nullcheck_addition = [
             'priceNettoPerSqmPerMonth',
             'priceNettoPerSqmPerYear',
-            'priceNettoTotalPerYear'#
+            'priceNettoTotalPerYear'
           ];
 
           $nullcheck = array_merge($nullcheck, $nullcheck_addition);
@@ -399,10 +399,10 @@ class ConversionService {
       }
 
   		foreach ($nullcheck as $key) {
-  			if (!$price[$key]) {
+  			if (! $price[$key]) {
   				$price[$key] = null;
   			}
-  		}
+      }
       return $price;
     }
 
@@ -558,6 +558,7 @@ class ConversionService {
         }
       }
       $value = $this->getValue($key, $context);
+      
       return $value;
     }
 
@@ -870,7 +871,7 @@ class ConversionService {
       }
 
       if($templateMixed == 'prices-rent'){
-        $list = array_merge($this->getCalculatedPrices('rent'), $list);
+        $list = array_merge($this->getCalculatedPrices('rent'),$list);
       }
       if($templateMixed == 'prices-buy'){
         $list = array_merge($this->getCalculatedPrices('buy'), $list);
