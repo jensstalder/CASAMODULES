@@ -684,7 +684,7 @@ class NumvalService {
                 'label' => $this->translator->translate('Land price', 'casasoft-standards'),
                 'icon' => '',
                 'type' => 'int',
-                'si' => '',
+                'si' => 'currency',
             ),
 
             'gross_premium' => array(
@@ -698,7 +698,7 @@ class NumvalService {
                 'label' => $this->translator->translate('Rental deposit', 'casasoft-standards'),
                 'icon' => '',
                 'type' => 'int',
-                'si' => '',
+                'si' => 'currency',
             ),
 
 

@@ -50,13 +50,13 @@ class Numval {
               $km = true;
           }
       }
-
       switch ($this->getSi()) {
           case 'm': $val = $number_filter->filter($val) . ' ' . ($km ? 'km' : 'm'); break;
           case 'm2': $val = $number_filter->filter($val) . ' ' . ($km ? 'km' : 'm') . '<sup>2</sup>'; break;
           case 'm3': $val = $number_filter->filter($val) . ' ' . ($km ? 'km' : 'm') . '<sup>3</sup>'; break;
           case 'kg': $val = $number_filter->filter($val) . ' kg'; break;
           case '%': $val = $number_filter->filter($val) . ' %'; break;
+          case 'currency': $val = ($options['currency']) . ' ' . $number_filter->filter($val) . '.–'; break;
       }
 
       return $val;

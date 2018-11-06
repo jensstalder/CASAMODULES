@@ -122,7 +122,7 @@ class ConversionService {
         if(!$input['time_segment']){
           //needs currencyFormat
           // $price = $this->currencyFormat($input['price'], 'CHF', false, 'de_CH') . '.–';
-          $price = 'CHF '. $input['price'].'.–';
+          $price = ($input['currency'] ? $input['currency'] : 'CHF '). $input['price'].'.–';
         }
         else if($input['time_segment']){
           switch ($input['time_segment']) {
@@ -145,10 +145,10 @@ class ConversionService {
           }
 
           if(isset($show_sqm) && $show_sqm){
-            $price = 'CHF '. number_format($input['price'], 0, '.', "'") . '.–' . " / m<sup>2</sup> / ".$time;
+            $price = ($input['currency'] ? $input['currency'] : 'CHF') . ' ' .  number_format($input['price'], 0, '.', "'") . '.–' . " / m<sup>2</sup> / ".$time;
           }
           else{
-            $price = 'CHF '. number_format($input['price'], 0, '.', "'") . '.–' . ($time !== 1 ? (" / ".$time) : '');
+            $price = ($input['currency'] ? $input['currency'] : 'CHF') . ' ' . number_format($input['price'], 0, '.', "'") . '.–' . ($time !== 1 ? (" / ".$time) : '');
           }
         }
       }
@@ -193,7 +193,7 @@ class ConversionService {
       }
     }
 
-    private function getCalculatedPrices($type = 'rent') {
+    private function getCalculatedPrices($type = 'rent', $currency) {
       $prices = [];
       $areas = $this->getList('areas');
       $area_seek = ['area_sia_gf', 'area_sia_nf', 'area_nwf', 'area_sia_gsf', 'volume_sia_gv'];
@@ -214,7 +214,8 @@ class ConversionService {
           'value' => $this->property['price'],
           'property_segment' => $this->property['price_property_segment'],
           'time_segment' => 'infinite',
-          'area' => $area
+          'area' => $area,
+          'currency' => $currency,
         ], [
           'property_segment' => 'all',
           'time_segment' => 'infinite'
@@ -222,7 +223,8 @@ class ConversionService {
         $price['price']['renderedValue'] = $this->renderPrice([
           'price' => $price['price']['value'],
           'property_segment' => 'all',
-          'time_segment' => 'infinite'
+          'time_segment' => 'infinite',
+          'currency' => $currency,
         ]);
         $show_price_per_sqm = false;
         if (isset($this->property['_embedded']['property_utilities'])):
@@ -242,7 +244,8 @@ class ConversionService {
             'value' => $this->property['price'],
             'property_segment' => $this->property['price_property_segment'],
             'time_segment' => 'infinite',
-            'area' => $area
+            'area' => $area,
+            'currency' => $currency,
           ], [
             'property_segment' => 'm',
             'time_segment' => 'infinite'
@@ -250,7 +253,8 @@ class ConversionService {
           $price['pricePerSqm']['renderedValue'] = $this->renderPrice([
             'price' => $price['pricePerSqm']['value'],
             'property_segment' => 'm',
-            'time_segment' => 'infinite'
+            'time_segment' => 'infinite',
+            'currency' => $currency,
           ]);
           $nullcheck = [
             'price',
@@ -297,7 +301,8 @@ class ConversionService {
           $price['priceBruttoTotalPerMonth']['renderedValue'] = $this->renderPrice([
             'price' => $price['priceBruttoTotalPerMonth']['value'],
             'property_segment' => 'all',
-            'time_segment' => 'm'
+            'time_segment' => 'm',
+            'currency' => $currency,            
           ]);
 
         // }
@@ -310,7 +315,8 @@ class ConversionService {
             'value' => $this->property['net_price'],
             'property_segment' => $this->property['net_price_property_segment'],
             'time_segment' => $this->property['net_price_time_segment'],
-            'area' => $area
+            'area' => $area,
+            'currency' => $currency,
           ], [
             'property_segment' => 'm',
             'time_segment' => 'm'
@@ -318,7 +324,8 @@ class ConversionService {
           $price['priceNettoPerSqmPerMonth']['renderedValue'] = $this->renderPrice([
             'price' => $price['priceNettoPerSqmPerMonth']['value'],
             'property_segment' => 'm',
-            'time_segment' => 'm'
+            'time_segment' => 'm',
+            'currency' => $currency,
           ]);
 
           $price['priceNettoPerSqmPerYear']['key'] = 'priceNettoPerSqmPerYear';
@@ -328,7 +335,8 @@ class ConversionService {
             'value' => $this->property['net_price'],
             'property_segment' => $this->property['net_price_property_segment'],
             'time_segment' => $this->property['net_price_time_segment'],
-            'area' => $area
+            'area' => $area,
+            'currency' => $currency,
           ], [
             'property_segment' => 'm',
             'time_segment' => 'y'
@@ -336,7 +344,8 @@ class ConversionService {
           $price['priceNettoPerSqmPerYear']['renderedValue'] = $this->renderPrice([
             'price' => $price['priceNettoPerSqmPerYear']['value'],
             'property_segment' => 'm',
-            'time_segment' => 'y'
+            'time_segment' => 'y',
+            'currency' => $currency,
           ]);
 
         }
@@ -356,7 +365,8 @@ class ConversionService {
         $price['priceNettoTotalPerMonth']['renderedValue'] = $this->renderPrice([
           'price' => $price['priceNettoTotalPerMonth']['value'],
           'property_segment' => 'all',
-          'time_segment' => 'm'
+          'time_segment' => 'm',
+          'currency' => $currency,
         ]);
 
         $nullcheck = [
@@ -382,7 +392,8 @@ class ConversionService {
           $price['priceNettoTotalPerYear']['renderedValue'] = $this->renderPrice([
             'price' => $price['priceNettoTotalPerYear']['value'],
             'property_segment' => 'all',
-            'time_segment' => 'y'
+            'time_segment' => 'y',
+            'currency' => $currency,
           ]);
 
           $nullcheck_addition = [
@@ -522,7 +533,7 @@ class ConversionService {
       return $key;
     }
 
-    public function getRenderedValue($key, $context = 'smart'){
+    public function getRenderedValue($key, $context = 'smart', $currency = null){
       if ($context == 'smart' || $context == 'special') {
         switch ($key) {
           case 'extraCosts':
@@ -538,6 +549,7 @@ class ConversionService {
                 'price' => $extraCost['cost'],
                 'time_segment' => $extraCost['time_segment'],
                 'property_segment' => $extraCost['property_segment'],
+                'currency' => $currency
               ]
               );
             }
@@ -554,7 +566,7 @@ class ConversionService {
               }
             }
           }
-          return $numval->getRenderedValue();
+          return $numval->getRenderedValue(['currency' => $currency]);
         }
       }
       $value = $this->getValue($key, $context);
@@ -719,7 +731,7 @@ class ConversionService {
       return null;
     }
 
-    public function getList($templateMixed = 'key-facts', $filtered = false){
+    public function getList($templateMixed = 'key-facts', $filtered = false, $currency = null){
       $list = [];
       $template = [];
       if (is_string($templateMixed)) {
@@ -849,7 +861,7 @@ class ConversionService {
           'context' => ($field[1] ? $field[1] : 'smart'),
           'label' => $this->getLabel($field[0], ($field[1] ? $field[1] : 'smart')),
           'value' => $this->getValue($field[0], ($field[1] ? $field[1] : 'smart')),
-          'renderedValue' => $this->getRenderedValue($field[0], ($field[1] ? $field[1] : 'smart')),
+          'renderedValue' => $this->getRenderedValue($field[0], ($field[1] ? $field[1] : 'smart'), $currency),
         ];
         if ($filtered && !$rfield['value']) {
 
@@ -871,10 +883,10 @@ class ConversionService {
       }
 
       if($templateMixed == 'prices-rent'){
-        $list = array_merge($this->getCalculatedPrices('rent'),$list);
+        $list = array_merge($this->getCalculatedPrices('rent', $currency),$list);
       }
       if($templateMixed == 'prices-buy'){
-        $list = array_merge($this->getCalculatedPrices('buy'), $list);
+        $list = array_merge($this->getCalculatedPrices('buy', $currency), $list);
       }
 
       return $list;
