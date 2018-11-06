@@ -148,7 +148,7 @@ class ConversionService {
             $price = 'CHF '. number_format($input['price'], 0, '.', "'") . '.–' . " / m<sup>2</sup> / ".$time;
           }
           else{
-            $price = 'CHF '. number_format($input['price'], 0, '.', "'") . '.–' . " / ".$time;
+            $price = 'CHF '. number_format($input['price'], 0, '.', "'") . '.–' . ($time !== 1 ? (" / ".$time) : '');
           }
         }
       }
