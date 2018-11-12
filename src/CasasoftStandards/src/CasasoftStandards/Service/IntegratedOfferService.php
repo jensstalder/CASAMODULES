@@ -7,9 +7,9 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
-class IntegratedOfferService implements FactoryInterface {
+class IntegratedOfferService {
 
-    public $items = array();
+    public $items = [];
     private $template;
 
     public function __construct($translator){
@@ -37,48 +37,48 @@ class IntegratedOfferService implements FactoryInterface {
     }
 
     public function getDefaultOptions(){
-        return array(
-            'parking-exterior-space' => array(
+        return [
+            'parking-exterior-space' => [
                 'label' => $this->translator->translate('External parking space', 'casasoft-standards'), //Aussenparkplatz
                 'icon' => '',
-            ),
-            'parking-carport' => array(
+            ],
+            'parking-carport' => [
                 'label' => $this->translator->translate('Carport', 'casasoft-standards'), //Carport
                 'icon' => '',
-            ),
-            'parking-garage-connected' => array(
+            ],
+            'parking-garage-connected' => [
                 'label' => $this->translator->translate('Connected garage', 'casasoft-standards'),
                 'icon' => '',
-            ),
-            'parking-garage-box' => array(
+            ],
+            'parking-garage-box' => [
                 'label' => $this->translator->translate('Garage box', 'casasoft-standards'), //Garagenbox
                 'icon' => '',
-            ),
-            'parking-duplex' => array(
+            ],
+            'parking-duplex' => [
                 'label' => $this->translator->translate('Duplex garage', 'casasoft-standards'), //Duplex
                 'icon' => '',
-            ),
-            'parking-garage-underground' => array(
+            ],
+            'parking-garage-underground' => [
                 'label' => $this->translator->translate('Underground parking garage', 'casasoft-standards'), //Tiefgaragenparkplatz
                 'icon' => '',
-            ),
-            'parking-garage' => array(
+            ],
+            'parking-garage' => [
                 'label' => $this->translator->translate('Single garage', 'casasoft-standards'),
                 'icon' => '',
-            ),
-            'parking-house' => array(
+            ],
+            'parking-house' => [
                 'label' => $this->translator->translate('Parking structure', 'casasoft-standards'), //Parkhaus
                 'icon' => '',
-            ),
-            'room-workroom' => array(
+            ],
+            'room-workroom' => [
                 'label' => $this->translator->translate('Workroom', 'casasoft-standards'),
                 'icon' => '',
-            ),
-            'room-storage-basement' => array(
+            ],
+            'room-storage-basement' => [
                 'label' => $this->translator->translate('Storage basement', 'casasoft-standards'),
                 'icon' => '',
-            )
-        );
+            ]
+        ];
     }
 
     public function addItem($obj, $key = null) {
@@ -105,7 +105,7 @@ class IntegratedOfferService implements FactoryInterface {
         if (isset($this->items[$key])) {
             return $this->items[$key];
         } else {
-            throw new \Exception("Invalid key $key.");
+            return false;
         }
     }
 

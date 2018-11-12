@@ -722,8 +722,7 @@ class NumvalService {
     public function deleteItem($key) {
         if (isset($this->items[$key])) {
             unset($this->items[$key]);
-        }
-        else {
+        } else {
             throw new \Exception("Invalid key $key.");
         }
     }
@@ -731,9 +730,8 @@ class NumvalService {
     public function getItem($key) {
         if (isset($this->items[$key])) {
             return $this->items[$key];
-        }
-        else {
-          return false;
+        } else {
+            return false;
         }
     }
 

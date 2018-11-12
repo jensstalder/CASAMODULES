@@ -401,8 +401,7 @@ class FeatureService {
     public function addItem($obj, $key = null) {
         if ($key == null) {
             $this->items[] = $obj;
-        }
-        else {
+        } else {
             if (isset($this->items[$key])) {
                 throw new KeyHasUseException("Key $key already in use.");
             }
