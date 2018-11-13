@@ -81,6 +81,9 @@ class NumvalService {
                     'number_of_apartments' => array(
                         'required' => true,
                     ),
+                    'number_of_guest_toilets' => [
+                        'required' => true,
+                    ],
                 )
             ),
             'areas' => array(
@@ -107,6 +110,21 @@ class NumvalService {
                     'area_sia_gsf' => array(
                         'required' => false,
                     ),
+                    'area_balcony' => [
+                        'required' => false,
+                    ],
+                    'area_cellar' => [
+                        'required' => false,
+                    ],
+                    'area_garden' => [
+                        'required' => false,
+                    ],
+                    'area_loggia' => [
+                        'required' => false,
+                    ],
+                    'area_terrace' => [
+                        'required' => false,
+                    ],
                     /*'cubature_gva' => array(
                         'required' => false,
                     ),*/
@@ -207,6 +225,12 @@ class NumvalService {
                 'type' => 'int',
                 'si' => '',
             ),
+            'number_of_guest_toilets' => [
+                'label' => $this->translator->translate('Number of guest toilets', 'casasoft-standards'),
+                'icon' => '',
+                'type' => 'int',
+                'si' => '',
+            ],
             'number_of_bathrooms' => array(
                 'label' => $this->translator->translate('Bathrooms', 'casasoft-standards'),
                 'icon' => '',
@@ -322,6 +346,37 @@ class NumvalService {
                 'type' => 'int',
                 'si' => 'm2',
             ),
+
+            'area_balcony' => [
+                'label' => $this->translator->translate('Balcony space', 'casasoft-standards'),
+                'icon' => '',
+                'type' => 'int',
+                'si' => 'm2',
+            ],
+            'area_cellar' => [
+                'label' => $this->translator->translate('Cellar space', 'casasoft-standards'),
+                'icon' => '',
+                'type' => 'int',
+                'si' => 'm2',
+            ],
+            'area_garden' => [
+                'label' => $this->translator->translate('Garden space', 'casasoft-standards'),
+                'icon' => '',
+                'type' => 'int',
+                'si' => 'm2',
+            ],
+            'area_loggia' => [
+                'label' => $this->translator->translate('Loggia space', 'casasoft-standards'),
+                'icon' => '',
+                'type' => 'int',
+                'si' => 'm2',
+            ],
+            'area_terrace' => [
+                'label' => $this->translator->translate('Terrace area', 'casasoft-standards'),
+                'icon' => '',
+                'type' => 'int',
+                'si' => 'm2',
+            ],
 
 
 
@@ -649,6 +704,18 @@ class NumvalService {
                 'type' => 'int',
                 'si' => '',
             ),
+            'year_last_modernized' => [
+                'label' => $this->translator->translate('Year of last modernization', 'casasoft-standards'),
+                'icon' => '',
+                'type' => 'int',
+                'si' => '',
+            ],
+            'year_last_restored' => [
+                'label' => $this->translator->translate('Year of last restoration', 'casasoft-standards'),
+                'icon' => '',
+                'type' => 'int',
+                'si' => '',
+            ],
             'ceiling_height' => array(
                 'label' => $this->translator->translate('Ceiling height', 'casasoft-standards'),
                 'icon' => '',
@@ -700,8 +767,60 @@ class NumvalService {
                 'type' => 'int',
                 'si' => 'currency',
             ),
-
-
+            'rental_income_gross' => [
+                'label' => $this->translator->translate('Rental income (gross)', 'casasoft-standards'),
+                'icon' => '',
+                'type' => 'int',
+                'si' => 'currency',
+            ],
+            'rental_income_net' => [
+                'label' => $this->translator->translate('Rental income (net)', 'casasoft-standards'),
+                'icon' => '',
+                'type' => 'int',
+                'si' => 'currency',
+            ],
+            'renewal_fund_input' => [
+                'label' => $this->translator->translate('Renewal fund input', 'casasoft-standards'),
+                'icon' => '',
+                'type' => 'int',
+                'si' => 'currency',
+            ],
+            'renewal_fund_value' => [
+                'label' => $this->translator->translate('Renewal fund value', 'casasoft-standards'),
+                'icon' => '',
+                'type' => 'int',
+                'si' => 'currency',
+            ],
+            'official_tax_value' => [
+                'label' => $this->translator->translate('Official tax value', 'casasoft-standards'),
+                'icon' => '',
+                'type' => 'int',
+                'si' => 'currency',
+            ],
+            'imputed_rent_value' => [
+                'label' => $this->translator->translate('Imputed rent value', 'casasoft-standards'),
+                'icon' => '',
+                'type' => 'int',
+                'si' => 'currency',
+            ],
+            'net_premium' => [
+                'label' => $this->translator->translate('Net premium', 'casasoft-standards'),
+                'icon' => '',
+                'type' => 'int',
+                'si' => '%',
+            ],
+            'building_insurance_value' => [ #Gebäudeversicherungswert
+                'label' => $this->translator->translate('Building insurance value', 'casasoft-standards'),
+                'icon' => '',
+                'type' => 'int',
+                'si' => 'currency',
+            ],
+            'constructed_factor' => [ #Baumassenziffer
+                'label' => $this->translator->translate('Constructed factor', 'casasoft-standards'),
+                'icon' => '',
+                'type' => 'int',
+                'si' => '%',
+            ],
         );
     }
 
