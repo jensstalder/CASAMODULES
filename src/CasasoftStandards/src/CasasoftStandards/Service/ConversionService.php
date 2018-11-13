@@ -454,12 +454,24 @@ class ConversionService {
           ['maximal_floor_loading','numeric_value'],
           ['carrying_capacity_crane','numeric_value'],
           ['carrying_capacity_elevator','numeric_value'],
+          ['s_number', 'special'],
+          ['unit_number', 'special'],
+          ['egid', 'special'],
+          ['ewid', 'special'],
       ],
       'prices-buy' => [
           ['price', 'special'],
           ['pricePerSqm', 'renders'],
+          ['priceRange', 'special'],
           ['gross_premium', 'numeric_value'],
+          ['net_premium', 'numeric_value'],
+          ['property_land_price', 'numeric_value'],
           ['building_insurance_value', 'numeric_value'],
+          ['official_tax_value', 'numeric_value'],
+          ['imputed_rent_value', 'numeric_value'],
+          ['renewal_fund_input', 'numeric_value'],
+          ['renewal_fund_value', 'numeric_value'],
+          ['renewalFundDate', 'special'],
       ],
       'prices-rent' => [
           ['priceBruttoTotalPerMonth', 'renders'],
@@ -470,7 +482,16 @@ class ConversionService {
           ['extraCosts', 'special'],
           ['has-rental-deposit-guarantee', 'feature'],
           ['rental_deposit', 'numeric_value'],
+          ['priceRange', 'special'],
+          ['gross_premium', 'numeric_value'],
+          ['net_premium', 'numeric_value'],
+          ['property_land_price', 'numeric_value'],
           ['building_insurance_value', 'numeric_value'],
+          ['official_tax_value', 'numeric_value'],
+          ['imputed_rent_value', 'numeric_value'],
+          ['renewal_fund_input', 'numeric_value'],
+          ['renewal_fund_value', 'numeric_value'],
+          ['renewalFundDate', 'special'],
       ]
     ];
 
@@ -565,25 +586,25 @@ class ConversionService {
                 case 'Ewid':
                     return $this->translator->translate('Ewid', 'casasoft-standards');
                     break;
-                case 'official_building_number':
+                case 'officialBuildingNumber':
                     return $this->translator->translate('Official building number', 'casasoft-standards');
                     break;
-                case 'ownership_share':
+                case 'ownershipShare':
                     return $this->translator->translate('Ownership share', 'casasoft-standards');
                     break;
-                case 'property_development':
+                case 'propertyDevelopment':
                     return $this->translator->translate('Property development', 'casasoft-standards');
                     break;
-                case 's_number':
+                case 'sNumber':
                     return $this->translator->translate('S-Number', 'casasoft-standards');
                     break;
-                case 'unit_number':
+                case 'unitNumber':
                     return $this->translator->translate('Unit number', 'casasoft-standards');
                     break;
-                case 'renewal_fund_date':
+                case 'renewalFundDate':
                     return $this->translator->translate('Renewal fund date', 'casasoft-standards');
                     break;
-                case 'price-range':
+                case 'priceRange':
                     return $this->translator->translate('Price range', 'casasoft-standards');
                     break;
             }
@@ -846,19 +867,19 @@ class ConversionService {
                         return $this->property['ewid'];
                     }
                     break;
-                case 'official_building_number':
-                    if (isset($this->property['official_building_number'])) {
-                        return $this->property['official_building_number'];
+                case 'officialBuildingNumber':
+                    if (isset($this->property['officialBuildingNumber'])) {
+                        return $this->property['officialBuildingNumber'];
                     }
                     break;
-                case 'ownership_share':
-                    if (isset($this->property['ownership_share'])) {
-                        return $this->property['ownership_share'];
+                case 'ownershipShare':
+                    if (isset($this->property['ownershipShare'])) {
+                        return $this->property['ownershipShare'];
                     }
                     break;
-                case 'property_development':
-                    if (isset($this->property['property_development'])) {
-                        switch ($this->property['property_development']) {
+                case 'propertyDevelopment':
+                    if (isset($this->property['propertyDevelopment'])) {
+                        switch ($this->property['propertyDevelopment']) {
                             case 'full':
                                 return $this->translator->translate('Fully developed', 'casasoft-standards');
                                 break;
@@ -874,38 +895,38 @@ class ConversionService {
                         }
                     }
                     break;
-                case 'renewal_fund_date':
-                    if (isset($this->property['renewal_fund_date'])) {
-                        if (is_array($this->property['renewal_fund_date'])) {
-                            $date_time = new \DateTime($this->property['renewal_fund_date']['date']);
+                case 'renewalFundDate':
+                    if (isset($this->property['renewalFundDate'])) {
+                        if (is_array($this->property['renewalFundDate'])) {
+                            $date_time = new \DateTime($this->property['renewalFundDate']['date']);
                             return $date_time->format('d.m.Y');
                         } else {
-                            if (method_exists($this->property['renewal_fund_date'], 'format')) {
-                                return $this->property['renewal_fund_date']->format('d.m.Y');
+                            if (method_exists($this->property['renewalFundDate'], 'format')) {
+                                return $this->property['renewalFundDate']->format('d.m.Y');
                             }
                         }
                     }
                     break;
-                case 's_number':
-                    if (isset($this->property['s_number'])) {
-                        return $this->property['s_number'];
+                case 'sNumber':
+                    if (isset($this->property['sNumber'])) {
+                        return $this->property['sNumber'];
                     }
                     break;
-                case 'unit_number':
-                    if (isset($this->property['unit_number'])) {
-                        return $this->property['unit_number'];
+                case 'unitNumber':
+                    if (isset($this->property['unitNumber'])) {
+                        return $this->property['unitNumber'];
                     }
                     break;
-                case 'price-range':
-                    if (isset($this->property['price_range_from'])) {
-                        if (isset($this->property['price_range_to'])) {
-                            return ($property['currency'] ? $property['currency'] : 'CHF ') . $this->property['price_range_from'] . ' ' . $this->translator->translate('To') . ' ' . $this->property['price_range_to'];
+                case 'priceRange':
+                    if (isset($this->property['priceRangeFrom'])) {
+                        if (isset($this->property['priceRangeTo'])) {
+                            return ($property['currency'] ? $property['currency'] : 'CHF ') . $this->property['priceRangeFrom'] . ' ' . $this->translator->translate('To') . ' ' . $this->property['priceRangeTo'];
                         } else {
-                            return ($property['currency'] ? $property['currency'] : 'CHF ') . $this->translator->translate('From') . ' ' . $this->property['price_range_from'];
+                            return ($property['currency'] ? $property['currency'] : 'CHF ') . $this->translator->translate('From') . ' ' . $this->property['priceRangeFrom'];
                         }
                     } else {
-                        if (isset($this->property['price_range_to'])) {
-                            return ($property['currency'] ? $property['currency'] : 'CHF ') . $this->translator->translate('To') . ' ' . $this->property['price_range_to'];
+                        if (isset($this->property['priceRangeTo'])) {
+                            return ($property['currency'] ? $property['currency'] : 'CHF ') . $this->translator->translate('To') . ' ' . $this->property['priceRangeTo'];
                         } else {
                             return null;
                         }
