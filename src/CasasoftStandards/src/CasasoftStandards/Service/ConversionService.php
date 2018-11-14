@@ -591,10 +591,10 @@ class ConversionService {
                 case 'extraCosts':
                     return $this->translator->translate('Extra Costs', 'casasoft-standards');
                     break;
-                case 'Egid':
+                case 'egid':
                     return $this->translator->translate('Egid', 'casasoft-standards');
                     break;
-                case 'Ewid':
+                case 'ewid':
                     return $this->translator->translate('Ewid', 'casasoft-standards');
                     break;
                 case 'officialBuildingNumber':

@@ -5,7 +5,7 @@ curl -X POST https://api.poeditor.com/v2/projects/export \
      -d language="de-ch" \
      -d type="mo" \
      | jq -j '.result.url' \
-     | xargs curl > ./src/language/de.mo
+     | xargs curl > de.mo
 
 printf "Fetching translations for FR backend:${NC}\n";
 curl -X POST https://api.poeditor.com/v2/projects/export \
@@ -14,7 +14,7 @@ curl -X POST https://api.poeditor.com/v2/projects/export \
      -d language="fr-ch" \
      -d type="mo" \
      | jq -j '.result.url' \
-     | xargs curl > ./src/language/fr.mo
+     | xargs curl > fr.mo
 
 printf "Fetching translations for IT backend:${NC}\n";
 curl -X POST https://api.poeditor.com/v2/projects/export \
@@ -23,7 +23,7 @@ curl -X POST https://api.poeditor.com/v2/projects/export \
      -d language="it-ch" \
      -d type="mo" \
      | jq -j '.result.url' \
-     | xargs curl > ./src/language/it.mo
+     | xargs curl > it.mo
 
 printf "Fetching translations for EN backend:${NC}\n";
 curl -X POST https://api.poeditor.com/v2/projects/export \
@@ -32,7 +32,7 @@ curl -X POST https://api.poeditor.com/v2/projects/export \
      -d language="en" \
      -d type="mo" \
      | jq -j '.result.url' \
-     | xargs curl > ./src/language/en.mo
+     | xargs curl > en.mo
 
 printf "Fetching translations for ES backend:${NC}\n";
 curl -X POST https://api.poeditor.com/v2/projects/export \
@@ -41,4 +41,4 @@ curl -X POST https://api.poeditor.com/v2/projects/export \
      -d language="es" \
      -d type="mo" \
      | jq -j '.result.url' \
-     | xargs curl > ./src/language/es.mo
+     | xargs curl > es.mo
