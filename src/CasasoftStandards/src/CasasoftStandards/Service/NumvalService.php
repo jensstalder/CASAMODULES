@@ -372,7 +372,7 @@ class NumvalService {
                 'si' => 'm2',
             ],
             'area_terrace' => [
-                'label' => $this->translator->translate('Terrace area', 'casasoft-standards'),
+                'label' => $this->translator->translate('Terrace space', 'casasoft-standards'),
                 'icon' => '',
                 'type' => 'int',
                 'si' => 'm2',
@@ -821,6 +821,19 @@ class NumvalService {
                 'type' => 'int',
                 'si' => '%',
             ],
+            'geak_exterior' => [
+                'label' => $this->translator->translate('GEAK exterior', 'casasoft-standards'),
+                'icon' => '',
+                'type' => 'int',
+                'si' => 'geak',
+            ],
+            'geak_total' => [
+                'label' => $this->translator->translate('GEAK total', 'casasoft-standards'),
+                'icon' => '',
+                'type' => 'int',
+                'si' => 'geak',
+            ],
+
         );
     }
 

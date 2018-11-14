@@ -14,7 +14,8 @@ class ConversionServiceFactory implements FactoryInterface
         $featureService = $container->get('CasasoftFeature');
         $utilityService = $container->get('CasasoftUtility');
         $integratedOfferService = $container->get('CasasoftIntegratedOffer');
-        $service = new ConversionService($translator, $numvalService, $categoryService, $featureService, $utilityService, $integratedOfferService);
+        $heatService = $container->get('CasasoftHeat');
+        $service = new ConversionService($translator, $numvalService, $categoryService, $featureService, $utilityService, $integratedOfferService, $heatService);
 
         return $service;
     }
@@ -27,7 +28,8 @@ class ConversionServiceFactory implements FactoryInterface
         $featureService = $serviceLocator->get('CasasoftFeature');
         $utilityService = $serviceLocator->get('CasasoftUtility');
         $integratedOfferService = $serviceLocator->get('CasasoftIntegratedOffer');
-        $service = new ConversionService($translator, $numvalService, $categoryService, $featureService, $utilityService, $integratedOfferService);
+        $heatService = $serviceLocator->get('CasasoftHeat');
+        $service = new ConversionService($translator, $numvalService, $categoryService, $featureService, $utilityService, $integratedOfferService, $heatService);
 
         return $service;
     }

@@ -371,8 +371,7 @@ class CategoryService {
     public function getGroup($key) {
         if (isset($this->groups[$key])) {
             return $this->groups[$key];
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -380,8 +379,7 @@ class CategoryService {
     public function getItem($key) {
         if (isset($this->items[$key])) {
             return $this->items[$key];
-        }
-        else {
+        } else {
             return false;
         }
     }

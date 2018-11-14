@@ -20,13 +20,14 @@ class ConversionService {
 
     public $property = null;
 
-    public function __construct($translator, $numvalService, $categoryService, $featureService, $utilityService, $integratedOfferService){
+    public function __construct($translator, $numvalService, $categoryService, $featureService, $utilityService, $integratedOfferService, $heatService){
         $this->translator = $translator;
         $this->numvalService = $numvalService;
         $this->categoryService = $categoryService;
         $this->featureService = $featureService;
         $this->utilityService = $utilityService;
         $this->integratedOfferService = $integratedOfferService;
+        $this->heatService = $heatService;
         $this->setProperty([]);
     }
 
@@ -441,8 +442,8 @@ class ConversionService {
           ['condition','special'],
           ['ceiling_height','numeric_value'],
           ['volume_gva','numeric_value'],
-          ['Wärmeerzeugung','special'],
-          ['Wärmeverteilung','special'],
+          // ['Wärmeerzeugung','special'],
+          // ['Wärmeverteilung','special'],
           //['granny-flat','category'], Wrong!! this whould be a feature
           ['parcelNumbers','special'],
           ['Erschliessung','special'],
@@ -458,6 +459,10 @@ class ConversionService {
           ['unit_number', 'special'],
           ['egid', 'special'],
           ['ewid', 'special'],
+          ['geak_exterior', 'numeric_value'],
+          ['geak_total', 'numeric_value'],
+          ['heatGeneration', 'heat'],
+          ['heatDistribution', 'heat'],
       ],
       'prices-buy' => [
           ['price', 'special'],
@@ -492,6 +497,12 @@ class ConversionService {
           ['renewal_fund_input', 'numeric_value'],
           ['renewal_fund_value', 'numeric_value'],
           ['renewalFundDate', 'special'],
+      ],
+      'energy' => [
+          ['geak_exterior', 'numeric_value'],
+          ['geak_total', 'numeric_value'],
+          ['heatGeneration', 'heat'],
+          ['heatDistribution', 'heat'],
       ]
     ];
 
@@ -607,6 +618,9 @@ class ConversionService {
                 case 'priceRange':
                     return $this->translator->translate('Price range', 'casasoft-standards');
                     break;
+                case 'energy':
+                    return $this->translator->translate('Energy', 'casasoft-standards');
+                    break;
             }
         }
 
@@ -630,9 +644,14 @@ class ConversionService {
             if ($utility) {return $utility->getLabel();}
         }
 
-        if ($context == 'smart' || $context == 's') {
+        if ($context == 'smart' || $context == 'integrated-offer') {
             $integratedOffer = $this->integratedOfferService->getItem($key);
-            if ($integratedOffer) {return $integratedOffer->getLabel;}
+            if ($integratedOffer) {return $integratedOffer->getLabel();}
+        }
+
+        if ($context == 'smart' || $context == 'heat') {
+            $heat = $this->heatService->getGroup($key);
+            if ($heat) {return $heat['label'];}
         }
 
         if ($context == 'smart' || $context == 'utility-alt') {
@@ -727,6 +746,18 @@ class ConversionService {
                     }
                 }
                 return $integratedOffer->getValue();
+            }
+        }
+
+        if ($context == 'smart' || $context == 'heat') {
+            $heatGroup = $this->heatService->getGroup($key);
+            if ($heatGroup) {
+                foreach ($heatGroup['heat_slugs'] as $slugKey => $slug) {
+                    if ($this->property[$key] === $slug) {
+                        $heatItem = $this->heatService->getItem($slug);
+                        return $heatItem->getLabel();
+                    }
+                }
             }
         }
 
@@ -920,13 +951,13 @@ class ConversionService {
                 case 'priceRange':
                     if (isset($this->property['priceRangeFrom'])) {
                         if (isset($this->property['priceRangeTo'])) {
-                            return ($property['currency'] ? $property['currency'] : 'CHF ') . $this->property['priceRangeFrom'] . ' ' . $this->translator->translate('To') . ' ' . $this->property['priceRangeTo'];
+                            return (isset($this->property['priceCurrency']) && $this->property['priceCurrency'] ? $this->property['priceCurrency'] : 'CHF') . ' ' . $this->property['priceRangeFrom'] . ' ' . $this->translator->translate('To', 'casasoft-standards') . ' ' . $this->property['priceRangeTo'];
                         } else {
-                            return ($property['currency'] ? $property['currency'] : 'CHF ') . $this->translator->translate('From') . ' ' . $this->property['priceRangeFrom'];
+                            return (isset($this->property['priceCurrency']) && $this->property['priceCurrency'] ? $this->property['priceCurrency'] : 'CHF') . ' ' . $this->translator->translate('From', 'casasoft-standards') . ' ' . $this->property['priceRangeFrom'];
                         }
                     } else {
                         if (isset($this->property['priceRangeTo'])) {
-                            return ($property['currency'] ? $property['currency'] : 'CHF ') . $this->translator->translate('To') . ' ' . $this->property['priceRangeTo'];
+                            return (isset($this->property['priceCurrency']) && $this->property['priceCurrency'] ? $this->property['priceCurrency'] : 'CHF') . ' ' . $this->translator->translate('To', 'casasoft-standards') . ' ' . $this->property['priceRangeTo'];
                         } else {
                             return null;
                         }

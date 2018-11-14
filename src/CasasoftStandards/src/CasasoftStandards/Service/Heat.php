@@ -5,7 +5,7 @@ use Zend\Http\Request;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class Energy {
+class Heat {
     private $key;
     public function getKey(){return $this->key;}
     public function setKey($key){$this->key = $key;}
