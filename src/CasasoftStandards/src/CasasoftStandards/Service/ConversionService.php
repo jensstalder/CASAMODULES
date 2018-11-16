@@ -135,7 +135,7 @@ class ConversionService {
             if (! $input['time_segment']) {
                 //needs currencyFormat
                 // $price = $this->currencyFormat($input['price'], 'CHF', false, 'de_CH') . '.–';
-                $price = ($input['currency'] ? $input['currency'] : 'CHF '). $input['price'].'.–';
+                $price = ($input['currency'] ? $input['currency'] : 'CHF '). number_format($input['price'], 0, '.', "'").'.–';
             } elseif ($input['time_segment']) {
                 switch ($input['time_segment']) {
                     case 'w':

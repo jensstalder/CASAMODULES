@@ -96,7 +96,7 @@ class Numval {
                 $val = $number_filter->filter($val) . ' %';
                 break;
             case 'currency':
-                $val = ($options['currency']) . ' ' . $number_filter->filter($val) . '.–';
+                $val = ($options['currency']) . ' ' . number_format($val, 0, '.', "'") . '.–';
                 break;
             case 'geak':
                 $val = $this->matchGeakLetter($val);
