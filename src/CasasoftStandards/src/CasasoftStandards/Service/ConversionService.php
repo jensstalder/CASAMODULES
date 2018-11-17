@@ -951,13 +951,13 @@ class ConversionService {
                 case 'priceRange':
                     if (isset($this->property['priceRangeFrom'])) {
                         if (isset($this->property['priceRangeTo'])) {
-                            return (isset($this->property['priceCurrency']) && $this->property['priceCurrency'] ? $this->property['priceCurrency'] : 'CHF') . ' ' . $this->property['priceRangeFrom'] . ' ' . $this->translator->translate('To', 'casasoft-standards') . ' ' . $this->property['priceRangeTo'];
+                            return (isset($this->property['priceCurrency']) && $this->property['priceCurrency'] ? $this->property['priceCurrency'] : 'CHF') . ' ' . number_format($this->property['priceRangeFrom'], 0, '.', "'") . ' ' . $this->translator->translate('To', 'casasoft-standards') . ' ' . number_format($this->property['priceRangeTo'], 0, '.', "'");
                         } else {
-                            return (isset($this->property['priceCurrency']) && $this->property['priceCurrency'] ? $this->property['priceCurrency'] : 'CHF') . ' ' . $this->translator->translate('From', 'casasoft-standards') . ' ' . $this->property['priceRangeFrom'];
+                            return (isset($this->property['priceCurrency']) && $this->property['priceCurrency'] ? $this->property['priceCurrency'] : 'CHF') . ' ' . $this->translator->translate('From', 'casasoft-standards') . ' ' . number_format($this->property['priceRangeFrom'], 0, '.', "'");
                         }
                     } else {
                         if (isset($this->property['priceRangeTo'])) {
-                            return (isset($this->property['priceCurrency']) && $this->property['priceCurrency'] ? $this->property['priceCurrency'] : 'CHF') . ' ' . $this->translator->translate('To', 'casasoft-standards') . ' ' . $this->property['priceRangeTo'];
+                            return (isset($this->property['priceCurrency']) && $this->property['priceCurrency'] ? $this->property['priceCurrency'] : 'CHF') . ' ' . $this->translator->translate('To', 'casasoft-standards') . ' ' . number_format($this->property['priceRangeTo'], 0, '.', "'");
                         } else {
                             return null;
                         }
