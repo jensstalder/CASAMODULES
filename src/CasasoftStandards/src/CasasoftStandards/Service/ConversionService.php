@@ -904,7 +904,7 @@ class ConversionService {
                     }
                     break;
                 case 'ownershipShare':
-                    if (isset($this->property['ownershipShare'])) {
+                    if (isset($this->property['ownershipShare']) && $this->property['ownershipShare']) {
                         return $this->property['ownershipShare'];
                     }
                     break;
