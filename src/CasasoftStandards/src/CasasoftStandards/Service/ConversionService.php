@@ -487,7 +487,6 @@ class ConversionService {
           ['extraCosts', 'special'],
           ['has-rental-deposit-guarantee', 'feature'],
           ['rental_deposit', 'numeric_value'],
-          ['priceRange', 'special'],
           ['gross_premium', 'numeric_value'],
           ['net_premium', 'numeric_value'],
           ['property_land_price', 'numeric_value'],
@@ -953,7 +952,7 @@ class ConversionService {
                         if (isset($this->property['priceRangeTo'])) {
                             return (isset($this->property['priceCurrency']) && $this->property['priceCurrency'] ? $this->property['priceCurrency'] : 'CHF') . ' ' . number_format($this->property['priceRangeFrom'], 0, '.', "'") . ' ' . $this->translator->translate('To', 'casasoft-standards') . ' ' . number_format($this->property['priceRangeTo'], 0, '.', "'");
                         } else {
-                            return (isset($this->property['priceCurrency']) && $this->property['priceCurrency'] ? $this->property['priceCurrency'] : 'CHF') . ' ' . $this->translator->translate('From', 'casasoft-standards') . ' ' . number_format($this->property['priceRangeFrom'], 0, '.', "'");
+                            return (isset($this->property['priceCurrency']) && $this->property['priceCurrency'] ? $this->property['priceCurrency'] : 'CHF') . ' ' . $this->translator->translate('Starting from', 'casasoft-standards') . ' ' . number_format($this->property['priceRangeFrom'], 0, '.', "'");
                         }
                     } else {
                         if (isset($this->property['priceRangeTo'])) {
