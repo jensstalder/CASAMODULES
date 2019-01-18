@@ -950,13 +950,27 @@ class ConversionService {
                 case 'priceRange':
                     if (isset($this->property['priceRangeFrom'])) {
                         if (isset($this->property['priceRangeTo'])) {
-                            return ((isset($this->property['priceCurrency']) && $this->property['priceCurrency'] ? $this->property['priceCurrency'] : 'CHF') . ' ' . number_format($this->property['priceRangeFrom'], 0, '.', "'") . ' ' . $this->translator->translate('To', 'casasoft-standards') . ' ' . number_format($this->property['priceRangeTo'], 0, '.', "'"));
+                            $priceRange = '';
+                            $priceRange .= (isset($this->property['priceCurrency']) && $this->property['priceCurrency'] ? $this->property['priceCurrency'] . ' ' : 'CHF ');
+                            $priceRange .= number_format($this->property['priceRangeFrom'], 0, '.', "'") . ' ';
+                            $priceRange .= $this->translator->translate('To', 'casasoft-standards') . ' ';
+                            $priceRange .= (isset($this->property['priceCurrency']) && $this->property['priceCurrency'] ? $this->property['priceCurrency'] . ' ' : 'CHF ');
+                            $priceRange .= number_format($this->property['priceRangeTo'], 0, '.', "'");
+                            return $priceRange;
                         } else {
-                            return ($this->translator->translate('Starting from', 'casasoft-standards') . ' ' . (isset($this->property['priceCurrency']) && $this->property['priceCurrency'] ? $this->property['priceCurrency'] : 'CHF') . ' ' . number_format($this->property['priceRangeFrom'], 0, '.', "'"));
+                            $priceRange = '';
+                            $priceRange .= $this->translator->translate('Starting from', 'casasoft-standards') . ' ';
+                            $priceRange .= (isset($this->property['priceCurrency']) && $this->property['priceCurrency'] ? $this->property['priceCurrency'] . ' ' : 'CHF ');
+                            $priceRange .= number_format($this->property['priceRangeFrom'], 0, '.', "'");
+                            return $priceRange;
                         }
                     } else {
                         if (isset($this->property['priceRangeTo'])) {
-                            return ($this->translator->translate('To', 'casasoft-standards') . ' ' . (isset($this->property['priceCurrency']) && $this->property['priceCurrency'] ? $this->property['priceCurrency'] : 'CHF') . ' ' . number_format($this->property['priceRangeTo'], 0, '.', "'"));
+                            $priceRange = '';
+                            $priceRange .= $this->translator->translate('To', 'casasoft-standards') . ' ';
+                            $priceRange .= (isset($this->property['priceCurrency']) && $this->property['priceCurrency'] ? $this->property['priceCurrency'] . ' ' : 'CHF ');
+                            $priceRange .= number_format($this->property['priceRangeTo'], 0, '.', "'");
+                            return $priceRange;
                         } else {
                             return null;
                         }
