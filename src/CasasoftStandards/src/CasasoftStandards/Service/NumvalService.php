@@ -865,7 +865,6 @@ class NumvalService {
     public function getItems(){
         if (! $this->items) {
             //set default numvals
-            trigger_error("NumvalService set defaults: ");
             $numval_options = $this->getDefaultOptions();
             foreach ($numval_options as $key => $options) {
                 $numval = new Numval;
