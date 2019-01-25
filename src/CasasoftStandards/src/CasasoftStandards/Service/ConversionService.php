@@ -29,6 +29,18 @@ class ConversionService {
         $this->integratedOfferService = $integratedOfferService;
         $this->heatService = $heatService;
         $this->setProperty([]);
+        trigger_error("ConversionService Constructed: ");
+    }
+
+    public function setTranslator($translator) {
+        $this->translator = $translator;
+        $this->numvalService->setTranslator($translator);
+        $this->categoryService->setTranslator($translator);
+        $this->featureService->setTranslator($translator);
+        $this->utilityService->setTranslator($translator);
+        $this->integratedOfferService->setTranslator($translator);
+        $this->heatService->setTranslator($translator);
+        trigger_error("ConversionService setTranslator: ");
     }
 
     private function transformPrice(Array $input, Array $output){
@@ -169,7 +181,7 @@ class ConversionService {
 
     public function setProperty(Array $data){
         $this->property = $data;
-        $this->numvalService->resetService();
+        
 
 
         if (isset($data['_embedded']['property'])) {

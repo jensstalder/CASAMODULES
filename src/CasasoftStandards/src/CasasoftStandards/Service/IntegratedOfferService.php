@@ -15,14 +15,6 @@ class IntegratedOfferService {
     public function __construct($translator){
         $this->translator = $translator;
 
-        //set default integrated offers
-        $options = $this->getDefaultOptions();
-        foreach ($options as $key => $options) {
-            $integrated_offer = new IntegratedOffer;
-            $integrated_offer->populate($options);
-            $integrated_offer->setKey($key);
-            $this->addItem($integrated_offer, $key);
-        }
     }
 
     public function createService(ServiceLocatorInterface $serviceLocator){
@@ -81,6 +73,12 @@ class IntegratedOfferService {
         ];
     }
 
+    public function setTranslator($translator) {
+        $this->translator = $translator;
+        $this->items = null;
+    }
+
+
     public function addItem($obj, $key = null) {
         if ($key == null) {
             $this->items[] = $obj;
@@ -94,34 +92,44 @@ class IntegratedOfferService {
     }
 
     public function deleteItem($key) {
-        if (isset($this->items[$key])) {
-            unset($this->items[$key]);
+        if (isset($this->getItems()[$key])) {
+            unset($this->getItems()[$key]);
         } else {
             throw new \Exception("Invalid key $key.");
         }
     }
 
     public function getItem($key) {
-        if (isset($this->items[$key])) {
-            return $this->items[$key];
+        if (isset($this->getItems()[$key])) {
+            return $this->getItems()[$key];
         } else {
             return false;
         }
     }
 
     public function getItems(){
+        if (! $this->items) {
+            //set default integrated offers
+            $options = $this->getDefaultOptions();
+            foreach ($options as $key => $options) {
+                $integrated_offer = new IntegratedOffer;
+                $integrated_offer->populate($options);
+                $integrated_offer->setKey($key);
+                $this->addItem($integrated_offer, $key);
+            }
+        }
         return $this->items;
     }
 
     public function keys() {
-        return array_keys($this->items);
+        return array_keys($this->getItems());
     }
 
     public function length() {
-        return count($this->items);
+        return count($this->getItems());
     }
 
     public function keyExists($key) {
-        return isset($this->items[$key]);
+        return isset($this->getItems()[$key]);
     }
 }

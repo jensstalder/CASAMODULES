@@ -14,17 +14,6 @@ class NumvalService {
 
     public function __construct($translator){
         $this->translator = $translator;
-
-        //set default numvals
-        $numval_options = $this->getDefaultOptions();
-        foreach ($numval_options as $key => $options) {
-            $numval = new Numval;
-            $numval->populate($options);
-            $numval->setKey($key);
-            $this->addItem($numval, $key);
-        }
-
-
         //default template
         $this->template = array(
             'general' => array(
@@ -186,7 +175,13 @@ class NumvalService {
         );
     }
 
+    public function setTranslator($translator) {
+        $this->translator = $translator;
+        $this->items = null;
+    }
+
     public function resetService(){
+        $this->items = null;
         $numval_options = $this->getDefaultOptions();
         foreach ($numval_options as $key => $options) {
             $numval = $this->getItem($key);
@@ -852,35 +847,46 @@ class NumvalService {
     }
 
     public function deleteItem($key) {
-        if (isset($this->items[$key])) {
-            unset($this->items[$key]);
+        if (isset($this->getItems()[$key])) {
+            unset($this->getItems()[$key]);
         } else {
             throw new \Exception("Invalid key $key.");
         }
     }
 
     public function getItem($key) {
-        if (isset($this->items[$key])) {
-            return $this->items[$key];
+        if (isset($this->getItems()[$key])) {
+            return $this->getItems()[$key];
         } else {
             return false;
         }
     }
 
     public function getItems(){
+        if (! $this->items) {
+            //set default numvals
+            trigger_error("NumvalService set defaults: ");
+            $numval_options = $this->getDefaultOptions();
+            foreach ($numval_options as $key => $options) {
+                $numval = new Numval;
+                $numval->populate($options);
+                $numval->setKey($key);
+                $this->addItem($numval, $key);
+            }
+        }
         return $this->items;
     }
 
     public function keys() {
-        return array_keys($this->items);
+        return array_keys($this->getItems());
     }
 
     public function length() {
-        return count($this->items);
+        return count($this->getItems());
     }
 
     public function keyExists($key) {
-        return isset($this->items[$key]);
+        return isset($this->getItems()[$key]);
     }
 
     public function isDistanceSeekable($key){

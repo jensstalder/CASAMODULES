@@ -73,6 +73,11 @@ class UtilityService{
         );
     }
 
+    public function setTranslator($translator) {
+        $this->translator = $translator;
+        $this->items = null;
+    }
+
     public function addItem($obj, $key = null) {
         if ($key == null) {
             $this->items[] = $obj;
