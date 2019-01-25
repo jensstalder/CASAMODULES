@@ -9,175 +9,17 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class NumvalService {
 
-    public $items = array();
+    public $items = [];
     private $template;
 
     public function __construct($translator){
         $this->translator = $translator;
-        //default template
-        $this->template = array(
-            'general' => array(
-                'name' => $this->translator->translate('General', 'casasoft-standards'),
-                'items' => array(
-                    'floor' => array(
-                        'required' => false,
-                    ),
-                    'year_built' => array(
-                        'required' => false,
-                    ),
-                    'year_last_renovated' => array(
-                        'required' => false,
-                    ),
-                    'year_renovated' => array( //depricated
-                        'required' => false,
-                    ),
-                    'ceiling_height' => array(
-                        'required' => false,
-                    ),
-                    'hall_height' => array(
-                        'required' => false,
-                    ),
-                    'utilization_number' => array(
-                        'required' => false,
-                    ),
-                    'construction_utilization_number' => array(
-                        'required' => false,
-                    ),
-                    'property_land_price' => array(
-                        'required' => false,
-                    ),
-                    'year_built' => array(
-                        'required' => false,
-                    ),
-                    'rental_deposit' => array(
-                        'required' => false,
-                    ),
-
-                )
-            ),
-            'number_of' => array(
-                'name' => $this->translator->translate('Number of', 'casasoft-standards'),
-                'items' => array(
-                    'number_of_floors' => array(
-                        'required' => false,
-                    ),
-                    'number_of_rooms' => array(
-                        'required' => true,
-                    ),
-                    'number_of_bathrooms' => array(
-                        'required' => true,
-                    ),
-                    'number_of_apartments' => array(
-                        'required' => true,
-                    ),
-                    'number_of_guest_toilets' => [
-                        'required' => true,
-                    ],
-                )
-            ),
-            'areas' => array(
-                'name' => $this->translator->translate('Areas', 'casasoft-standards'),
-                'items' => array(
-                    'area_sia_gf' => array(
-                        'required' => false,
-                    ),
-                    /*'area_sia_ngf' => array(
-                        'required' => false,
-                    ),*/
-                    'area_sia_nf' => array(
-                        'required' => false,
-                    ),
-                    'area_bwf' => array(
-                        'required' => true,
-                    ),
-                    'area_nwf' => array(
-                        'required' => false,
-                    ),
-                    /*'area_property_land' => array(
-                        'required' => false,
-                    ),*/
-                    'area_sia_gsf' => array(
-                        'required' => false,
-                    ),
-                    'area_balcony' => [
-                        'required' => false,
-                    ],
-                    'area_cellar' => [
-                        'required' => false,
-                    ],
-                    'area_garden' => [
-                        'required' => false,
-                    ],
-                    'area_loggia' => [
-                        'required' => false,
-                    ],
-                    'area_terrace' => [
-                        'required' => false,
-                    ],
-                    /*'cubature_gva' => array(
-                        'required' => false,
-                    ),*/
-                    /*'cubature_sia' => array(
-                        'required' => false,
-                    ),*/
-                    'volume_sia_gv' => array(
-                        'required' => false,
-                    ),
-                )
-            ),
-            'distances' => array(
-                'name' => $this->translator->translate('Distances', 'casasoft-standards'),
-                'items' => array(
-                    'distance_kindergarten' => array(
-                        'required' => false,
-                    ),
-                    'distance_primary_school' => array(
-                       'required' => false,
-                    ),
-                    'distance_high_school' => array(
-                       'required' => false,
-                    ),
-                    'distance_college_university' => array(
-                       'required' => false,
-                    ),
-                    'distance_bus_stop' => array(
-                        'required' => false,
-                    ),
-                    'distance_train_station' => array(
-                      'required' => false,
-                    ),
-                    'distance_post' => array(
-                       'required' => false,
-                    ),
-                    'distance_bank' => array(
-                       'required' => false,
-                    ),
-                    'distance_cable_railway_station' => array(
-                       'required' => false,
-                    ),
-                    'distance_boat_dock' => array(
-                       'required' => false,
-                    ),
-                    'distance_public_transport' => array(
-                       'required' => false,
-                    ),
-                    'distance_shop' => array(
-                       'required' => false,
-                    ),
-                    'distance_motorway' => array(
-                       'required' => false,
-                    ),
-                    'distance_airport'  => array(
-                       'required' => false,
-                    ),
-                )
-            )
-        );
     }
 
     public function setTranslator($translator) {
         $this->translator = $translator;
         $this->items = null;
+        $this->template = null;
     }
 
     public function resetService(){
@@ -194,8 +36,168 @@ class NumvalService {
     }
 
     public function getTemplate(){
+        if (! $this->template) {
+            $this->template = array(
+                'general' => array(
+                    'name' => $this->translator->translate('General', 'casasoft-standards'),
+                    'items' => array(
+                        'floor' => array(
+                            'required' => false,
+                        ),
+                        'year_built' => array(
+                            'required' => false,
+                        ),
+                        'year_last_renovated' => array(
+                            'required' => false,
+                        ),
+                        'year_renovated' => array( //depricated
+                            'required' => false,
+                        ),
+                        'ceiling_height' => array(
+                            'required' => false,
+                        ),
+                        'hall_height' => array(
+                            'required' => false,
+                        ),
+                        'utilization_number' => array(
+                            'required' => false,
+                        ),
+                        'construction_utilization_number' => array(
+                            'required' => false,
+                        ),
+                        'property_land_price' => array(
+                            'required' => false,
+                        ),
+                        'year_built' => array(
+                            'required' => false,
+                        ),
+                        'rental_deposit' => array(
+                            'required' => false,
+                        ),
+                    )
+                ),
+                'number_of' => array(
+                    'name' => $this->translator->translate('Number of', 'casasoft-standards'),
+                    'items' => array(
+                        'number_of_floors' => array(
+                            'required' => false,
+                        ),
+                        'number_of_rooms' => array(
+                            'required' => true,
+                        ),
+                        'number_of_bathrooms' => array(
+                            'required' => true,
+                        ),
+                        'number_of_apartments' => array(
+                            'required' => true,
+                        ),
+                        'number_of_guest_toilets' => [
+                            'required' => true,
+                        ],
+                    )
+                ),
+                'areas' => array(
+                    'name' => $this->translator->translate('Areas', 'casasoft-standards'),
+                    'items' => array(
+                        'area_sia_gf' => array(
+                            'required' => false,
+                        ),
+                        /*'area_sia_ngf' => array(
+                            'required' => false,
+                        ),*/
+                        'area_sia_nf' => array(
+                            'required' => false,
+                        ),
+                        'area_bwf' => array(
+                            'required' => true,
+                        ),
+                        'area_nwf' => array(
+                            'required' => false,
+                        ),
+                        /*'area_property_land' => array(
+                            'required' => false,
+                        ),*/
+                        'area_sia_gsf' => array(
+                            'required' => false,
+                        ),
+                        'area_balcony' => [
+                            'required' => false,
+                        ],
+                        'area_cellar' => [
+                            'required' => false,
+                        ],
+                        'area_garden' => [
+                            'required' => false,
+                        ],
+                        'area_loggia' => [
+                            'required' => false,
+                        ],
+                        'area_terrace' => [
+                            'required' => false,
+                        ],
+                        /*'cubature_gva' => array(
+                            'required' => false,
+                        ),*/
+                        /*'cubature_sia' => array(
+                            'required' => false,
+                        ),*/
+                        'volume_sia_gv' => array(
+                            'required' => false,
+                        ),
+                    )
+                ),
+                'distances' => array(
+                    'name' => $this->translator->translate('Distances', 'casasoft-standards'),
+                    'items' => array(
+                        'distance_kindergarten' => array(
+                            'required' => false,
+                        ),
+                        'distance_primary_school' => array(
+                           'required' => false,
+                        ),
+                        'distance_high_school' => array(
+                           'required' => false,
+                        ),
+                        'distance_college_university' => array(
+                           'required' => false,
+                        ),
+                        'distance_bus_stop' => array(
+                            'required' => false,
+                        ),
+                        'distance_train_station' => array(
+                          'required' => false,
+                        ),
+                        'distance_post' => array(
+                           'required' => false,
+                        ),
+                        'distance_bank' => array(
+                           'required' => false,
+                        ),
+                        'distance_cable_railway_station' => array(
+                           'required' => false,
+                        ),
+                        'distance_boat_dock' => array(
+                           'required' => false,
+                        ),
+                        'distance_public_transport' => array(
+                           'required' => false,
+                        ),
+                        'distance_shop' => array(
+                           'required' => false,
+                        ),
+                        'distance_motorway' => array(
+                           'required' => false,
+                        ),
+                        'distance_airport'  => array(
+                           'required' => false,
+                        ),
+                    )
+                )
+            );
+        }
         return $this->template;
     }
+
     public function setTemplate($template){
         $this->template = $template;
     }
@@ -889,7 +891,7 @@ class NumvalService {
     }
 
     public function isDistanceSeekable($key){
-        if (in_array($key, array_keys($this->template['distances']['items']))) {
+        if (in_array($key, array_keys($this->getTemplate()['distances']['items']))) {
             return true;
         } else {
             return false;

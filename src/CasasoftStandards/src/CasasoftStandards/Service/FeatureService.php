@@ -9,7 +9,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class FeatureService {
 
-    public $items = array();
+    public $items = [];
 
     public function __construct($translator){
         $this->translator = $translator;

@@ -14,7 +14,6 @@ class HeatService {
     public function __construct($translator){
         $this->translator = $translator;
 
-        $this->groups = $this->getDefaultGroupOptions();
     }
 
     public function createService(ServiceLocatorInterface $serviceLocator){
@@ -91,12 +90,13 @@ class HeatService {
     public function setTranslator($translator) {
         $this->translator = $translator;
         $this->items = null;
+        $this->groups = null;
     }
 
 
     public function hasSlugInGroup($slug, $groupslug){
-        if (array_key_exists($groupslug, $this->groups)) {
-            if (in_array($slug, $this->groups[$groupslug]['heat_slugs'])) {
+        if (array_key_exists($groupslug, $this->getGroups())) {
+            if (in_array($slug, $this->getGroups()[$groupslug]['heat_slugs'])) {
                 return true;
             }
         }
@@ -127,17 +127,15 @@ class HeatService {
     public function deleteItem($key) {
         if (isset($this->getItems()[$key])) {
             unset($this->getItems()[$key]);
-        }
-        else {
+        } else {
             throw new \Exception("Invalid key $key.");
         }
     }
 
     public function getGroup($key) {
-        if (isset($this->groups[$key])) {
-            return $this->groups[$key];
-        }
-        else {
+        if (isset($this->getGroups()[$key])) {
+            return $this->getGroups()[$key];
+        } else {
             return false;
         }
     }
@@ -162,6 +160,13 @@ class HeatService {
             }
         }
         return $this->items;
+    }
+
+    public function getGroups() {
+        if (! $this->groups) {
+            $this->groups = $this->getDefaultGroupOptions();
+        }
+        return $this->groups;
     }
 
     public function keys() {

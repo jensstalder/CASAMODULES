@@ -14,7 +14,6 @@ class IntegratedOfferService {
 
     public function __construct($translator){
         $this->translator = $translator;
-
     }
 
     public function createService(ServiceLocatorInterface $serviceLocator){
