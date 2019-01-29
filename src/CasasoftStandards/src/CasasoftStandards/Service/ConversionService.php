@@ -179,8 +179,6 @@ class ConversionService {
 
     public function setProperty(Array $data){
         $this->property = $data;
-        
-
 
         if (isset($data['_embedded']['property'])) {
             $this->property = $data['_embedded']['property'];

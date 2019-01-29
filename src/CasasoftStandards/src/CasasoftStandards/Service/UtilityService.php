@@ -93,7 +93,7 @@ class UtilityService{
         if (isset($this->getItems()[$key])) {
             return $this->getItems()[$key];
         } else {
-            throw new \Exception("Invalid key $key.");
+            return false;
         }
     }
 
