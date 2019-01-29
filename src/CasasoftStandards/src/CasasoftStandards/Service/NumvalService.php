@@ -141,9 +141,9 @@ class NumvalService {
                         /*'cubature_sia' => array(
                             'required' => false,
                         ),*/
-                        'volume_sia_gv' => array(
+                        /*'volume_sia_gv' => array(
                             'required' => false,
-                        ),
+                        ),*/
                     )
                 ),
                 'distances' => array(

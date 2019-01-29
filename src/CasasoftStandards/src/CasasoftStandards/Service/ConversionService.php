@@ -451,7 +451,7 @@ class ConversionService {
           ['year_last_restored','numeric_value'],
           ['condition','special'],
           ['ceiling_height','numeric_value'],
-          ['volume_gva','numeric_value'],
+          // ['volume_gva','numeric_value'],
           // ['Wärmeerzeugung','special'],
           // ['Wärmeverteilung','special'],
           //['granny-flat','category'], Wrong!! this whould be a feature
@@ -653,7 +653,7 @@ class ConversionService {
             if ($utility) {return $utility->getLabel();}
         }
 
-        if ($context == 'smart' || $context == 'integrated-offer') {
+        if ($context == 'smart' || $context == 'integrated-offers') {
             $integratedOffer = $this->integratedOfferService->getItem($key);
             if ($integratedOffer) {return $integratedOffer->getLabel();}
         }
