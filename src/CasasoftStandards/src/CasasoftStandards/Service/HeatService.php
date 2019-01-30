@@ -56,6 +56,12 @@ class HeatService {
             'radiators' => [
                 'label' => $this->translator->translate('Radiators', 'casasoft-standards')
             ],
+            'radiators' => [
+                'label' => $this->translator->translate('Radiators', 'casasoft-standards')
+            ],
+            'infrared' => [
+                'label' => $this->translator->translate('Infrared', 'casasoft-standards')
+            ],
         ];
     }
 
