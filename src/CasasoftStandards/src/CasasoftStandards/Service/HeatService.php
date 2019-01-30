@@ -78,14 +78,15 @@ class HeatService {
                     'air-water-heatpump',
                     'oil',
                     'pellet',
-                    'heatpump'
+                    'heatpump',
                 ],
             ],
             'heatDistribution' => [
                 'label' => $this->translator->translate('Heat distribution', 'casasoft-standards'),
                 'heat_slugs' => [
                     'floor',
-                    'radiators'
+                    'radiators',
+                    'infrared',
                 ],
             ],
         ];
