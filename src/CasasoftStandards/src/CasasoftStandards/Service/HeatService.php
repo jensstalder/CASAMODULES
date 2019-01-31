@@ -10,6 +10,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 class HeatService {
 
     public $items = [];
+    private $groups = null;
 
     public function __construct($translator){
         $this->translator = $translator;
