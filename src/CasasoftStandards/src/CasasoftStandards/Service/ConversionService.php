@@ -474,6 +474,7 @@ class ConversionService {
       ],
       'prices-buy' => [
           ['price', 'special'],
+          ['extraCosts', 'special'],
           ['pricePerSqm', 'renders'],
           ['priceRange', 'special'],
           ['gross_premium', 'numeric_value'],
