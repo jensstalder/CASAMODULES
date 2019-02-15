@@ -10,6 +10,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 class HeatService {
 
     public $items = [];
+    private $groups = null;
 
     public function __construct($translator){
         $this->translator = $translator;
@@ -56,6 +57,12 @@ class HeatService {
             'radiators' => [
                 'label' => $this->translator->translate('Radiators', 'casasoft-standards')
             ],
+            'radiators' => [
+                'label' => $this->translator->translate('Radiators', 'casasoft-standards')
+            ],
+            'infrared' => [
+                'label' => $this->translator->translate('Infrared', 'casasoft-standards')
+            ],
         ];
     }
 
@@ -72,14 +79,15 @@ class HeatService {
                     'air-water-heatpump',
                     'oil',
                     'pellet',
-                    'heatpump'
+                    'heatpump',
                 ],
             ],
             'heatDistribution' => [
                 'label' => $this->translator->translate('Heat distribution', 'casasoft-standards'),
                 'heat_slugs' => [
                     'floor',
-                    'radiators'
+                    'radiators',
+                    'infrared',
                 ],
             ],
         ];
