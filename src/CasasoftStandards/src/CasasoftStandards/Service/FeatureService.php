@@ -271,7 +271,7 @@ class FeatureService {
                 'icon' => '',
             ),
             'is-minergie-p-eco' => array(
-                'label' => this.translate('Minergie-P-ECO', 'casasoft-standards'),
+                'label' => $this->translator->translate('Minergie-P-ECO', 'casasoft-standards'),
                 'icon' => '',
             ),
            'is-non-smoking' => array(
