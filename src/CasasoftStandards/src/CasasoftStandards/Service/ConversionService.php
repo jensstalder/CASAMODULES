@@ -720,6 +720,32 @@ class ConversionService {
                 return $numval->getRenderedValue(['currency' => $currency]);
             }
         }
+        if ($key === 'availability') {
+            $value = $this->getValue($key, $context);
+            if ($value) {
+                switch ($value) {
+                    case 'active': return $this->translator->translate('Active', 'casasoft-standards'); break;
+                    case 'inactive': return $this->translator->translate('Inactive', 'casasoft-standards'); break;
+                    case 'reference': return $this->translator->translate('Reference', 'casasoft-standards'); break;
+                    case 'reserved': return $this->translator->translate('Reserved', 'casasoft-standards'); break;
+                    case 'taken':
+                        $type = null;
+                        if (isset($this->property['type'])) {
+                            $type = $this->property['type'];
+                        }
+                        switch ($type) {
+                            case 'rent': return $this->translator->translate('Rented', 'casasoft-standards'); break;
+                            case 'buy': return $this->translator->translate('Sold', 'casasoft-standards'); break;
+                            default: return $this->translator->translate('Taken', 'casasoft-standards'); break;
+                        }
+                    break;
+                    case 'draft': return $this->translator->translate('Draft', 'casasoft-standards'); break;
+                    case 'private': return $this->translator->translate('Private', 'casasoft-standards'); break;
+                    case 'in-acquisition': return $this->translator->translate('In acquisition', 'casasoft-standards'); break;
+                }
+            }
+            return null;
+        }
         $value = $this->getValue($key, $context);
         return $value;
     }
@@ -776,27 +802,7 @@ class ConversionService {
             switch ($key) {
                 case 'availability':
                     if (isset($this->property['availability']) && $this->property['availability']) {
-                        switch ($this->property['availability']) {
-                            case 'active': return $this->translator->translate('Active', 'casasoft-standards'); break;
-                            case 'inactive': return $this->translator->translate('Inactive', 'casasoft-standards'); break;
-                            case 'reference': return $this->translator->translate('Reference', 'casasoft-standards'); break;
-                            case 'reserved': return $this->translator->translate('Reserved', 'casasoft-standards'); break;
-                            case 'taken':
-                                $type = null;
-                                if (isset($this->property['type'])) {
-                                    $type = $this->property['type'];
-                                }
-                                switch ($type) {
-                                    case 'rent': return $this->translator->translate('Rented', 'casasoft-standards'); break;
-                                    case 'buy': return $this->translator->translate('Sold', 'casasoft-standards'); break;
-                                    default: return $this->translator->translate('Taken', 'casasoft-standards'); break;
-                                }
-                                return $this->property['availability'];
-                            break;
-                            case 'draft': return $this->translator->translate('Draft', 'casasoft-standards'); break;
-                            case 'private': return $this->translator->translate('Private', 'casasoft-standards'); break;
-                            case 'in-acquisition': return $this->translator->translate('In acquisition', 'casasoft-standards'); break;
-                        }
+                        return $this->property['availability'];
                     }
                     return null;
                     break;
