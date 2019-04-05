@@ -167,7 +167,7 @@ class ConversionService {
                 }
 
                 if (isset($show_sqm) && $show_sqm) {
-                    $price = ($input['currency'] ? $input['currency'] : 'CHF') . ' ' .  number_format($input['price'], 0, '.', "'") . '.–' . " / m<sup>2</sup> / ".$time;
+                    $price = ($input['currency'] ? $input['currency'] : 'CHF') . ' ' .  number_format($input['price'], 0, '.', "'") . '.–' . " / m<sup>2</sup>". ($time !== 1 ? (" / ".$time) : '');
                 } else {
                     $price = ($input['currency'] ? $input['currency'] : 'CHF') . ' ' . number_format($input['price'], 0, '.', "'") . '.–' . ($time !== 1 ? (" / ".$time) : '');
                 }
