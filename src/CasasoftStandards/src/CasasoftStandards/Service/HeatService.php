@@ -66,6 +66,12 @@ class HeatService {
             'wall' => [
                 'label' => $this->translator->translate('Wall heating', 'casasoft-standards')
             ],
+            'solar-thermal' => [
+                'label' => $this->translator->translate('Solar Thermal', 'casasoft-standards')
+            ],
+            'photovoltaics' => [
+                'label' => $this->translator->translate('Photovoltaics', 'casasoft-standards')
+            ],
         ];
     }
 
@@ -83,6 +89,8 @@ class HeatService {
                     'oil',
                     'pellet',
                     'heatpump',
+                    'solar-thermal',
+                    'photovoltaics',
                 ],
             ],
             'heatDistribution' => [
