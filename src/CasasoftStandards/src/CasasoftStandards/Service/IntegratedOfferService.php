@@ -61,6 +61,10 @@ class IntegratedOfferService {
                 'label' => $this->translator->translate('Parking structure', 'casasoft-standards'), //Parkhaus
                 'icon' => '',
             ],
+            'parking-double-garage' => [
+                'label' => $this->translator->translate('Double garage', 'casasoft-standards'), //Parkhaus
+                'icon' => '',
+            ],
             'room-workroom' => [
                 'label' => $this->translator->translate('Workroom', 'casasoft-standards'),
                 'icon' => '',
