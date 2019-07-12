@@ -1031,11 +1031,14 @@ class ConversionService {
                 $template = $this->templates[$templateMixed];
             } elseif ($templateMixed === 'areas') {
                 $template = [];
-                foreach ($this->numvalService->getDefaultOptions() as $key => $options) {
-                    if (strpos($key, 'area_') !== false) {
-                        $template[] = [$key, 'numeric_value'];
-                    }
+                foreach ($this->numvalService->getTemplate()['areas']['items']  as $key => $options) {
+                    $template[] = [$key, 'numeric_value'];
                 }
+                // foreach ($this->numvalService->getDefaultOptions() as $key => $options) {
+                //     if (strpos($key, 'area_') !== false) {
+                //         $template[] = [$key, 'numeric_value'];
+                //     }
+                // }
             } elseif ($templateMixed === 'volumes') {
                 $template = [];
                 foreach ($this->numvalService->getDefaultOptions() as $key => $options) {
