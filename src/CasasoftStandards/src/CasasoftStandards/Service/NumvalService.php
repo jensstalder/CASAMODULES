@@ -99,24 +99,18 @@ class NumvalService {
                 'areas' => array(
                     'name' => $this->translator->translate('Areas', 'casasoft-standards'),
                     'items' => array(
-                        'area_sia_gf' => array(
-                            'required' => false,
-                        ),
-                        /*'area_sia_ngf' => array(
-                            'required' => false,
-                        ),*/
-                        'area_sia_nf' => array(
-                            'required' => false,
-                        ),
                         'area_bwf' => array(
                             'required' => true,
                         ),
                         'area_nwf' => array(
                             'required' => false,
                         ),
-                        /*'area_property_land' => array(
+                        'area_sia_nf' => array(
                             'required' => false,
-                        ),*/
+                        ),
+                        'area_sia_gf' => array(
+                            'required' => false,
+                        ),
                         'area_sia_gsf' => array(
                             'required' => false,
                         ),
@@ -126,22 +120,32 @@ class NumvalService {
                         'area_cellar' => [
                             'required' => false,
                         ],
-                        'area_garden' => [
+                        'area_terrace' => [
                             'required' => false,
                         ],
                         'area_loggia' => [
                             'required' => false,
                         ],
-                        'area_terrace' => [
+                        'area_garden' => [
                             'required' => false,
                         ],
-                        /*'cubature_gva' => array(
+                        'area_sia_ggf' => [
+                            'required' => false,
+                        ],
+                        'volume_sia_gv' => array(
+                            'required' => false,
+                        ),
+                        'cubature_gva' => array(
+                            'required' => false,
+                        ),
+                        'cubature_sia' => array(
+                            'required' => false,
+                        ),
+                        /*'area_sia_ngf' => array(
                             'required' => false,
                         ),*/
-                        /*'cubature_sia' => array(
-                            'required' => false,
-                        ),*/
-                        /*'volume_sia_gv' => array(
+                        
+                        /*'area_property_land' => array(
                             'required' => false,
                         ),*/
                     )
