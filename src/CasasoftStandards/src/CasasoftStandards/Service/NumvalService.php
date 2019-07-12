@@ -132,15 +132,15 @@ class NumvalService {
                         'area_sia_ggf' => [
                             'required' => false,
                         ],
-                        'volume_sia_gv' => array(
-                            'required' => false,
-                        ),
-                        'cubature_gva' => array(
-                            'required' => false,
-                        ),
-                        'cubature_sia' => array(
-                            'required' => false,
-                        ),
+                        // 'volume_sia_gv' => array(
+                        //     'required' => false,
+                        // ),
+                        // 'cubature_gva' => array(
+                        //     'required' => false,
+                        // ),
+                        // 'cubature_sia' => array(
+                        //     'required' => false,
+                        // ),
                         /*'area_sia_ngf' => array(
                             'required' => false,
                         ),*/
