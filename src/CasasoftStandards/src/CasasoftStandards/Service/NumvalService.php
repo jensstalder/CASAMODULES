@@ -834,6 +834,18 @@ class NumvalService {
                 'type' => 'int',
                 'si' => 'geak',
             ],
+            'number_of_showers' => [
+                'label' => $this->translator->translate('Number of showers', 'casasoft-standards'),
+                'icon' => '',
+                'type' => 'int',
+                'si' => '',
+            ],
+            'number_of_toilets' => [
+                'label' => $this->translator->translate('Number of toilets', 'casasoft-standards'),
+                'icon' => '',
+                'type' => 'int',
+                'si' => '',
+            ],
 
         );
     }

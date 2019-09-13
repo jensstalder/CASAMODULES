@@ -392,6 +392,22 @@ class FeatureService {
                 'label' => $this->translator->translate('Base floor', 'casasoft-standards'),
                 'icon' => '',
             ),
+            'has-attic' => array(
+                'label' => $this->translator->translate('Attic', 'casasoft-standards'),
+                'icon' => '',
+            ),
+            'has-cellar' => array(
+                'label' => $this->translator->translate('Cellar', 'casasoft-standards'),
+                'icon' => '',
+            ),
+            'has-charging-station' => array(
+                'label' => $this->translator->translate('Charging station', 'casasoft-standards'),
+                'icon' => '',
+            ),
+            'has-dishwasher' => array(
+                'label' => $this->translator->translate('Dishwasher', 'casasoft-standards'),
+                'icon' => '',
+            ),
 
         );
     }
