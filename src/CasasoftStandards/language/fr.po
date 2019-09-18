@@ -1457,3 +1457,23 @@ msgstr "Solaire thermique"
 msgid "Photovoltaics"
 msgstr "Solaire photovoltaïque"
 
+#: 
+msgid "Dishwasher"
+msgstr ""
+
+#: 
+msgid "Charging station"
+msgstr ""
+
+#: 
+msgid "Cellar"
+msgstr ""
+
+#: 
+msgid "Number of toilets"
+msgstr ""
+
+#: 
+msgid "Number of showers"
+msgstr ""
+
