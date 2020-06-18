@@ -325,10 +325,12 @@ class ConversionService {
             ]);
 
             $extraCosts = null;
-            foreach ($this->property['_embedded']['extracosts'] as $extracost) {
-                if (in_array($extracost['title'], ['extracosts', 'Nebenkosten']) && $extracost['cost']) {
-                    $extraCosts = $extracost;
-                    break;
+            if (isset($this->property['_embedded']['extracosts'])) {
+                foreach ($this->property['_embedded']['extracosts'] as $extracost) {
+                    if (in_array($extracost['title'], ['extracosts', 'Nebenkosten']) && $extracost['cost']) {
+                        $extraCosts = $extracost;
+                        break;
+                    }
                 }
             }
             if ($extraCosts) {
