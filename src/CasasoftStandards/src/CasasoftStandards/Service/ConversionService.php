@@ -324,6 +324,37 @@ class ConversionService {
                 'currency' => $currency,
             ]);
 
+            $extraCosts = null;
+            if (isset($this->property['_embedded']['extracosts'])) {
+                foreach ($this->property['_embedded']['extracosts'] as $extracost) {
+                    if (in_array($extracost['title'], ['extracosts', 'Nebenkosten']) && $extracost['cost']) {
+                        $extraCosts = $extracost;
+                        break;
+                    }
+                }
+            }
+            if ($extraCosts) {
+                $price['extraCostsPerMonth']['key'] = 'extraCostsPerMonth';
+                $price['extraCostsPerMonth']['context'] = '';
+                $price['extraCostsPerMonth']['label'] = $this->getLabel('extraCosts');
+                $price['extraCostsPerMonth']['value'] = round($this->transformPrice([
+                    'value' => $extraCosts['cost'],
+                    'property_segment' => $extraCosts['property_segment'],
+                    'time_segment' => $extraCosts['time_segment'],
+                    'area' => $area,
+                ], [
+                    'property_segment' => 'all',
+                    'time_segment' => 'm',
+                ]));
+                $price['extraCostsPerMonth']['renderedValue'] = $this->renderPrice([
+                    'price' => $price['extraCostsPerMonth']['value'],
+                    'property_segment' => 'all',
+                    'time_segment' => 'm',
+                    'currency' => $currency,
+                ]);
+            }
+
+
             // }
             if ($show_prices) {
                 $price['priceNettoPerSqmPerMonth']['key'] = 'priceNettoPerSqmPerMonth';
