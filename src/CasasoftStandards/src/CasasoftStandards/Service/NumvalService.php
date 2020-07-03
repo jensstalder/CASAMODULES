@@ -221,7 +221,7 @@ class NumvalService {
                 'si' => '',
             ),
             'number_of_apartments' => array(
-                'label' => $this->translator->translate('Apartments', 'casasoft-standards'),
+                'label' => $this->translator->translate('Number of residential units', 'casasoft-standards'),
                 'icon' => '',
                 'type' => 'int',
                 'si' => '',
