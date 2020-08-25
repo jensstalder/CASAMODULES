@@ -661,7 +661,7 @@ class NumvalService {
                 'label' => $this->translator->translate('Utilization number', 'casasoft-standards'),
                 'icon' => '',
                 'type' => 'float',
-                'si' => '%',
+                'si' => '',
             ),
             'construction_utilization_number' => array( //baumassenzahl
                 'label' => $this->translator->translate('Construction utilization number', 'casasoft-standards'),
