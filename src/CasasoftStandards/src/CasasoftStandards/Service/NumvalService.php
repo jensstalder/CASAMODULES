@@ -820,7 +820,7 @@ class NumvalService {
                 'label' => $this->translator->translate('Constructed factor', 'casasoft-standards'),
                 'icon' => '',
                 'type' => 'int',
-                'si' => '%',
+                'si' => '',
             ],
             'geak_exterior' => [
                 'label' => $this->translator->translate('GEAK exterior', 'casasoft-standards'),
