@@ -903,6 +903,7 @@ class ConversionService {
                             'is-modernized',
                             'is-renovation-indigent',
                             'is-shell-construction',
+                            'is-new',
                             'is-new-construction',
                             'is-partially-renovation-indigent',
                             'is-partially-refurbished',
