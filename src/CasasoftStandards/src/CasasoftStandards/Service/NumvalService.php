@@ -144,7 +144,7 @@ class NumvalService {
                         /*'area_sia_ngf' => array(
                             'required' => false,
                         ),*/
-                        
+
                         /*'area_property_land' => array(
                             'required' => false,
                         ),*/
@@ -761,6 +761,12 @@ class NumvalService {
                 'type' => 'float',
                 'si' => '%',
             ),
+            'gross_premium_target' => array(
+                'label' => $this->translator->translate('Gross premium (target)', 'casasoft-standards'),
+                'icon' => '',
+                'type' => 'float',
+                'si' => '%',
+            ),
 
             'rental_deposit' => array(
                 'label' => $this->translator->translate('Rental deposit', 'casasoft-standards'),
@@ -776,6 +782,12 @@ class NumvalService {
             ],
             'rental_income_net' => [
                 'label' => $this->translator->translate('Rental income (net)', 'casasoft-standards'),
+                'icon' => '',
+                'type' => 'int',
+                'si' => 'currency',
+            ],
+            'rental_income_net_max_potential' => [
+                'label' => $this->translator->translate('Rental income (potential)', 'casasoft-standards'),
                 'icon' => '',
                 'type' => 'int',
                 'si' => 'currency',
@@ -846,6 +858,41 @@ class NumvalService {
                 'type' => 'int',
                 'si' => '',
             ],
+            'occupancy_percentage' => array(
+                'label' => $this->translator->translate('Current occupancy', 'casasoft-standards'),
+                'icon' => '',
+                'type' => 'float',
+                'si' => '%',
+            ),
+
+            'yearly_operation_and_maintenance_costs' => [
+                'label' => $this->translator->translate('Operation and maintenance cost', 'casasoft-standards'),
+                'icon' => '',
+                'type' => 'int',
+                'si' => 'currency',
+            ],
+
+            'auction_start_price' => [
+                'label' => $this->translator->translate('Auction start price', 'casasoft-standards'),
+                'icon' => '',
+                'type' => 'int',
+                'si' => 'currency',
+            ],
+
+            'auction_minimal_increase' => [
+                'label' => $this->translator->translate('Auction minimal increase', 'casasoft-standards'),
+                'icon' => '',
+                'type' => 'int',
+                'si' => 'currency',
+            ],
+
+            'bidding_start_price' => [
+                'label' => $this->translator->translate('Bidding start price', 'casasoft-standards'),
+                'icon' => '',
+                'type' => 'int',
+                'si' => 'currency',
+            ],
+
 
         );
     }
