@@ -1082,18 +1082,6 @@ class ConversionService {
                         }
                     }
                     break;
-                case 'occupancyPercentageDate':
-                    if (isset($this->property['occupancyPercentageDate'])) {
-                        if (is_array($this->property['occupancyPercentageDate'])) {
-                            $date_time = new \DateTime($this->property['occupancyPercentageDate']['date']);
-                            return $date_time->format('d.m.Y');
-                        } else {
-                            if (method_exists($this->property['occupancyPercentageDate'], 'format')) {
-                                return $this->property['occupancyPercentageDate']->format('d.m.Y');
-                            }
-                        }
-                    }
-                    break;
                 case 'salesMethod':
                     if (isset($this->property['salesMethod'])) {
                         switch ($this->property['salesMethod']) {
@@ -1112,86 +1100,21 @@ class ConversionService {
                         }
                     }
                     break;
+                case 'occupancyPercentageDate':
                 case 'auctionStartDate':
-                    if (isset($this->property['auctionStartDate'])) {
-                        if (is_array($this->property['auctionStartDate'])) {
-                            $date_time = new \DateTime($this->property['auctionStartDate']['date']);
-                            return $date_time->format('d.m.Y');
-                        } else {
-                            if (method_exists($this->property['auctionStartDate'], 'format')) {
-                                return $this->property['auctionStartDate']->format('d.m.Y');
-                            }
-                        }
-                    }
-                    break;
                 case 'auctionEndDate':
-                    if (isset($this->property['auctionEndDate'])) {
-                        if (is_array($this->property['auctionEndDate'])) {
-                            $date_time = new \DateTime($this->property['auctionEndDate']['date']);
-                            return $date_time->format('d.m.Y');
-                        } else {
-                            if (method_exists($this->property['auctionEndDate'], 'format')) {
-                                return $this->property['auctionEndDate']->format('d.m.Y');
-                            }
-                        }
-                    }
-                    break;
                 case 'biddingStartDate':
-                    if (isset($this->property['biddingStartDate'])) {
-                        if (is_array($this->property['biddingStartDate'])) {
-                            $date_time = new \DateTime($this->property['biddingStartDate']['date']);
-                            return $date_time->format('d.m.Y');
-                        } else {
-                            if (method_exists($this->property['biddingStartDate'], 'format')) {
-                                return $this->property['biddingStartDate']->format('d.m.Y');
-                            }
-                        }
-                    }
-                    break;
                 case 'biddingBindingStartDate':
-                    if (isset($this->property['biddingBindingStartDate'])) {
-                        if (is_array($this->property['biddingBindingStartDate'])) {
-                            $date_time = new \DateTime($this->property['biddingBindingStartDate']['date']);
-                            return $date_time->format('d.m.Y');
-                        } else {
-                            if (method_exists($this->property['biddingBindingStartDate'], 'format')) {
-                                return $this->property['biddingBindingStartDate']->format('d.m.Y');
-                            }
-                        }
-                    }
-                    break;
                 case 'biddingEndDate':
-                    if (isset($this->property['biddingEndDate'])) {
-                        if (is_array($this->property['biddingEndDate'])) {
-                            $date_time = new \DateTime($this->property['biddingEndDate']['date']);
-                            return $date_time->format('d.m.Y');
-                        } else {
-                            if (method_exists($this->property['biddingEndDate'], 'format')) {
-                                return $this->property['biddingEndDate']->format('d.m.Y');
-                            }
-                        }
-                    }
-                    break;
                 case 'salesStartDate':
-                    if (isset($this->property['salesStartDate'])) {
-                        if (is_array($this->property['salesStartDate'])) {
-                            $date_time = new \DateTime($this->property['salesStartDate']['date']);
-                            return $date_time->format('d.m.Y');
-                        } else {
-                            if (method_exists($this->property['salesStartDate'], 'format')) {
-                                return $this->property['salesStartDate']->format('d.m.Y');
-                            }
-                        }
-                    }
-                    break;
                 case 'salesEndDate':
-                    if (isset($this->property['salesEndDate'])) {
-                        if (is_array($this->property['salesEndDate'])) {
-                            $date_time = new \DateTime($this->property['salesEndDate']['date']);
+                    if (isset($this->property[$key])) {
+                        if (is_array($this->property[$key])) {
+                            $date_time = new \DateTime($this->property[$key]['date']);
                             return $date_time->format('d.m.Y');
                         } else {
-                            if (method_exists($this->property['salesEndDate'], 'format')) {
-                                return $this->property['salesEndDate']->format('d.m.Y');
+                            if (method_exists($this->property[$key], 'format')) {
+                                return $this->property[$key]->format('d.m.Y');
                             }
                         }
                     }
