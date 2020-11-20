@@ -1197,12 +1197,10 @@ class ConversionService {
                     }
                     break;
                 case 'salesDealType':
-                    if (isset($this->property['salesDealType'])) {
-                        if ($this->getValue('is-share-deal', 'feature')) {
-                            return $this->translator->translate('Share deal', 'casasoft-standards');
-                        } else {
-                            return $this->translator->translate('Asset deal', 'casasoft-standards');
-                        }
+                    if ($this->getValue('is-share-deal', 'feature')) {
+                        return $this->translator->translate('Share deal', 'casasoft-standards');
+                    } else {
+                        return $this->translator->translate('Asset deal', 'casasoft-standards');
                     }
                     break;
             }
