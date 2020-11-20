@@ -76,10 +76,10 @@ class HeatService {
                 'label' => $this->translator->translate('Coal', 'casasoft-standards')
             ],
             'heatpump-brine-and-water' => [
-                'label' => $this->translator->translate('Brine-water-heatpump heating', 'casasoft-standards')
+                'label' => $this->translator->translate('Brine-water heat pump', 'casasoft-standards')
             ],
             'bhkw' => [
-                'label' => $this->translator->translate('BHKW', 'casasoft-standards')
+                'label' => $this->translator->translate('Block-type thermal power station', 'casasoft-standards')
             ],
         ];
     }
