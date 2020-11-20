@@ -72,6 +72,15 @@ class HeatService {
             'photovoltaics' => [
                 'label' => $this->translator->translate('Photovoltaics', 'casasoft-standards')
             ],
+            'coal' => [
+                'label' => $this->translator->translate('Coal', 'casasoft-standards')
+            ],
+            'heatpump-brine-and-water' => [
+                'label' => $this->translator->translate('Brine-water-heatpump heating', 'casasoft-standards')
+            ],
+            'bhkw' => [
+                'label' => $this->translator->translate('BHKW', 'casasoft-standards')
+            ],
         ];
     }
 
@@ -91,6 +100,9 @@ class HeatService {
                     'heatpump',
                     'solar-thermal',
                     'photovoltaics',
+                    'coal',
+                    'heatpump-brine-and-water',
+                    'bhkw'
                 ],
             ],
             'heatDistribution' => [
