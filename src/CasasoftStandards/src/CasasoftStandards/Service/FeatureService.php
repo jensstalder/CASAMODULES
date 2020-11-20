@@ -422,7 +422,7 @@ class FeatureService {
             ),
 
             'is-vat-opted' => array(
-                'label' => $this->translator->translate('Vat opted', 'casasoft-standards'),
+                'label' => $this->translator->translate('VAT opted', 'casasoft-standards'),
                 'icon' => '',
             ),
 
