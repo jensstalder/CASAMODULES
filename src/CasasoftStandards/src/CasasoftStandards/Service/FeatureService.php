@@ -421,6 +421,16 @@ class FeatureService {
                 'icon' => '',
             ),
 
+            'is-vat-opted' => [
+                'label' => $this->translator->translate('VAT opted', 'casasoft-standards'),
+                'icon' => '',
+            ],
+
+            'is-share-deal' => [
+                'label' => $this->translator->translate('Share deal', 'casasoft-standards'),
+                'icon' => '',
+            ],
+
         );
     }
 

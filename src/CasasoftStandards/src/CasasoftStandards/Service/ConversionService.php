@@ -663,6 +663,38 @@ class ConversionService {
                 case 'availability':
                     return $this->translator->translate('Availability', 'casasoft-standards');
                     break;
+                case 'occupancyPercentageDate':
+                    return $this->translator->translate('Current occupancy (date)', 'casasoft-standards');
+                    break;
+                case 'salesMethod':
+                    return $this->translator->translate('Sales method', 'casasoft-standards');
+                    break;
+                case 'auctionStartDate':
+                    return $this->translator->translate('Auction start', 'casasoft-standards');
+                    break;
+                case 'auctionEndDate':
+                    return $this->translator->translate('Auction end', 'casasoft-standards');
+                    break;
+                case 'biddingStartDate':
+                    return $this->translator->translate('Bidding start', 'casasoft-standards');
+                    break;
+                case 'biddingBindingStartDate':
+                    return $this->translator->translate('Bidding start (binding)', 'casasoft-standards');
+                    break;
+                case 'biddingEndDate':
+                    return $this->translator->translate('Bidding end', 'casasoft-standards');
+                    break;
+                case 'salesStartDate':
+                    return $this->translator->translate('Sales start', 'casasoft-standards');
+                    break;
+                case 'salesEndDate':
+                    return $this->translator->translate('Sales end', 'casasoft-standards');
+                    break;
+                case 'salesDealType':
+                    return $this->translator->translate('Sales deal type', 'casasoft-standards');
+                    break;
+
+
             }
         }
 
@@ -1048,6 +1080,50 @@ class ConversionService {
                         } else {
                             return null;
                         }
+                    }
+                    break;
+                case 'salesMethod':
+                    if (isset($this->property['salesMethod'])) {
+                        switch ($this->property['salesMethod']) {
+                            case 'fixed':
+                                return $this->translator->translate('Fixed pricing', 'casasoft-standards');
+                                break;
+                            case 'auction':
+                                return $this->translator->translate('Auction', 'casasoft-standards');
+                                break;
+                            case 'bidding':
+                                return $this->translator->translate('Bidding process', 'casasoft-standards');
+                                break;
+                            default:
+                                return $this->property['salesMethod'];
+                                break;
+                        }
+                    }
+                    break;
+                case 'occupancyPercentageDate':
+                case 'auctionStartDate':
+                case 'auctionEndDate':
+                case 'biddingStartDate':
+                case 'biddingBindingStartDate':
+                case 'biddingEndDate':
+                case 'salesStartDate':
+                case 'salesEndDate':
+                    if (isset($this->property[$key])) {
+                        if (is_array($this->property[$key])) {
+                            $date_time = new \DateTime($this->property[$key]['date']);
+                            return $date_time->format('d.m.Y');
+                        } else {
+                            if (method_exists($this->property[$key], 'format')) {
+                                return $this->property[$key]->format('d.m.Y');
+                            }
+                        }
+                    }
+                    break;
+                case 'salesDealType':
+                    if ($this->getValue('is-share-deal', 'feature')) {
+                        return $this->translator->translate('Share deal', 'casasoft-standards');
+                    } else {
+                        return $this->translator->translate('Asset deal', 'casasoft-standards');
                     }
                     break;
             }
