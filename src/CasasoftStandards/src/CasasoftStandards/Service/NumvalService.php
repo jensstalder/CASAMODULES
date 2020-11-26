@@ -761,12 +761,12 @@ class NumvalService {
                 'type' => 'float',
                 'si' => '%',
             ),
-            'gross_premium_target' => array(
+            'gross_premium_target' => [
                 'label' => $this->translator->translate('Gross premium (target)', 'casasoft-standards'),
                 'icon' => '',
                 'type' => 'float',
                 'si' => '%',
-            ),
+            ],
 
             'rental_deposit' => array(
                 'label' => $this->translator->translate('Rental deposit', 'casasoft-standards'),
@@ -858,12 +858,12 @@ class NumvalService {
                 'type' => 'int',
                 'si' => '',
             ],
-            'occupancy_percentage' => array(
+            'occupancy_percentage' => [
                 'label' => $this->translator->translate('Current occupancy', 'casasoft-standards'),
                 'icon' => '',
                 'type' => 'float',
                 'si' => '%',
-            ),
+            ],
 
             'yearly_operation_and_maintenance_costs' => [
                 'label' => $this->translator->translate('Operation and maintenance cost', 'casasoft-standards'),
