@@ -437,10 +437,12 @@ class ConversionService {
                     }
                 }
             }
+            // print_r($extraCosts);
+            // die();
             if ($extraCosts) {
                 $price['extraCostsPerMonth']['key'] = 'extraCostsPerMonth';
                 $price['extraCostsPerMonth']['context'] = '';
-                $price['extraCostsPerMonth']['label'] = $this->getLabel('extraCosts');
+                $price['extraCostsPerMonth']['label'] = $this->getLabel('extraCosts').' / '.$this->translator->translate('month', 'casasoft-standards');
                 $price['extraCostsPerMonth']['value'] = round($this->transformPrice([
                     'value' => $extraCosts['cost'],
                     'property_segment' => $extraCosts['property_segment'],
@@ -456,9 +458,32 @@ class ConversionService {
                     'time_segment' => 'm',
                     'currency' => $currency,
                 ]);
+                if ($show_prices) {
+                    $price['extraCostsPerYear']['key'] = 'extraCostsPerYear';
+                    $price['extraCostsPerYear']['context'] = '';
+                    $price['extraCostsPerYear']['label'] = $this->getLabel('extraCosts').' / '.$this->translator->translate('year', 'casasoft-standards');
+                    $price['extraCostsPerYear']['value'] = round($this->transformPrice([
+                        'value' => $extraCosts['cost'],
+                        'property_segment' => $extraCosts['property_segment'],
+                        'time_segment' => $extraCosts['time_segment'],
+                        'area' => $area,
+                    ], [
+                        'property_segment' => 'all',
+                        'time_segment' => 'y',
+                    ]));
+                    $price['extraCostsPerYear']['renderedValue'] = $this->renderPrice([
+                        'price' => $price['extraCostsPerYear']['value'],
+                        'property_segment' => 'all',
+                        'time_segment' => 'y',
+                        'currency' => $currency,
+                    ]);
+                }
             }
         }
-
+        // print_r($nullcheck);
+        // print_r($price);
+        // die();
+        
         foreach ($nullcheck as $key) {
             if (! $price[$key]) {
                 $price[$key] = null;
