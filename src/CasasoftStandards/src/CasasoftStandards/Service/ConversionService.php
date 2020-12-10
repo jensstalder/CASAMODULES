@@ -437,8 +437,6 @@ class ConversionService {
                     }
                 }
             }
-            // print_r($extraCosts);
-            // die();
             if ($extraCosts) {
                 $price['extraCostsPerMonth']['key'] = 'extraCostsPerMonth';
                 $price['extraCostsPerMonth']['context'] = '';
@@ -480,10 +478,6 @@ class ConversionService {
                 }
             }
         }
-        // print_r($nullcheck);
-        // print_r($price);
-        // die();
-        
         foreach ($nullcheck as $key) {
             if (! $price[$key]) {
                 $price[$key] = null;
