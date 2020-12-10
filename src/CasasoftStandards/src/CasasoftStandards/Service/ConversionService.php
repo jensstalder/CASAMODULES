@@ -179,7 +179,8 @@ class ConversionService {
 
     public function setProperty(Array $data){
         $this->property = $data;
-
+        $this->numvalService->resetService();
+        $this->integratedOfferService->resetService();
         if (isset($data['_embedded']['property'])) {
             $this->property = $data['_embedded']['property'];
         } elseif (isset($data['_embedded']['provider'])) {
@@ -216,6 +217,11 @@ class ConversionService {
             $this->property['integrated_offers'] = $this->property['_embedded']['integrated_offers'];
             unset($this->property['_embedded']['integrated_offers']);
         }
+    }
+
+    public function getProperty()
+    {
+        return $this->property;
     }
 
     private function getCalculatedPrices($type = 'rent', $currency) {
@@ -324,38 +330,6 @@ class ConversionService {
                 'currency' => $currency,
             ]);
 
-            $extraCosts = null;
-            if (isset($this->property['_embedded']['extracosts'])) {
-                foreach ($this->property['_embedded']['extracosts'] as $extracost) {
-                    if (in_array($extracost['title'], ['extracosts', 'Nebenkosten']) && $extracost['cost']) {
-                        $extraCosts = $extracost;
-                        break;
-                    }
-                }
-            }
-            if ($extraCosts) {
-                $price['extraCostsPerMonth']['key'] = 'extraCostsPerMonth';
-                $price['extraCostsPerMonth']['context'] = '';
-                $price['extraCostsPerMonth']['label'] = $this->getLabel('extraCosts');
-                $price['extraCostsPerMonth']['value'] = round($this->transformPrice([
-                    'value' => $extraCosts['cost'],
-                    'property_segment' => $extraCosts['property_segment'],
-                    'time_segment' => $extraCosts['time_segment'],
-                    'area' => $area,
-                ], [
-                    'property_segment' => 'all',
-                    'time_segment' => 'm',
-                ]));
-                $price['extraCostsPerMonth']['renderedValue'] = $this->renderPrice([
-                    'price' => $price['extraCostsPerMonth']['value'],
-                    'property_segment' => 'all',
-                    'time_segment' => 'm',
-                    'currency' => $currency,
-                ]);
-            }
-
-
-            // }
             if ($show_prices) {
                 $price['priceNettoPerSqmPerMonth']['key'] = 'priceNettoPerSqmPerMonth';
                 $price['priceNettoPerSqmPerMonth']['context'] = '';
@@ -453,8 +427,57 @@ class ConversionService {
 
                 $nullcheck = array_merge($nullcheck, $nullcheck_addition);
             }
-        }
 
+            $extraCosts = null;
+            if (isset($this->property['_embedded']['extracosts'])) {
+                foreach ($this->property['_embedded']['extracosts'] as $extracost) {
+                    if (in_array($extracost['title'], ['extracosts', 'Nebenkosten']) && $extracost['cost']) {
+                        $extraCosts = $extracost;
+                        break;
+                    }
+                }
+            }
+            if ($extraCosts) {
+                $price['extraCostsPerMonth']['key'] = 'extraCostsPerMonth';
+                $price['extraCostsPerMonth']['context'] = '';
+                $price['extraCostsPerMonth']['label'] = $this->getLabel('extraCosts').' / '.$this->translator->translate('month', 'casasoft-standards');
+                $price['extraCostsPerMonth']['value'] = round($this->transformPrice([
+                    'value' => $extraCosts['cost'],
+                    'property_segment' => $extraCosts['property_segment'],
+                    'time_segment' => $extraCosts['time_segment'],
+                    'area' => $area,
+                ], [
+                    'property_segment' => 'all',
+                    'time_segment' => 'm',
+                ]));
+                $price['extraCostsPerMonth']['renderedValue'] = $this->renderPrice([
+                    'price' => $price['extraCostsPerMonth']['value'],
+                    'property_segment' => 'all',
+                    'time_segment' => 'm',
+                    'currency' => $currency,
+                ]);
+                if ($show_prices) {
+                    $price['extraCostsPerYear']['key'] = 'extraCostsPerYear';
+                    $price['extraCostsPerYear']['context'] = '';
+                    $price['extraCostsPerYear']['label'] = $this->getLabel('extraCosts').' / '.$this->translator->translate('year', 'casasoft-standards');
+                    $price['extraCostsPerYear']['value'] = round($this->transformPrice([
+                        'value' => $extraCosts['cost'],
+                        'property_segment' => $extraCosts['property_segment'],
+                        'time_segment' => $extraCosts['time_segment'],
+                        'area' => $area,
+                    ], [
+                        'property_segment' => 'all',
+                        'time_segment' => 'y',
+                    ]));
+                    $price['extraCostsPerYear']['renderedValue'] = $this->renderPrice([
+                        'price' => $price['extraCostsPerYear']['value'],
+                        'property_segment' => 'all',
+                        'time_segment' => 'y',
+                        'currency' => $currency,
+                    ]);
+                }
+            }
+        }
         foreach ($nullcheck as $key) {
             if (! $price[$key]) {
                 $price[$key] = null;
@@ -524,7 +547,7 @@ class ConversionService {
             //   ['priceNettoPerSqmPerYear', 'renders'],
             //   ['priceNettoPerTotalPerMonth', 'renders'],
             //   ['priceNettoPerTotalPerYear', 'renders'],
-            ['extraCosts', 'special'],
+            //   ['extraCosts', 'special'], now handled directly in price-rent logic
             ['has-rental-deposit-guarantee', 'feature'],
             ['rental_deposit', 'numeric_value'],
             ['gross_premium', 'numeric_value'],
