@@ -874,7 +874,7 @@ class ConversionService {
             $heatGroup = $this->heatService->getGroup($key);
             if ($heatGroup) {
                 foreach ($heatGroup['heat_slugs'] as $slugKey => $slug) {
-                    if ($this->property[$key] === $slug) {
+                    if (isset($this->property[$key]) && $this->property[$key] === $slug) {
                         $heatItem = $this->heatService->getItem($slug);
                         return $heatItem->getLabel();
                     }
