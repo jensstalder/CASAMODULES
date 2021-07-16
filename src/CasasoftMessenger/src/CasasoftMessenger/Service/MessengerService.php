@@ -1,13 +1,13 @@
 <?php
 namespace CasasoftMessenger\Service;
 
-use Zend\Http\Request;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\Http\Request;
+use Laminas\ServiceManager\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use Zend\Http\Client as HttpClient;
-use Zend\Json\Json;
+use Laminas\Http\Client as HttpClient;
+use Laminas\Json\Json;
 
 class MessengerService implements FactoryInterface {
 
@@ -180,7 +180,7 @@ class MessengerService implements FactoryInterface {
     	
 
     	$config = array(
-            'adapter'   => 'Zend\Http\Client\Adapter\Curl',
+            'adapter'   => 'Laminas\Http\Client\Adapter\Curl',
             'curloptions' => array(
                 CURLOPT_FRESH_CONNECT => true,
                 //CURLOPT_TIMEOUT_MS => 1
@@ -200,7 +200,7 @@ class MessengerService implements FactoryInterface {
 
         $client->setRawBody(Json::encode($postdata));
         $client->setEncType(HttpClient::ENC_FORMDATA);
-        $client->setAuth($this->config['username'], $this->config['password'], \Zend\Http\Client::AUTH_BASIC);
+        $client->setAuth($this->config['username'], $this->config['password'], \Laminas\Http\Client::AUTH_BASIC);
 
         $response = $client->send();    
 		

@@ -1,14 +1,14 @@
 <?php
 namespace CasaLogService\Service;
 
-use Zend\View\Model\ViewModel;
+use Laminas\View\Model\ViewModel;
  
-use Zend\Http\Client as HttpClient;
-use Zend\Json\Json;
+use Laminas\Http\Client as HttpClient;
+use Laminas\Json\Json;
 
-use Zend\Config\Writer;
+use Laminas\Config\Writer;
 
-class LogService implements \Zend\Log\Writer\WriterInterface {
+class LogService implements \Laminas\Log\Writer\WriterInterface {
     protected $viewRender;
     protected $config = array();
     protected $stack = array();
@@ -150,7 +150,7 @@ class LogService implements \Zend\Log\Writer\WriterInterface {
         }
 
         $config = array(
-            'adapter'   => 'Zend\Http\Client\Adapter\Curl',
+            'adapter'   => 'Laminas\Http\Client\Adapter\Curl',
             'curloptions' => array(
                 CURLOPT_FRESH_CONNECT => true,
                 CURLOPT_TIMEOUT_MS => 6000
@@ -167,7 +167,7 @@ class LogService implements \Zend\Log\Writer\WriterInterface {
         
         $client->setRawBody(Json::encode($this->stack));
         $client->setEncType(HttpClient::ENC_FORMDATA);
-        $client->setAuth($this->config['username'], $this->config['password'], \Zend\Http\Client::AUTH_BASIC);
+        $client->setAuth($this->config['username'], $this->config['password'], \Laminas\Http\Client::AUTH_BASIC);
 
         try {
             $response = $client->send();    
@@ -184,7 +184,7 @@ class LogService implements \Zend\Log\Writer\WriterInterface {
     */
     public function logMsg($message, $priority = 7){
         $config = array(
-            'adapter'   => 'Zend\Http\Client\Adapter\Curl',
+            'adapter'   => 'Laminas\Http\Client\Adapter\Curl',
             'curloptions' => array(
                 CURLOPT_FRESH_CONNECT => true,
                 //CURLOPT_TIMEOUT_MS => 1
@@ -208,7 +208,7 @@ class LogService implements \Zend\Log\Writer\WriterInterface {
             'timestamp' => date('Y-m-dTH:i:s',time())
         )));
         $client->setEncType(HttpClient::ENC_FORMDATA);
-        $client->setAuth($this->config['username'], $this->config['password'], \Zend\Http\Client::AUTH_BASIC);
+        $client->setAuth($this->config['username'], $this->config['password'], \Laminas\Http\Client::AUTH_BASIC);
 
         try {
             $response = $client->send();    

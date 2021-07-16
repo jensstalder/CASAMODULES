@@ -1,0 +1,66 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "31e240fb5cac4055b0ed550e3ab1cfc1",
+    "packages": [
+        {
+            "name": "laminas/laminas-dependency-plugin",
+            "version": "2.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laminas/laminas-dependency-plugin.git",
+                "reference": "c5b4bf87729d6f38c73ca8ed22a5d62ec641d075"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laminas/laminas-dependency-plugin/zipball/c5b4bf87729d6f38c73ca8ed22a5d62ec641d075",
+                "reference": "c5b4bf87729d6f38c73ca8ed22a5d62ec641d075",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.1 || ^2.0",
+                "php": "^7.3 || ~8.0.0"
+            },
+            "require-dev": {
+                "composer/composer": "^1.9 || ^2.0",
+                "mikey179/vfsstream": "^1.6",
+                "roave/security-advisories": "dev-master"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Laminas\\DependencyPlugin\\DependencyRewriterPluginDelegator"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laminas\\DependencyPlugin\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Replace zendframework and zfcampus packages with their Laminas Project equivalents.",
+            "funding": [
+                {
+                    "url": "https://funding.communitybridge.org/projects/laminas-project",
+                    "type": "community_bridge"
+                }
+            ],
+            "time": "2021-02-15T16:44:31+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": [],
+    "prefer-stable": true,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=5.3.2"
+    },
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
+}
