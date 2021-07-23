@@ -15,28 +15,23 @@ use Composer\Plugin\PreCommandRunEvent;
 
 use function array_map;
 use function array_shift;
+use function get_class;
 use function in_array;
-use function is_array;
 use function preg_split;
 use function reset;
 use function sprintf;
 
-/** @psalm-suppress PropertyNotSetInConstructor */
 abstract class AbstractDependencyRewriter implements RewriterInterface
 {
-    /**
-     * @psalm-suppress PropertyNotSetInConstructor
-     * @var Composer
-     */
+    /** @var Composer */
     protected $composer;
 
-    /**
-     * @psalm-suppress PropertyNotSetInConstructor
-     * @var IOInterface
-     */
+    /** @var IOInterface */
     protected $io;
 
-    /** @var Replacements */
+    /**
+     * @var Replacements
+     */
     private $replacements;
 
     public function __construct()
@@ -44,14 +39,11 @@ abstract class AbstractDependencyRewriter implements RewriterInterface
         $this->replacements = new Replacements();
     }
 
-    /**
-     * @return void
-     */
     public function activate(Composer $composer, IOInterface $io)
     {
         $this->composer = $composer;
-        $this->io       = $io;
-        $this->output(sprintf('<info>Activating %s</info>', static::class), IOInterface::DEBUG);
+        $this->io = $io;
+        $this->output(sprintf('<info>Activating %s</info>', get_class($this)), IOInterface::DEBUG);
     }
 
     /**
@@ -61,15 +53,13 @@ abstract class AbstractDependencyRewriter implements RewriterInterface
      * this listener will replace the argument with the equivalent Laminas
      * package. This ensures that the `composer.json` file is written to
      * reflect the package installed.
-     *
-     * @return void
      */
     public function onPreCommandRun(PreCommandRunEvent $event)
     {
         $this->output(
             sprintf(
                 '<info>In %s::%s</info>',
-                static::class,
+                get_class($this),
                 __FUNCTION__
             ),
             IOInterface::DEBUG
@@ -85,10 +75,9 @@ abstract class AbstractDependencyRewriter implements RewriterInterface
             return;
         }
 
-        $packages = $input->getArgument('packages');
         $input->setArgument(
             'packages',
-            is_array($packages) ? array_map([$this, 'updatePackageArgument'], $packages) : []
+            array_map([$this, 'updatePackageArgument'], $input->getArgument('packages'))
         );
     }
 
@@ -98,7 +87,7 @@ abstract class AbstractDependencyRewriter implements RewriterInterface
      * @param string $message
      * @param int $verbosity
      */
-    protected function output($message, $verbosity = IOInterface::NORMAL): void
+    protected function output($message, $verbosity = IOInterface::NORMAL)
     {
         $this->io->write($message, true, $verbosity);
     }

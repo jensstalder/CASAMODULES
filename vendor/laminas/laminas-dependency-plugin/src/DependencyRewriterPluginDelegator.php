@@ -27,10 +27,12 @@ use function version_compare;
 
 class DependencyRewriterPluginDelegator implements EventSubscriberInterface, PluginInterface
 {
-    /** @var RewriterInterface */
+    /**
+     * @var RewriterInterface
+     */
     private $rewriter;
 
-    public function __construct(?RewriterInterface $rewriter = null)
+    public function __construct(RewriterInterface $rewriter = null)
     {
         $this->rewriter = $rewriter
             ?: $this->createDependencyRewriterForPluginVersion(PluginInterface::PLUGIN_API_VERSION);
@@ -43,27 +45,23 @@ class DependencyRewriterPluginDelegator implements EventSubscriberInterface, Plu
     public static function getSubscribedEvents()
     {
         if (version_compare(PluginInterface::PLUGIN_API_VERSION, '2.0', 'lt')) {
-            /** @psalm-suppress UndefinedConstant */
             return [
                 InstallerEvents::PRE_DEPENDENCIES_SOLVING => ['onPreDependenciesSolving', 1000],
-                PackageEvents::PRE_PACKAGE_INSTALL        => ['onPrePackageInstallOrUpdate', 1000],
-                PackageEvents::PRE_PACKAGE_UPDATE         => ['onPrePackageInstallOrUpdate', 1000],
-                PluginEvents::PRE_COMMAND_RUN             => ['onPreCommandRun', 1000],
+                PackageEvents::PRE_PACKAGE_INSTALL => ['onPrePackageInstallOrUpdate', 1000],
+                PackageEvents::PRE_PACKAGE_UPDATE => ['onPrePackageInstallOrUpdate', 1000],
+                PluginEvents::PRE_COMMAND_RUN => ['onPreCommandRun', 1000],
             ];
         }
 
         return [
-            PluginEvents::PRE_POOL_CREATE      => ['onPrePoolCreate', 1000],
+            PluginEvents::PRE_POOL_CREATE => ['onPrePoolCreate', 1000],
             PackageEvents::PRE_PACKAGE_INSTALL => ['onPrePackageInstallOrUpdate', 1000],
-            PackageEvents::PRE_PACKAGE_UPDATE  => ['onPrePackageInstallOrUpdate', 1000],
-            PluginEvents::PRE_COMMAND_RUN      => ['onPreCommandRun', 1000],
-            ScriptEvents::POST_AUTOLOAD_DUMP   => ['onPostAutoloadDump', -1000],
+            PackageEvents::PRE_PACKAGE_UPDATE => ['onPrePackageInstallOrUpdate', 1000],
+            PluginEvents::PRE_COMMAND_RUN => ['onPreCommandRun', 1000],
+            ScriptEvents::POST_AUTOLOAD_DUMP => ['onPostAutoloadDump', -1000],
         ];
     }
 
-    /**
-     * @return void
-     */
     public function onPreDependenciesSolving(InstallerEvent $event)
     {
         $rewriter = $this->rewriter;
@@ -71,25 +69,16 @@ class DependencyRewriterPluginDelegator implements EventSubscriberInterface, Plu
         $rewriter->onPreDependenciesSolving($event);
     }
 
-    /**
-     * @return void
-     */
     public function onPrePackageInstallOrUpdate(PackageEvent $event)
     {
         $this->rewriter->onPrePackageInstallOrUpdate($event);
     }
 
-    /**
-     * @return void
-     */
     public function onPreCommandRun(PreCommandRunEvent $event)
     {
         $this->rewriter->onPreCommandRun($event);
     }
 
-    /**
-     * @return void
-     */
     public function onPrePoolCreate(PrePoolCreateEvent $event)
     {
         $rewriter = $this->rewriter;
@@ -97,9 +86,6 @@ class DependencyRewriterPluginDelegator implements EventSubscriberInterface, Plu
         $rewriter->onPrePoolCreate($event);
     }
 
-    /**
-     * @return void
-     */
     public function onPostAutoloadDump(Event $event)
     {
         $rewriter = $this->rewriter;
@@ -107,24 +93,15 @@ class DependencyRewriterPluginDelegator implements EventSubscriberInterface, Plu
         $rewriter->onPostAutoloadDump($event);
     }
 
-    /**
-     * @return void
-     */
     public function activate(Composer $composer, IOInterface $io)
     {
         $this->rewriter->activate($composer, $io);
     }
 
-    /**
-     * @return void
-     */
     public function deactivate(Composer $composer, IOInterface $io)
     {
     }
 
-    /**
-     * @return void
-     */
     public function uninstall(Composer $composer, IOInterface $io)
     {
     }

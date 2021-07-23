@@ -19,11 +19,8 @@ use Composer\Package\PackageInterface;
 use Composer\Plugin\PrePoolCreateEvent;
 use Composer\Repository\InstalledFilesystemRepository;
 use Composer\Script\Event;
-use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Input\InputInterface;
 
-use function array_merge;
 use function assert;
 use function call_user_func;
 use function dirname;
@@ -33,41 +30,35 @@ use function is_array;
 use function ksort;
 use function sprintf;
 
-/** @psalm-suppress PropertyNotSetInConstructor */
 final class DependencyRewriterV2 extends AbstractDependencyRewriter implements
     PoolCapableInterface,
     AutoloadDumpCapableInterface
 {
-    public const COMPOSER_LOCK_UPDATE_OPTIONS = [
-        'ignore-platform-reqs',
-        'ignore-platform-req',
-    ];
+    /**
+     * @var PackageInterface[]
+     */
+    private $zendPackagesInstalled = [];
 
-    /** @var PackageInterface[] */
-    public $zendPackagesInstalled = [];
-
-    /** @var callable */
+    /**
+     * @var callable
+     */
     private $applicationFactory;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     private $composerFile;
 
-    /** @var InputInterface */
-    private $input;
-
-    public function __construct(
-        ?callable $applicationFactory = null,
-        string $composerFile = '',
-        ?InputInterface $input = null
-    ) {
+    /**
+     * @param string $composerFile
+     */
+    public function __construct(callable $applicationFactory = null, $composerFile = '')
+    {
         parent::__construct();
-
-        /** @psalm-suppress MixedAssignment */
-        $this->composerFile       = $composerFile ?: Factory::getComposerFile();
-        $this->applicationFactory = $applicationFactory ?? static function (): Application {
+        $this->composerFile = $composerFile ?: Factory::getComposerFile();
+        $this->applicationFactory = $applicationFactory ?: static function () {
             return new Application();
         };
-        $this->input              = $input ?? new ArgvInput();
     }
 
     /**
@@ -76,8 +67,6 @@ final class DependencyRewriterV2 extends AbstractDependencyRewriter implements
      * When a 3rd party package has dependencies on ZF packages, this method
      * will detect the request to install a ZF package, and rewrite it to use a
      * Laminas variant at the equivalent version, if one exists.
-     *
-     * @return void
      */
     public function onPrePackageInstallOrUpdate(PackageEvent $event)
     {
@@ -120,9 +109,8 @@ final class DependencyRewriterV2 extends AbstractDependencyRewriter implements
             return;
         }
 
-        $version            = $package->getVersion();
-        $repositoryManager  = $this->composer->getRepositoryManager();
-        $replacementPackage = $repositoryManager->findPackage($replacementName, $version);
+        $version = $package->getVersion();
+        $replacementPackage = $this->composer->getRepositoryManager()->findPackage($replacementName, $version);
 
         if ($replacementPackage === null) {
             // No matching replacement package found
@@ -144,9 +132,6 @@ final class DependencyRewriterV2 extends AbstractDependencyRewriter implements
         $this->zendPackagesInstalled[] = $package;
     }
 
-    /**
-     * @return void
-     */
     public function onPostAutoloadDump(Event $event)
     {
         if (! $this->zendPackagesInstalled) {
@@ -154,17 +139,17 @@ final class DependencyRewriterV2 extends AbstractDependencyRewriter implements
         }
 
         // Remove zend-packages from vendor/ directory
-        $composer   = $event->getComposer();
+        $composer = $event->getComposer();
         $installers = $composer->getInstallationManager();
         $repository = $composer->getRepositoryManager()->getLocalRepository();
 
         $composerFile = $this->createComposerFile();
-        $definition   = $composerFile->read();
+        $definition = $composerFile->read();
         assert(is_array($definition));
         $definitionChanged = false;
 
         foreach ($this->zendPackagesInstalled as $package) {
-            $packageName     = $package->getName();
+            $packageName = $package->getName();
             $replacementName = $this->transformPackageName($packageName);
             if ($this->isRootRequirement($definition, $packageName)) {
                 $this->output(sprintf(
@@ -174,7 +159,7 @@ final class DependencyRewriterV2 extends AbstractDependencyRewriter implements
                 ));
 
                 $definitionChanged = true;
-                $definition        = $this->updateRootRequirements(
+                $definition = $this->updateRootRequirements(
                     $definition,
                     $packageName,
                     $replacementName
@@ -192,15 +177,12 @@ final class DependencyRewriterV2 extends AbstractDependencyRewriter implements
         $this->updateLockFile();
     }
 
-    /**
-     * @return void
-     */
     public function onPrePoolCreate(PrePoolCreateEvent $event)
     {
         $this->output(sprintf('In %s', __METHOD__));
 
         $installedRepository = $this->createInstalledRepository($this->composer, $this->io);
-        $installedPackages   = $installedRepository->getPackages();
+        $installedPackages = $installedRepository->getPackages();
 
         $installedZendPackages = [];
 
@@ -217,8 +199,8 @@ final class DependencyRewriterV2 extends AbstractDependencyRewriter implements
         }
 
         $unacceptableFixedPackages = $event->getUnacceptableFixedPackages();
-        $repository                = $this->composer->getRepositoryManager();
-        $packages                  = $event->getPackages();
+        $repository = $this->composer->getRepositoryManager();
+        $packages = $event->getPackages();
 
         foreach ($packages as $index => $package) {
             if (! in_array($package->getName(), $installedZendPackages, true)) {
@@ -249,7 +231,7 @@ final class DependencyRewriterV2 extends AbstractDependencyRewriter implements
      * With `composer update --lock`, all missing packages are being installed aswell.
      * This is where we slip-stream in with our plugin.
      */
-    private function updateLockFile(): void
+    private function updateLockFile()
     {
         $application = call_user_func($this->applicationFactory);
         assert($application instanceof Application);
@@ -257,16 +239,11 @@ final class DependencyRewriterV2 extends AbstractDependencyRewriter implements
         $application->setAutoExit(false);
 
         $input = [
-            'command'       => 'update',
-            '--lock'        => true,
-            '--no-scripts'  => true,
+            'command' => 'update',
+            '--lock' => true,
+            '--no-scripts' => true,
             '--working-dir' => dirname($this->composerFile),
         ];
-
-        $input = array_merge($input, $this->extractAdditionalInputOptionsFromInput(
-            $this->input,
-            self::COMPOSER_LOCK_UPDATE_OPTIONS
-        ));
 
         $application->run(new ArrayInput($input));
     }
@@ -276,7 +253,6 @@ final class DependencyRewriterV2 extends AbstractDependencyRewriter implements
      */
     private function createInstalledRepository(Composer $composer, IOInterface $io)
     {
-        /** @var string $vendor */
         $vendor = $composer->getConfig()->get('vendor-dir');
 
         return new InstalledFilesystemRepository(
@@ -302,21 +278,21 @@ final class DependencyRewriterV2 extends AbstractDependencyRewriter implements
      */
     private function updateRootRequirements(array $definition, $packageName, $replacementPackageName)
     {
-        /** @var bool $sortPackages */
-        $sortPackages = $definition['config']['sort-packages'] ?? false;
+        $sortPackages = false;
+        if (isset($definition['config']['sort-packages'])) {
+            $sortPackages = $definition['config']['sort-packages'];
+        }
 
         foreach (['require', 'require-dev'] as $key) {
             if (! isset($definition[$key])) {
                 continue;
             }
 
-            /** @var array $requirements */
             $requirements = $definition[$key];
             if (! isset($requirements[$packageName])) {
                 continue;
             }
 
-            /** @psalm-suppress MixedAssignment */
             $requirements[$replacementPackageName] = $requirements[$packageName];
             unset($requirements[$packageName]);
             if ($sortPackages) {
@@ -330,8 +306,6 @@ final class DependencyRewriterV2 extends AbstractDependencyRewriter implements
     }
 
     /**
-     * @deprecated Please use public property {@see DependencyRewriterV2::$zendPackagesInstalled} instead.
-     *
      * @return PackageInterface[]
      */
     public function getZendPackagesInstalled()
@@ -345,25 +319,5 @@ final class DependencyRewriterV2 extends AbstractDependencyRewriter implements
     private function createComposerFile()
     {
         return new JsonFile($this->composerFile, null, $this->io);
-    }
-
-    /**
-     * @psalm-param list<non-empty-string> $options
-     * @psalm-return array<non-empty-string,mixed>
-     */
-    private function extractAdditionalInputOptionsFromInput(InputInterface $input, array $options): array
-    {
-        $additionalInputOptions = [];
-        foreach ($options as $optionName) {
-            $option = sprintf('--%s', $optionName);
-            assert(! empty($option));
-            if (! $input->hasParameterOption($option, true)) {
-                continue;
-            }
-            /** @psalm-suppress MixedAssignment */
-            $additionalInputOptions[$option] = $input->getParameterOption($option, false, true);
-        }
-
-        return $additionalInputOptions;
     }
 }
