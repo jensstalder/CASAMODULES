@@ -58,15 +58,7 @@ class ComposerStaticInit31914a805ef172b3504541e8d8dc7bcb
             array (
                 0 => __DIR__ . '/../..' . '/src',
             ),
-            'CasaLogService\\' => 
-            array (
-                0 => __DIR__ . '/../..' . '/src',
-            ),
         ),
-    );
-
-    public static $classMap = array (
-        'CasaLogService\\Service\\LogService' => __DIR__ . '/../..' . '/src/CasaLogService/src/CasaLogService/Service/LogService.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
@@ -75,7 +67,6 @@ class ComposerStaticInit31914a805ef172b3504541e8d8dc7bcb
             $loader->prefixLengthsPsr4 = ComposerStaticInit31914a805ef172b3504541e8d8dc7bcb::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit31914a805ef172b3504541e8d8dc7bcb::$prefixDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInit31914a805ef172b3504541e8d8dc7bcb::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit31914a805ef172b3504541e8d8dc7bcb::$classMap;
 
         }, null, ClassLoader::class);
     }
