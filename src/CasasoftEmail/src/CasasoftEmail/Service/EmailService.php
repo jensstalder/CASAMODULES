@@ -20,6 +20,7 @@ class EmailService {
     protected $defaultTemplateVariables = array();
     protected $defaultLayoutVariables = array();
     protected $encoding = 'UTF-8';
+    protected $transcript = [];
 
     protected $config = array(
         'debug' => false,
@@ -74,6 +75,9 @@ class EmailService {
     }
 
     public function renderEmail($template = 'message', $emailOptions = array()){
+        $this->transcript[] = ['function' => __FUNCTION__];
+        $this->transcript[] = ['template' => $template];
+
         $emailOptions = array_merge($this->defaultEmailOptions, $emailOptions);
         if ($this->html && $this->casasoftMailTemplate && ($this->templateGroup == 'icasa' || $this->templateGroup == 'homestreet') && isset($emailOptions['msg'])) {
             //$casaMailTemplate  = $this->getServiceLocator()->get('CasasoftMailTemplate');
@@ -278,7 +282,7 @@ class EmailService {
             } else {
                 throw new \Exception("neither " . "email/".$this->templateGroup."/".$template . ' or ' . "email/default/".$template . ' is available', 1);
             }
-            
+
             $layout->setVariable("content", $contentView);
 
             $content = $this->viewRender->render($layout);
@@ -290,12 +294,11 @@ class EmailService {
     }
 
     public function sendMandrill($template = 'message', $emailOptions = array(), $content = null){
+        $this->transcript[] = ['function' => __FUNCTION__];
         try {
             $mandrill = new \Mandrill($emailOptions['mandrill']['key']); 
             $message = array(
                 'subject' => $emailOptions['subject'],
-                //'from_email' => $emailOptions['from'],
-                //'from_email' => $this->config['from'],
                 'from_email' => $emailOptions['mandrill']['from_email'],
                 'from_name' => $emailOptions['mandrill']['from_name'],
                 'headers' => [],
@@ -304,7 +307,6 @@ class EmailService {
                 'track_clicks' => true,
                 'inline_css' => true,
                 'tags' => ($emailOptions['mandrill']['tags'] ? $emailOptions['mandrill']['tags'] : []),
-                //'metadata' => array('website' => $service_website),
             );
             if ($this->html) {
                 $message['html'] = $content;
@@ -342,38 +344,40 @@ class EmailService {
             switch ($mandrill_result[0]['status']) {
                 case 'sent':
                 case 'scheduled':
+                    $this->transcript[] = ['mandrill-status' => $mandrill_result[0]['status']];
+
                     return 'mandrill:'.$mandrill_result[0]['status'];
-                    break;
                 case 'queued':
                 case 'rejected':
                 case 'invalid':
-                    echo print_r($mandrill_result, true). "\n";
+                    $this->transcript[] = ['mandrill-error' => $mandrill_result];
                     $this->sendEmail('error', array(
-                      'to' => 'js@casasoft.ch',
-                      'from' => 'alert@cassaoft.com',
-                      'subject' => 'Mandrill Fehler',
-                      'error' => print_r(array_merge($emailOptionsSave, $mandrill_result), true),
-                      'domain' => 'casamail.local'
-                    ));
-                    return 'mandrill:'.$mandrill_result[0]['status'];
+                        'to' => 'js@casasoft.ch',
+                        'from' => 'alert@cassaoft.com',
+                        'subject' => 'Mandrill Fehler',
+                        'domain' => 'casamail.local',
+                    ), print_r(array_merge($emailOptionsSave, $mandrill_result), true));
 
-                    break;
-                
+                    return 'mandrill:'.$mandrill_result[0]['status'];
                 default:
+                    $this->transcript[] = ['mandrill-unknown' => $mandrill_result];
+
                     return 'mandrill:?'.$mandrill_result[0]['status'];
-                    break;
             }
 
 
             //print_r($mandrill_result);
             //print_r($message);
         } catch (\Exception $e) {
-            return $this->sendSMTP($template, $emailOptions, $content);
+            throw $e;
+            // return $this->sendSMTP($template, $emailOptions, $content);
         }
        
     }
 
-    public function sendSMTP($template = 'message', $emailOptions = array(), $content = null){
+    public function sendSMTP($template = 'message', $emailOptions = array(), $content = null) 
+    {
+        $this->transcript[] = ['function' => __FUNCTION__];
         $attachments = (isset($emailOptions['attachments']) && $emailOptions['attachments'] && is_array($emailOptions['attachments']) ? $emailOptions['attachments'] : array() );
 
         $message = new Message();
@@ -475,24 +479,31 @@ class EmailService {
               $transport = new SendmailTransport();
             }
             try {
-                $transport->send($message);
+                return $transport->send($message);
             } catch (\Exception $e) {
-              if (!get_class($transport) == 'Sendmail') {
-                //try with postfix
-                $transport = new SendmailTransport();
-                $transport->send($message);
-              }
+                if (!get_class($transport) == 'Sendmail') {
+                    //try with postfix
+                    $transport = new SendmailTransport();
+                    try {
+                        return $transport->send($message);
+                    } catch (\Exception $e) {
+                        throw $e;
+                    }
+                }
+                throw $e;
             }
         } else {
-            echo '<h1>E-Mail <strong>NOT</strong> sent</h1>';
+            throw new \Exception('E-Mail NOT sent via SMTP');
         }
 
-        return 'smtp:?';
+        throw new \Exception('E-Mail NOT sent via SMTP');
     }
 
     public function sendEmail($template = 'message', $emailOptions = array(), $content = null){
         
         $mandrillOptions = [];
+        $this->transcript[] = ['function' => __FUNCTION__];
+
         if (isset($emailOptions['mandrill']) && $emailOptions['mandrill']) {
             $mandrillOptions = array_merge($this->config['mandrill'], $emailOptions['mandrill']);
         } else {
@@ -515,8 +526,9 @@ class EmailService {
 
         $emailOptions = array_merge($this->config, $emailOptions);
         $emailOptions['mandrill'] = $mandrillOptions;
-
+        $this->transcript[] = ['emailOptions' => $emailOptions];
         if (!$content) {
+            $this->transcript[] = ['no content - rendering template' => $template];
             $content = $this->renderEmail($template, $emailOptions);
         }
         
@@ -568,15 +580,15 @@ class EmailService {
             
         }
         if (isset($emailOptions['mandrill']) && $this->encoding == 'UTF-8') {
-            return $this->sendMandrill($template, $emailOptions, $content);
+            $response = $this->sendMandrill($template, $emailOptions, $content);
         } else {
-            return $this->sendSMTP($template, $emailOptions, $content);
+            $response = $this->sendSMTP($template, $emailOptions, $content);
         }
-        
+        $this->transcript[] = ['response' => $response];
         
 
         //return $content;
-        return true;
+        return $this->transcript;
 
     }
 
