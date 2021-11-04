@@ -533,6 +533,8 @@ class ConversionService {
             ['priceRange', 'special'],
             ['gross_premium', 'numeric_value'],
             ['net_premium', 'numeric_value'],
+            ['bidding_start_price', 'numeric_value'],
+            ['auction_start_price', 'numeric_value'],
             ['property_land_price', 'numeric_value'],
             ['building_insurance_value', 'numeric_value'],
             ['official_tax_value', 'numeric_value'],
