@@ -460,7 +460,7 @@ class EmailService {
             if (isset($emailOptions['smtp']) && $emailOptions['smtp'] == 'google') {
               $transport = new SmtpTransport();
               $options   = new SmtpOptions(array(
-                  'name'              => 'casamail.com',
+                  'name'              => 'casasoft.com',
                   'host'              => 'smtp.gmail.com',
                   'port' => 465,
                   'connection_class'  => 'login',
