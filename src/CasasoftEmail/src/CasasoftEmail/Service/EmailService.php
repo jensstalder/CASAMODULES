@@ -348,13 +348,13 @@ class EmailService {
                 case 'rejected':
                 case 'invalid':
                     echo print_r($mandrill_result, true). "\n";
-                    $this->sendEmail('error', array(
-                      'to' => 'js@casasoft.ch',
-                      'from' => 'alert@cassaoft.com',
-                      'subject' => 'Mandrill Fehler',
-                      'error' => print_r(array_merge($emailOptionsSave, $mandrill_result), true),
-                      'domain' => 'casamail.local'
-                    ));
+//                    $this->sendEmail('error', array(
+//                      'to' => 'js@casasoft.ch',
+//                      'from' => 'alert@cassaoft.com',
+//                      'subject' => 'Mandrill Fehler',
+//                      'error' => print_r(array_merge($emailOptionsSave, $mandrill_result), true),
+//                      'domain' => 'casamail.local'
+//                    ));
                     return 'mandrill:'.$mandrill_result[0]['status'];
 
                     break;
