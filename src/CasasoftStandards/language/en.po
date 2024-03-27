@@ -1485,16 +1485,16 @@ msgid "Minergie-A-ECO"
 msgstr "Minergie-A-ECO"
 
 #:
-msgid "Minergie-Quarter"
-msgstr "Minergie-Quarter"
+msgid "Minergie-Areal"
+msgstr "Minergie-Areal"
 
 #:
-msgid "MQS Construction"
-msgstr "MQS Construction"
+msgid "MQS Bau"
+msgstr "MQS Bau"
 
 #:
-msgid "MQS Operations"
-msgstr "MQS Operations"
+msgid "MQS Betrieb"
+msgstr "MQS Betrieb"
 
 #:
 msgid "Fiber optic connection"

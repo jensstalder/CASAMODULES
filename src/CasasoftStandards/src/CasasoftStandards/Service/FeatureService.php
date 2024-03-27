@@ -294,16 +294,16 @@ class FeatureService {
                 'label' => $this->translator->translate('Minergie-A-ECO', 'casasoft-standards'),
                 'icon' => '',
             ),
-            'is-minergie-quarter' => array(
-                'label' => $this->translator->translate('Minergie-Quarter', 'casasoft-standards'),
+            'is-minergie-areal' => array(
+                'label' => $this->translator->translate('Minergie-Areal', 'casasoft-standards'),
                 'icon' => '',
             ),
-            'is-mqs-construction' => array(
-                'label' => $this->translator->translate('MQS construction', 'casasoft-standards'),
+            'is-mqs-betrieb' => array(
+                'label' => $this->translator->translate('MQS Bau', 'casasoft-standards'),
                 'icon' => '',
             ),
-            'is-mqs-operations' => array(
-                'label' => $this->translator->translate('MQS Operations', 'casasoft-standards'),
+            'is-mqs-betrieb' => array(
+                'label' => $this->translator->translate('MQS Betrieb', 'casasoft-standards'),
                 'icon' => '',
             ),
             'is-minergie-p-eco' => array(
