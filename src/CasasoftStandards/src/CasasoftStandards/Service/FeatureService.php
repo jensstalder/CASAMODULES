@@ -290,6 +290,22 @@ class FeatureService {
                 'label' => $this->translator->translate('Minergie-ECO', 'casasoft-standards'),
                 'icon' => '',
             ),
+            'is-minergie-a-eco' => array(
+                'label' => $this->translator->translate('Minergie-A-ECO', 'casasoft-standards'),
+                'icon' => '',
+            ),
+            'is-minergie-areal' => array(
+                'label' => $this->translator->translate('Minergie-Areal', 'casasoft-standards'),
+                'icon' => '',
+            ),
+            'is-mqs-bau' => array(
+                'label' => $this->translator->translate('MQS Bau', 'casasoft-standards'),
+                'icon' => '',
+            ),
+            'is-mqs-betrieb' => array(
+                'label' => $this->translator->translate('MQS Betrieb', 'casasoft-standards'),
+                'icon' => '',
+            ),
             'is-minergie-p-eco' => array(
                 'label' => $this->translator->translate('Minergie-P-ECO', 'casasoft-standards'),
                 'icon' => '',
@@ -437,15 +453,15 @@ class FeatureService {
                 'icon' => '',
             ),
 
-            'is-vat-opted' => [
+            'is-vat-opted' =>  array(
                 'label' => $this->translator->translate('VAT opted', 'casasoft-standards'),
                 'icon' => '',
-            ],
+            ),
 
-            'is-share-deal' => [
+            'is-share-deal' =>  array(
                 'label' => $this->translator->translate('Share deal', 'casasoft-standards'),
                 'icon' => '',
-            ],
+            ),
 
         );
     }
