@@ -298,7 +298,7 @@ class FeatureService {
                 'label' => $this->translator->translate('Minergie-Areal', 'casasoft-standards'),
                 'icon' => '',
             ),
-            'is-mqs-betrieb' => array(
+            'is-mqs-bau' => array(
                 'label' => $this->translator->translate('MQS Bau', 'casasoft-standards'),
                 'icon' => '',
             ),
