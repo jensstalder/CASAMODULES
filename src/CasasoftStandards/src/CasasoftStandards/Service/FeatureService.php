@@ -67,6 +67,22 @@ class FeatureService {
                 'label' => $this->translator->translate('Is under roof', 'casasoft-standards'),
                 'icon' => '',
             ),
+            'has-fiber-optic-connection ' => array(
+                'label' => $this->translator->translate('Fiber optic connection', 'casasoft-standards'),
+                'icon' => '',
+            ),
+            'has-multimedia-wiring' => array(
+                'label' => $this->translator->translate('Multimedia wiring', 'casasoft-standards'),
+                'icon' => '',
+            ),
+            'has-charging-station-for-electric-car' => array(
+                'label' => $this->translator->translate('Charging station for electric car', 'casasoft-standards'),
+                'icon' => '',
+            ),
+            'is-temporary-use' => array(
+                'label' => $this->translator->translate('Temporary use', 'casasoft-standards'),
+                'icon' => '',
+            ),
 
 
             'has-rental-deposit-guarantee' => array(

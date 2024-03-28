@@ -54,7 +54,7 @@ class UtilityService{
                 'icon' => '',
             ),
             'building' => array(
-                'label' => $this->translator->translate('Building', 'casasoft-standards'),
+                'label' => $this->translator->translate('Construction', 'casasoft-standards'),
                 'icon' => '',
             ),
             'investment' => array(
