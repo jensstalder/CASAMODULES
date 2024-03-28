@@ -1045,8 +1045,8 @@ msgid "Storage"
 msgstr "Storage"
 
 #: ../src/CasasoftStandards/Service/UtilityService.php:66
-msgid "Building"
-msgstr "Building"
+msgid "Construction"
+msgstr "Construction"
 
 #: ../src/CasasoftStandards/Service/UtilityService.php:70
 msgid "Investment"
