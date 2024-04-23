@@ -1502,18 +1502,6 @@ msgid "Minergie-A-ECO"
 msgstr "Minergie-A-ECO"
 
 #:
-msgid "Minergie-quarter"
-msgstr "Minergie-Quartier"
-
-#:
-msgid "Mqs construction"
-msgstr "SQM Construction"
-
-#:
-msgid "Mqs operations"
-msgstr "SQM Exploitation"
-
-#:
 msgid "Construction"
 msgstr "Construction"
 

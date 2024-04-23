@@ -1509,24 +1509,12 @@ msgid "Charging station for electric car"
 msgstr "Caricatore per auto elettriche"
 
 #:
-msgid "Minergie-A"
+msgid "Minergie A"
 msgstr "Minergie-A"
 
 #:
 msgid "Minergie-A-ECO"
 msgstr "Minergie-A-ECO"
-
-#:
-msgid "Minergie-quarter"
-msgstr "Minergie-Quartiere"
-
-#:
-msgid "Mqs construction"
-msgstr "SQM construzione"
-
-#:
-msgid "Mqs operations"
-msgstr "SQM esercizio"
 
 #:
 msgid "Construction"

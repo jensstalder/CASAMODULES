@@ -1478,7 +1478,7 @@ msgstr ""
 
 
 #:
-msgid "Minergie-A"
+msgid "Minergie A"
 msgstr "Minergie-A"
 
 #:
@@ -1598,24 +1598,12 @@ msgid "Charging station for electric car"
 msgstr "Charging station for electric car"
 
 #:
-msgid "Minergie-A"
+msgid "Minergie A"
 msgstr "Minergie-A"
 
 #:
 msgid "Minergie-A-ECO"
 msgstr "Minergie-A-ECO"
-
-#:
-msgid "Minergie-quarter"
-msgstr "Minergie-Quarter"
-
-#:
-msgid "Mqs construction"
-msgstr "MQS Construction"
-
-#:
-msgid "Mqs operations"
-msgstr "MQS Operations"
 
 #:
 msgid "Construction"

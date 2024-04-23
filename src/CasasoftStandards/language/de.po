@@ -1493,7 +1493,7 @@ msgid "Charging station for electric car"
 msgstr "Ladestation für Elektroauto"
 
 #:
-msgid "Minergie-A"
+msgid "Minergie A"
 msgstr "Minergie-A"
 
 #:
