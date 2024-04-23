@@ -1517,7 +1517,7 @@ msgid "Construction"
 msgstr "Bauen"
 
 #:
-msgid "Agricultural-lot"
+msgid "Agricultural lot"
 msgstr "Agrarland"
 
 #:
@@ -1533,11 +1533,11 @@ msgid "Butcher"
 msgstr "Metzgerei"
 
 #:
-msgid "Car-repair-shop"
+msgid "Car repair shop"
 msgstr "Autogarage"
 
 #:
-msgid "Carpentry-shop"
+msgid "Carpentry shop"
 msgstr "Schreinerei"
 
 #:
@@ -1545,7 +1545,7 @@ msgid "Casino"
 msgstr "Casino"
 
 #:
-msgid "Cellar-compartment"
+msgid "Cellar compartment"
 msgstr "Kellerabteil"
 
 #:
@@ -1553,31 +1553,31 @@ msgid "Chalet"
 msgstr "Chalet"
 
 #:
-msgid "Cheese-factory"
+msgid "Cheese factory"
 msgstr "Käserei"
 
 #:
-msgid "Club-disco"
+msgid "Club disco"
 msgstr "Club/Disco"
 
 #:
-msgid "Commercial-lot"
+msgid "Commercial lot"
 msgstr "Gewerbebauland"
 
 #:
-msgid "Commercial-space"
+msgid "Commercial space"
 msgstr "Gewerberäumlichkeiten"
 
 #:
-msgid "Doctors-office"
+msgid "Doctors office"
 msgstr "Praxis"
 
 #:
-msgid "Earth-sheltered-dwelling"
+msgid "Earth sheltered dwelling"
 msgstr "Erdhaus"
 
 #:
-msgid "Furnished-flat"
+msgid "Furnished flat"
 msgstr "Möblierte Wohnung"
 
 #:
@@ -1585,11 +1585,11 @@ msgid "Hairdresser"
 msgstr "Coiffeursalon"
 
 #:
-msgid "Industrial-lot"
+msgid "Industrial lot"
 msgstr "Industriebauland"
 
 #:
-msgid "Industrial-object"
+msgid "Industrial object"
 msgstr "Industrieobjekt"
 
 #:
@@ -1605,7 +1605,7 @@ msgid "Library"
 msgstr "Bibliothek"
 
 #:
-msgid "Market-garden"
+msgid "Market garden"
 msgstr "Gärtnerei"
 
 #:
@@ -1613,11 +1613,11 @@ msgid "Motel"
 msgstr "Motel"
 
 #:
-msgid "Movie-theater"
+msgid "Movie theater"
 msgstr "Kino"
 
 #:
-msgid "Multistorey-car-park"
+msgid "Multistorey car park"
 msgstr "Parkhaus"
 
 #:
@@ -1625,7 +1625,7 @@ msgid "Orphanage"
 msgstr "Heim"
 
 #:
-msgid "Party-room"
+msgid "Party room"
 msgstr "Partyraum"
 
 #:
@@ -1637,15 +1637,15 @@ msgid "Stoeckli"
 msgstr "Stöckli"
 
 #:
-msgid "Shopping-center"
+msgid "Shopping center"
 msgstr "Shoppingcenter"
 
 #:
-msgid "Squash-badminton"
+msgid "Squash badminton"
 msgstr "Squash/Badmintonhalle"
 
 #:
-msgid "Storage-room"
+msgid "Storage room"
 msgstr "Lager"
 
 

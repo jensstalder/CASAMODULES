@@ -1638,11 +1638,11 @@ msgid "Butcher"
 msgstr "Butcher"
 
 #:
-msgid "Car-repair-shop"
+msgid "Car repair shop"
 msgstr "Car repair shop"
 
 #:
-msgid "Carpentry-shop"
+msgid "Carpentry shop"
 msgstr "Carpentry shop"
 
 #:
@@ -1650,7 +1650,7 @@ msgid "Casino"
 msgstr "Casino"
 
 #:
-msgid "Cellar-compartment"
+msgid "Cellar compartment"
 msgstr "Cellar compartment"
 
 #:
@@ -1658,31 +1658,31 @@ msgid "Chalet"
 msgstr "Chalet"
 
 #:
-msgid "Cheese-factory"
+msgid "Cheese factory"
 msgstr "Cheese factory"
 
 #:
-msgid "Club-disco"
+msgid "Club disco"
 msgstr "Club/Disco"
 
 #:
-msgid "Commercial-lot"
+msgid "Commercial lot"
 msgstr "Commercial building plot"
 
 #:
-msgid "Commercial-space"
+msgid "Commercial space"
 msgstr "Commercial premises"
 
 #:
-msgid "Doctors-office"
+msgid "Doctors office"
 msgstr "Doctors office"
 
 #:
-msgid "Earth-sheltered-dwelling"
+msgid "Earth sheltered dwelling"
 msgstr "Earth sheltered dwelling"
 
 #:
-msgid "Furnished-flat"
+msgid "Furnished flat"
 msgstr "Furnished flat"
 
 #:
@@ -1690,11 +1690,11 @@ msgid "Hairdresser"
 msgstr "Hair salon"
 
 #:
-msgid "Industrial-lot"
+msgid "Industrial lot"
 msgstr "Industrial building plot"
 
 #:
-msgid "Industrial-object"
+msgid "Industrial object"
 msgstr "Industrial property"
 
 #:
@@ -1710,7 +1710,7 @@ msgid "Library"
 msgstr "Library"
 
 #:
-msgid "Market-garden"
+msgid "Market garden"
 msgstr "Market garden"
 
 #:
@@ -1718,11 +1718,11 @@ msgid "Motel"
 msgstr "Motel"
 
 #:
-msgid "Movie-theater"
+msgid "Movie theater"
 msgstr "Movie theatre"
 
 #:
-msgid "Multistorey-car-park"
+msgid "Multistorey car park"
 msgstr "Multistorey car park"
 
 #:
@@ -1730,7 +1730,7 @@ msgid "Orphanage"
 msgstr "Orphanage"
 
 #:
-msgid "Party-room"
+msgid "Party room"
 msgstr "Party room"
 
 #:
@@ -1742,15 +1742,15 @@ msgid "Stoeckli"
 msgstr "Stoeckli"
 
 #:
-msgid "Shopping-center"
+msgid "Shopping center"
 msgstr "Shopping center"
 
 #:
-msgid "Squash-badminton"
+msgid "Squash badminton"
 msgstr "Squash badminton"
 
 #:
-msgid "Storage-room"
+msgid "Storage room"
 msgstr "Storage room"
 
 

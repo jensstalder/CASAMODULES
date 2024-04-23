@@ -1533,7 +1533,7 @@ msgid "Construction"
 msgstr "Costruzione"
 
 #:
-msgid "Agricultural-lot"
+msgid "Agricultural lot"
 msgstr "Terreno agricolo"
 
 #:
@@ -1549,11 +1549,11 @@ msgid "Butcher"
 msgstr "Macelleria"
 
 #:
-msgid "Car-repair-shop"
+msgid "Car repair shop"
 msgstr "Garage"
 
 #:
-msgid "Carpentry-shop"
+msgid "Carpentry shop"
 msgstr "Falegnameria"
 
 #:
@@ -1561,7 +1561,7 @@ msgid "Casino"
 msgstr "Casino"
 
 #:
-msgid "Cellar-compartment"
+msgid "Cellar compartment"
 msgstr "Scomparto cantina"
 
 #:
@@ -1569,31 +1569,31 @@ msgid "Chalet"
 msgstr "Chalet"
 
 #:
-msgid "Cheese-factory"
+msgid "Cheese factory"
 msgstr "Caseificio"
 
 #:
-msgid "Club-disco"
+msgid "Club disco"
 msgstr "Club/Disco"
 
 #:
-msgid "Commercial-lot"
+msgid "Commercial lot"
 msgstr "Terreno edificabile commerciale"
 
 #:
-msgid "Commercial-space"
+msgid "Commercial space"
 msgstr "Locale commerciale"
 
 #:
-msgid "Doctors-office"
+msgid "Doctors office"
 msgstr "Ambulatorio"
 
 #:
-msgid "Earth-sheltered-dwelling"
+msgid "Earth sheltered dwelling"
 msgstr "Casa nella caverna/terra"
 
 #:
-msgid "Furnished-flat"
+msgid "Furnished flat"
 msgstr "Appartamento ammobiliato"
 
 #:
@@ -1601,11 +1601,11 @@ msgid "Hairdresser"
 msgstr "Salone di parrucchiere"
 
 #:
-msgid "Industrial-lot"
+msgid "Industrial lot"
 msgstr "Terreno edificabile industriale"
 
 #:
-msgid "Industrial-object"
+msgid "Industrial object"
 msgstr "Oggetto industriale"
 
 #:
@@ -1621,7 +1621,7 @@ msgid "Library"
 msgstr "Biblioteca"
 
 #:
-msgid "Market-garden"
+msgid "Market garden"
 msgstr "Vivaio"
 
 #:
@@ -1629,11 +1629,11 @@ msgid "Motel"
 msgstr "Motel"
 
 #:
-msgid "Movie-theater"
+msgid "Movie theater"
 msgstr "Cinema"
 
 #:
-msgid "Multistorey-car-park"
+msgid "Multistorey car park"
 msgstr "Autosilo"
 
 #:
@@ -1641,7 +1641,7 @@ msgid "Orphanage"
 msgstr "Instituto"
 
 #:
-msgid "Party-room"
+msgid "Party room"
 msgstr "Salone per feste"
 
 #:
@@ -1657,11 +1657,11 @@ msgid "Shopping-center"
 msgstr "Centro commerciale"
 
 #:
-msgid "Squash-badminton"
+msgid "Squash badminton"
 msgstr "Capannone squash/badminton"
 
 #:
-msgid "Storage-room"
+msgid "Storage room"
 msgstr "Magazzino"
 
 
