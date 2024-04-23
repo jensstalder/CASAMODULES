@@ -1476,3 +1476,176 @@ msgstr "Anzahl Toiletten"
 msgid "Number of showers"
 msgstr "Anzahl Duschen"
 
+#:
+msgid "Temporary use"
+msgstr "Zwischennutzung"
+
+#:
+msgid "Fiber optic connection"
+msgstr "Glasfaseranschluss"
+
+#:
+msgid "Multimedia wiring"
+msgstr "Multimediale Verkabelung"
+
+#:
+msgid "Charging station for electric car"
+msgstr "Ladestation für Elektroauto"
+
+#:
+msgid "Minergie-A"
+msgstr "Minergie-A"
+
+#:
+msgid "Minergie-A-ECO"
+msgstr "Minergie-A-ECO"
+
+#:
+msgid "Minergie-quarter"
+msgstr "Minergie-Areal"
+
+#:
+msgid "Mqs construction"
+msgstr "MQS Bau"
+
+#:
+msgid "Mqs operations"
+msgstr "MQS Betrieb"
+
+#:
+msgid "Construction"
+msgstr "Bauen"
+
+#:
+msgid "Agricultural-lot"
+msgstr "Agrarland"
+
+#:
+msgid "Arcade"
+msgstr "Arkade"
+
+#:
+msgid "Bakery"
+msgstr "Bäckerei"
+
+#:
+msgid "Butcher"
+msgstr "Metzgerei"
+
+#:
+msgid "Car-repair-shop"
+msgstr "Autogarage"
+
+#:
+msgid "Carpentry-shop"
+msgstr "Schreinerei"
+
+#:
+msgid "Casino"
+msgstr "Casino"
+
+#:
+msgid "Cellar-compartment"
+msgstr "Kellerabteil"
+
+#:
+msgid "Chalet"
+msgstr "Chalet"
+
+#:
+msgid "Cheese-factory"
+msgstr "Käserei"
+
+#:
+msgid "Club-disco"
+msgstr "Club/Disco"
+
+#:
+msgid "Commercial-lot"
+msgstr "Gewerbebauland"
+
+#:
+msgid "Commercial-space"
+msgstr "Gewerberäumlichkeiten"
+
+#:
+msgid "Doctors-office"
+msgstr "Praxis"
+
+#:
+msgid "Earth-sheltered-dwelling"
+msgstr "Erdhaus"
+
+#:
+msgid "Furnished-flat"
+msgstr "Möblierte Wohnung"
+
+#:
+msgid "Hairdresser"
+msgstr "Coiffeursalon"
+
+#:
+msgid "Industrial-lot"
+msgstr "Industriebauland"
+
+#:
+msgid "Industrial-object"
+msgstr "Industrieobjekt"
+
+#:
+msgid "Kiosk"
+msgstr "Kiosk"
+
+#:
+msgid "Laboratory"
+msgstr "Labor"
+
+#:
+msgid "Library"
+msgstr "Bibliothek"
+
+#:
+msgid "Market-garden"
+msgstr "Gärtnerei"
+
+#:
+msgid "Motel"
+msgstr "Motel"
+
+#:
+msgid "Movie-theater"
+msgstr "Kino"
+
+#:
+msgid "Multistorey-car-park"
+msgstr "Parkhaus"
+
+#:
+msgid "Orphanage"
+msgstr "Heim"
+
+#:
+msgid "Party-room"
+msgstr "Partyraum"
+
+#:
+msgid "Pub"
+msgstr "Pub"
+
+#:
+msgid "Stoeckli"
+msgstr "Stöckli"
+
+#:
+msgid "Shopping-center"
+msgstr "Shoppingcenter"
+
+#:
+msgid "Squash-badminton"
+msgstr "Squash/Badmintonhalle"
+
+#:
+msgid "Storage-room"
+msgstr "Lager"
+
+
