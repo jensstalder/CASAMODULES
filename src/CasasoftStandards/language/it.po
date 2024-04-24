@@ -1492,3 +1492,164 @@ msgstr "Garage sotterraneo"
 msgid "per year"
 msgstr "per anno"
 
+#:
+msgid "Temporary use"
+msgstr "Recupero urbano"
+
+#:
+msgid "Fiber optic connection"
+msgstr "Connessione in fibra ottica"
+
+#:
+msgid "Multimedia wiring"
+msgstr "Cablaggio multimediale"
+
+#:
+msgid "Charging station for electric car"
+msgstr "Caricatore per auto elettriche"
+
+#:
+msgid "Minergie A"
+msgstr "Minergie-A"
+
+#:
+msgid "Minergie-A-ECO"
+msgstr "Minergie-A-ECO"
+
+#:
+msgid "Construction"
+msgstr "Costruzione"
+
+#:
+msgid "Agricultural lot"
+msgstr "Terreno agricolo"
+
+#:
+msgid "Arcade"
+msgstr "Porticato"
+
+#:
+msgid "Bakery"
+msgstr "Panificio"
+
+#:
+msgid "Butcher"
+msgstr "Macelleria"
+
+#:
+msgid "Car repair shop"
+msgstr "Garage"
+
+#:
+msgid "Carpentry shop"
+msgstr "Falegnameria"
+
+#:
+msgid "Casino"
+msgstr "Casino"
+
+#:
+msgid "Cellar compartment"
+msgstr "Scomparto cantina"
+
+#:
+msgid "Chalet"
+msgstr "Chalet"
+
+#:
+msgid "Cheese factory"
+msgstr "Caseificio"
+
+#:
+msgid "Club disco"
+msgstr "Club/Disco"
+
+#:
+msgid "Commercial lot"
+msgstr "Terreno edificabile commerciale"
+
+#:
+msgid "Commercial space"
+msgstr "Locale commerciale"
+
+#:
+msgid "Doctors office"
+msgstr "Ambulatorio"
+
+#:
+msgid "Earth sheltered dwelling"
+msgstr "Casa nella caverna/terra"
+
+#:
+msgid "Furnished flat"
+msgstr "Appartamento ammobiliato"
+
+#:
+msgid "Hairdresser"
+msgstr "Salone di parrucchiere"
+
+#:
+msgid "Industrial lot"
+msgstr "Terreno edificabile industriale"
+
+#:
+msgid "Industrial object"
+msgstr "Oggetto industriale"
+
+#:
+msgid "Kiosk"
+msgstr "Chiosco"
+
+#:
+msgid "Laboratory"
+msgstr "Laboratoriio"
+
+#:
+msgid "Library"
+msgstr "Biblioteca"
+
+#:
+msgid "Market garden"
+msgstr "Vivaio"
+
+#:
+msgid "Motel"
+msgstr "Motel"
+
+#:
+msgid "Movie theater"
+msgstr "Cinema"
+
+#:
+msgid "Multistorey car park"
+msgstr "Autosilo"
+
+#:
+msgid "Orphanage"
+msgstr "Instituto"
+
+#:
+msgid "Party room"
+msgstr "Salone per feste"
+
+#:
+msgid "Pub"
+msgstr "Pub"
+
+#:
+msgid "Stoeckli"
+msgstr "Dipendenza"
+
+#:
+msgid "Shopping-center"
+msgstr "Centro commerciale"
+
+#:
+msgid "Squash badminton"
+msgstr "Capannone squash/badminton"
+
+#:
+msgid "Storage room"
+msgstr "Magazzino"
+
+

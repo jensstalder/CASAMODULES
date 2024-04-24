@@ -1477,3 +1477,164 @@ msgstr ""
 msgid "Number of showers"
 msgstr ""
 
+#:
+msgid "Temporary use"
+msgstr "Urbanisme temporaire"
+
+#:
+msgid "Fiber optic connection"
+msgstr "Connexion fibre optique"
+
+#:
+msgid "Multimedia wiring"
+msgstr "Câblage multimédia"
+
+#:
+msgid "Charging station for electric car"
+msgstr "Chargeur pour voiture électrique"
+
+#:
+msgid "Minergie-A"
+msgstr "Minergie-A"
+
+#:
+msgid "Minergie-A-ECO"
+msgstr "Minergie-A-ECO"
+
+#:
+msgid "Construction"
+msgstr "Construction"
+
+#:
+msgid "Agricultural lot"
+msgstr "Terrain agricole"
+
+#:
+msgid "Arcade"
+msgstr "Arcade"
+
+#:
+msgid "Bakery"
+msgstr "Boulangerie"
+
+#:
+msgid "Butcher"
+msgstr "Boucherie"
+
+#:
+msgid "Car repair shop"
+msgstr "Garage automobile"
+
+#:
+msgid "Carpentry shop"
+msgstr "Menuiserie"
+
+#:
+msgid "Casino"
+msgstr "Casino"
+
+#:
+msgid "Cellar compartment"
+msgstr "Compartement de cave"
+
+#:
+msgid "Chalet"
+msgstr "Chalet"
+
+#:
+msgid "Cheese factory"
+msgstr "Fromagerie"
+
+#:
+msgid "Club disco"
+msgstr "Club/Disco"
+
+#:
+msgid "Commercial lot"
+msgstr "Terrain à bâtir commercial"
+
+#:
+msgid "Commercial space"
+msgstr "Local commercial"
+
+#:
+msgid "Doctors office"
+msgstr "Établissement médico-social"
+
+#:
+msgid "Earth sheltered dwelling"
+msgstr "Maison troglodyte/organique"
+
+#:
+msgid "Furnished flat"
+msgstr "Appartement meublé"
+
+#:
+msgid "Hairdresser"
+msgstr "Salon de coiffure"
+
+#:
+msgid "Industrial lot"
+msgstr "Terrain à bâtir industriel"
+
+#:
+msgid "Industrial object"
+msgstr "Objet industriel"
+
+#:
+msgid "Kiosk"
+msgstr "Kiosque"
+
+#:
+msgid "Laboratory"
+msgstr "Laboratoire"
+
+#:
+msgid "Library"
+msgstr "Bibliothèque"
+
+#:
+msgid "Market garden"
+msgstr "Pépinière"
+
+#:
+msgid "Motel"
+msgstr "Motel"
+
+#:
+msgid "Movie theater"
+msgstr "Cinéma"
+
+#:
+msgid "Multistorey car park"
+msgstr "Parking à étages"
+
+#:
+msgid "Orphanage"
+msgstr "Foyer"
+
+#:
+msgid "Party room"
+msgstr "Salle des fêtes"
+
+#:
+msgid "Pub"
+msgstr "Pub"
+
+#:
+msgid "Stoeckli"
+msgstr "Dépendance"
+
+#:
+msgid "Shopping center"
+msgstr "Centre commercial"
+
+#:
+msgid "Squash badminton"
+msgstr "Terrain de squash/badminton couvert"
+
+#:
+msgid "Storage room"
+msgstr "Entrepôt"
+
+

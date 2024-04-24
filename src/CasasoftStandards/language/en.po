@@ -1478,7 +1478,7 @@ msgstr ""
 
 
 #:
-msgid "Minergie-A"
+msgid "Minergie A"
 msgstr "Minergie-A"
 
 #:
@@ -1580,5 +1580,166 @@ msgstr "Industrial object"
 #:
 msgid "Kiosk"
 msgstr "Kiosk"
+
+#:
+msgid "Temporary use"
+msgstr "Temporary use"
+
+#:
+msgid "Fiber optic connection"
+msgstr "Fiber optic connection"
+
+#:
+msgid "Multimedia wiring"
+msgstr "Multimedia wiring"
+
+#:
+msgid "Charging station for electric car"
+msgstr "Charging station for electric car"
+
+#:
+msgid "Minergie A"
+msgstr "Minergie-A"
+
+#:
+msgid "Minergie-A-ECO"
+msgstr "Minergie-A-ECO"
+
+#:
+msgid "Construction"
+msgstr "Construction"
+
+#:
+msgid "Agricultural-lot"
+msgstr "Agricultural land"
+
+#:
+msgid "Arcade"
+msgstr "Arcade"
+
+#:
+msgid "Bakery"
+msgstr "Bakery"
+
+#:
+msgid "Butcher"
+msgstr "Butcher"
+
+#:
+msgid "Car repair shop"
+msgstr "Car repair shop"
+
+#:
+msgid "Carpentry shop"
+msgstr "Carpentry shop"
+
+#:
+msgid "Casino"
+msgstr "Casino"
+
+#:
+msgid "Cellar compartment"
+msgstr "Cellar compartment"
+
+#:
+msgid "Chalet"
+msgstr "Chalet"
+
+#:
+msgid "Cheese factory"
+msgstr "Cheese factory"
+
+#:
+msgid "Club disco"
+msgstr "Club/Disco"
+
+#:
+msgid "Commercial lot"
+msgstr "Commercial building plot"
+
+#:
+msgid "Commercial space"
+msgstr "Commercial premises"
+
+#:
+msgid "Doctors office"
+msgstr "Doctors office"
+
+#:
+msgid "Earth sheltered dwelling"
+msgstr "Earth sheltered dwelling"
+
+#:
+msgid "Furnished flat"
+msgstr "Furnished flat"
+
+#:
+msgid "Hairdresser"
+msgstr "Hair salon"
+
+#:
+msgid "Industrial lot"
+msgstr "Industrial building plot"
+
+#:
+msgid "Industrial object"
+msgstr "Industrial property"
+
+#:
+msgid "Kiosk"
+msgstr "Kiosk"
+
+#:
+msgid "Laboratory"
+msgstr "Laboratory"
+
+#:
+msgid "Library"
+msgstr "Library"
+
+#:
+msgid "Market garden"
+msgstr "Market garden"
+
+#:
+msgid "Motel"
+msgstr "Motel"
+
+#:
+msgid "Movie theater"
+msgstr "Movie theatre"
+
+#:
+msgid "Multistorey car park"
+msgstr "Multistorey car park"
+
+#:
+msgid "Orphanage"
+msgstr "Orphanage"
+
+#:
+msgid "Party room"
+msgstr "Party room"
+
+#:
+msgid "Pub"
+msgstr "Pub"
+
+#:
+msgid "Stoeckli"
+msgstr "Stoeckli"
+
+#:
+msgid "Shopping center"
+msgstr "Shopping center"
+
+#:
+msgid "Squash badminton"
+msgstr "Squash badminton"
+
+#:
+msgid "Storage room"
+msgstr "Storage room"
+
 
 
