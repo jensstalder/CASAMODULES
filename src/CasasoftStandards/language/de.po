@@ -1477,6 +1477,14 @@ msgid "Number of showers"
 msgstr "Anzahl Duschen"
 
 #:
+msgid "Anzahl Wohneinheiten"
+msgstr "Number of residential units"
+
+#:
+msgid "Number of buildings"
+msgstr "Anzahl Gebäude"
+
+#:
 msgid "Temporary use"
 msgstr "Zwischennutzung"
 
