@@ -49,7 +49,7 @@ msgstr "Farm"
 msgid "Farm house"
 msgstr "Farm house"
 
-#: ../src/CasasoftStandards/Service/CategoryService.php:47
+#:
 msgid "Furnished flat"
 msgstr "Furnished flat"
 
@@ -123,7 +123,7 @@ msgstr "Underground slot"
 msgid "Villa"
 msgstr "Villa"
 
-#: ../src/CasasoftStandards/Service/CategoryService.php:65
+#:
 msgid "Chalet"
 msgstr "Chalet"
 
@@ -152,9 +152,10 @@ msgstr "Ground floor"
 msgid "Office"
 msgstr "Office"
 
+#. Exihition space???
 #: ../src/CasasoftStandards/Service/CategoryService.php:76
 msgid "Exihition space"
-msgstr "Exihition space"
+msgstr "Exhibition space"
 
 #: ../src/CasasoftStandards/Service/CategoryService.php:77
 msgid "Retail"
@@ -230,7 +231,7 @@ msgstr "Boat dry dock"
 
 #: ../src/CasasoftStandards/Service/CategoryService.php:96
 msgid "Alottment garden"
-msgstr "Alottment garden"
+msgstr "Allotment garden"
 
 #: ../src/CasasoftStandards/Service/CategoryService.php:97
 msgid "Squash / Badminton"
@@ -320,7 +321,7 @@ msgstr "Horse box"
 msgid "Boat mooring"
 msgstr "Boat mooring"
 
-#: ../src/CasasoftStandards/Service/CategoryService.php:119
+#:
 msgid "Cellar compartment"
 msgstr "Cellar compartment"
 
@@ -332,7 +333,7 @@ msgstr "Attic compartment"
 msgid "Restaurant"
 msgstr "Restaurant"
 
-#: ../src/CasasoftStandards/Service/CategoryService.php:124
+#:
 msgid "Shopping center"
 msgstr "Shopping center"
 
@@ -386,7 +387,7 @@ msgstr "Features"
 #: ../src/CasasoftStandards/Service/ConversionService.php:458
 #: ../src/CasasoftStandards/Service/ConversionService.php:563
 msgid "On Request"
-msgstr "On Request"
+msgstr "Upon request"
 
 #: ../src/CasasoftStandards/Service/ConversionService.php:608
 msgid "Fully ***"
@@ -394,7 +395,7 @@ msgstr "Fully ***"
 
 #: ../src/CasasoftStandards/Service/ConversionService.php:610
 msgid "Partialy ***"
-msgstr "Partialy ***"
+msgstr "Partially ***"
 
 #: ../src/CasasoftStandards/Service/ConversionService.php:612
 msgid "NOT ***"
@@ -758,7 +759,7 @@ msgstr "Bathrooms"
 
 #: ../src/CasasoftStandards/Service/NumvalService.php:217
 msgid "Numver of parcels"
-msgstr "Numver of parcels"
+msgstr "Number of parcels"
 
 #: ../src/CasasoftStandards/Service/NumvalService.php:223
 msgid "Distance to kindergarten"
@@ -1044,19 +1045,21 @@ msgstr "Residential"
 msgid "Storage"
 msgstr "Storage"
 
+#. This can probably be deleted. It's probably not used anymore. "Construction" has been added instead, which is a better translation.
 #: ../src/CasasoftStandards/Service/UtilityService.php:66
-msgid "Construction"
-msgstr "Construction"
+#, fuzzy
+msgid "Building"
+msgstr "Building"
 
 #: ../src/CasasoftStandards/Service/UtilityService.php:70
 msgid "Investment"
 msgstr "Investment"
 
-#: 
+#:
 msgid "Gross rent / m² / month"
 msgstr "Gross rent / m² / month"
 
-#: 
+#:
 msgid "Gross rent / m² / year"
 msgstr "Gross rent / m² / year"
 
@@ -1064,19 +1067,19 @@ msgstr "Gross rent / m² / year"
 msgid "Gross rent / month"
 msgstr "Gross rent / month"
 
-#: 
+#:
 msgid "Gross rent / year"
 msgstr "Gross rent / year"
 
-#: 
+#:
 msgid "Gross price"
 msgstr "Gross price"
 
-#: 
+#:
 msgid "Net rent / m² / month"
 msgstr "Net rent / m² / month"
 
-#: 
+#:
 msgid "Net rent / m² / year"
 msgstr "Net rent / m² / year"
 
@@ -1088,7 +1091,7 @@ msgstr "Net rent / year"
 msgid "Net rent / month"
 msgstr "Net rent / month"
 
-#: 
+#:
 msgid "Net price"
 msgstr "Net price"
 
@@ -1136,346 +1139,649 @@ msgstr "Net rent / m² / year"
 msgid "Sales price"
 msgstr "Sales price"
 
-#: 
+#:
 msgid "Category"
 msgstr "Category"
 
-#: 
+#:
 msgid "Part of a house"
 msgstr "Part of a house"
 
-#: 
+#:
 msgid "Immediate"
 msgstr "Immediate"
 
-#: 
+#:
 msgid "Gastronomy / Hotel"
 msgstr "Gastronomy / Hotel"
 
-#: 
+#:
 msgid "Parking / Garage"
 msgstr "Parking / Garage"
 
-#: 
+#:
 msgid "Extra Costs"
 msgstr "Extra Costs"
 
-#: 
+#:
 msgid "Engadine house"
 msgstr "Engadine house"
 
-#: 
+#:
 msgid "Patrician house"
 msgstr "Patrician house"
 
-#: 
+#:
 msgid "Volumes"
 msgstr "Volumes"
 
-#: 
+#:
 msgid "Guest toilets"
 msgstr "Guest toilets"
 
-#: 
+#:
 msgid "Electric heating"
 msgstr "Electric heating"
 
-#: 
+#:
 msgid "Geothermal-probe heating"
 msgstr "Geothermal-probe heating"
 
-#: 
+#:
 msgid "District heating"
 msgstr "District heating"
 
-#: 
+#:
 msgid "Gas heating"
 msgstr "Gas heating"
 
-#: 
+#:
 msgid "Wood heating"
 msgstr "Wood heating"
 
-#: 
+#:
 msgid "Air-water-heatpump heating"
 msgstr "Air-water-heatpump heating"
 
-#: 
+#:
 msgid "Oil heating"
 msgstr "Oil heating"
 
-#: 
+#:
 msgid "Pellet heating"
 msgstr "Pellet heating"
 
-#: 
+#:
 msgid "Heatpump heating"
 msgstr "Heatpump heating"
 
-#: 
+#:
 msgid "Floor heating"
 msgstr "Floor heating"
 
-#: 
+#:
 msgid "Radiators"
 msgstr "Radiators"
 
-#: 
+#:
 msgid "Heat generation"
 msgstr "Heat generation"
 
-#: 
+#:
 msgid "Heat distribution"
 msgstr "Heat distribution"
 
-#: 
+#:
 msgid "Egid"
 msgstr "Egid"
 
-#: 
+#:
 msgid "Ewid"
 msgstr "Ewid"
 
-#: 
+#:
 msgid "Official building number"
 msgstr "Official building number"
 
-#: 
+#:
 msgid "Ownership share"
 msgstr "Ownership share"
 
-#: 
+#:
 msgid "Property development"
 msgstr "Property development"
 
-#: 
+#:
 msgid "S-Number"
 msgstr "S-Number"
 
-#: 
+#:
 msgid "Unit number"
 msgstr "Unit number"
 
-#: 
+#:
 msgid "Renewal fund date"
 msgstr "Renewal fund date"
 
-#: 
+#:
 msgid "Price range"
 msgstr "Price range"
 
-#: 
+#:
 msgid "Energy"
 msgstr "Energy"
 
-#: 
+#:
 msgid "Fully developed"
 msgstr "Fully developed"
 
-#: 
+#:
 msgid "Partialy Developed"
-msgstr "Partialy Developed"
+msgstr "Partially Developed"
 
-#: 
+#:
 msgid "Undeveloped"
 msgstr "Undeveloped"
 
-#: 
+#:
 msgid "From"
 msgstr "From"
 
-#: 
+#:
 msgid "To"
 msgstr "To"
 
-#: 
+#:
 msgid "Balcony space"
 msgstr "Balcony space"
 
-#: 
+#:
 msgid "Cellar space"
 msgstr "Cellar space"
 
-#: 
+#:
 msgid "Garden space"
 msgstr "Garden space"
 
-#: 
+#:
 msgid "Loggia space"
 msgstr "Loggia space"
 
-#: 
+#:
 msgid "Terrace space"
 msgstr "Terrace space"
 
-#: 
+#:
 msgid "Year of last modernization"
 msgstr "Year of last modernization"
 
-#: 
+#:
 msgid "Year of last restoration"
 msgstr "Year of last restoration"
 
-#: 
+#:
 msgid "Rental income (gross)"
 msgstr "Rental income (gross)"
 
-#: 
+#:
 msgid "Rental income (net)"
-msgstr "Rental income (net)"
+msgstr "Net annual rent (actual)"
 
-#: 
+#:
 msgid "Renewal fund input"
 msgstr "Renewal fund input"
 
-#: 
+#:
 msgid "Official tax value"
 msgstr "Official tax value"
 
-#: 
+#:
 msgid "Imputed rent value"
 msgstr "Imputed rent value"
 
-#: 
+#:
 msgid "Net premium"
 msgstr "Net premium"
 
-#: 
+#:
 msgid "Building insurance value"
 msgstr "Building insurance value"
 
-#: 
+#:
 msgid "Constructed factor"
 msgstr "Constructed factor"
 
-#: 
+#:
 msgid "GEAK exterior"
 msgstr "GEAK exterior"
 
-#: 
+#:
 msgid "GEAK total"
 msgstr "GEAK total"
 
-#: 
+#:
 msgid "Renewal fund value"
 msgstr "Renewal fund value"
 
-#: 
+#:
 msgid "Number of guest toilets"
 msgstr "Number of guest toilets"
 
-#: 
+#:
 msgid "Starting from"
 msgstr "Starting from"
 
-#: 
+#:
 msgid "Mr."
 msgstr "Mr."
 
-#: 
+#:
 msgid "Ms."
 msgstr "Ms."
 
-#: 
+#:
 msgid "Infrared"
 msgstr "Infrared"
 
-#: 
+#:
 msgid "Minergie-ECO"
 msgstr "Minergie-ECO"
 
-#: 
+#:
 msgid "Minergie-P-ECO"
 msgstr "Minenergie-P-ECO"
 
-#: 
+#:
 msgid "GVA"
 msgstr "GVA"
 
-#: 
+#:
 msgid "Availability"
 msgstr "Availability"
 
-#: 
+#:
 msgid "Active"
 msgstr "Active"
 
-#: 
+#:
 msgid "Inactive"
 msgstr "Inactive"
 
-#: 
+#:
 msgid "Reference"
 msgstr "Reference"
 
-#: 
+#:
 msgid "Reserved"
 msgstr "Reserved"
 
-#: 
+#:
 msgid "Draft"
 msgstr "Draft"
 
-#: 
+#:
 msgid "Private"
 msgstr "Private"
 
-#: 
+#:
 msgid "In acquisition"
 msgstr "In acquisition"
 
-#: 
+#:
 msgid "Sold"
 msgstr "Sold"
 
-#: 
+#:
 msgid "Rented"
 msgstr "Rented"
 
-#: 
+#:
 msgid "Taken"
 msgstr "Taken"
 
-#: 
+#:
 msgid "Residential / commercial building"
-msgstr "Living/commercial building"
+msgstr "Living / commercial building"
 
-#: 
+#:
 msgid "day"
 msgstr "day"
 
-#: 
+#:
 msgid "Wall heating"
 msgstr "Wall heating"
 
-#: 
+#:
 msgid "Solar Thermal"
-msgstr ""
+msgstr "Solar Thermal"
 
-#: 
+#:
 msgid "Photovoltaics"
-msgstr ""
+msgstr "Photovoltaics"
 
-#: 
+#:
 msgid "Dishwasher"
-msgstr ""
+msgstr "Dishwasher"
 
-#: 
+#:
 msgid "Charging station"
-msgstr ""
+msgstr "Charging station"
 
-#: 
+#:
 msgid "Cellar"
-msgstr ""
+msgstr "Cellar"
 
-#: 
+#:
 msgid "Number of toilets"
-msgstr ""
+msgstr "Number of toilets"
 
-#: 
+#:
 msgid "Number of showers"
-msgstr ""
+msgstr "Number of showers"
 
+#:
+msgid "Playground"
+msgstr "Playground"
+
+#:
+msgid "Garage underground"
+msgstr "Garage underground"
+
+#:
+msgid "per year"
+msgstr "per year"
+
+#:
+msgid "Remote viewing"
+msgstr "Remote viewing"
+
+#:
+msgid "Number of residential units"
+msgstr "Number of residential units"
+
+#:
+msgid "Number of buildings"
+msgstr "Number of buildings"
+
+#:
+msgid "Number of commercial units"
+msgstr "Number of commercial units"
+
+#:
+msgid "Rental income (potential)"
+msgstr "Net annual rent (potential)"
+
+#:
+msgid "Current occupancy"
+msgstr "Current occupancy"
+
+#:
+msgid "Current occupancy (date)"
+msgstr "Current occupancy (date)"
+
+#:
+msgid "Gross premium (target)"
+msgstr "Gross premium"
+
+#:
+msgid "Operation and maintenance cost"
+msgstr "Operation and maintenance cost (yearly)"
+
+#:
+msgid "VAT opted"
+msgstr "opted"
+
+#:
+msgid "Sales method"
+msgstr "Sales method"
+
+#:
+msgid "Fixed pricing"
+msgstr "Fixed price"
+
+#:
+msgid "Auction"
+msgstr "Auction"
+
+#:
+msgid "Bidding process"
+msgstr "Bidding process"
+
+#:
+msgid "Auction start price"
+msgstr "Auction start price"
+
+#:
+msgid "Auction start"
+msgstr "Auction start"
+
+#:
+msgid "Auction end"
+msgstr "Auction end"
+
+#:
+msgid "Auction minimal increase"
+msgstr "Auction minimal increase"
+
+#:
+msgid "Bidding start price"
+msgstr "Bidding start price"
+
+#:
+msgid "Bidding start"
+msgstr "Bidding start"
+
+#:
+msgid "Bidding start (binding)"
+msgstr "Bidding start (binding)"
+
+#:
+msgid "Bidding end"
+msgstr "Bidding end"
+
+#:
+msgid "Sales start"
+msgstr "Sales start"
+
+#:
+msgid "Sales end"
+msgstr "Sales end"
+
+#:
+msgid "Share deal"
+msgstr "Share deal"
+
+#:
+msgid "Sales deal type"
+msgstr "Sales deal type"
+
+#:
+msgid "Asset deal"
+msgstr "Asset deal"
+
+#:
+msgid "Brine-water heat pump"
+msgstr "Brine-water heat pump"
+
+#:
+msgid "Block-type thermal power station"
+msgstr "Block-type thermal power station"
+
+#:
+msgid "Coal"
+msgstr "Coal"
+
+#:
+msgid "VAT not opted"
+msgstr "not opted"
+
+#:
+msgid "Number of rooms from"
+msgstr "Number of rooms from"
+
+#:
+msgid "Number of rooms to"
+msgstr "Number of rooms to"
+
+#:
+msgid "Construction status"
+msgstr "Construction status"
+
+#:
+msgid "Floorspace from"
+msgstr "Floorspace from"
+
+#:
+msgid "Floorspace to"
+msgstr "Floorspace to"
+
+#:
+msgid "Living area from"
+msgstr "Living area from"
+
+#:
+msgid "Living area to"
+msgstr "Living area to"
+
+#:
+msgid "per"
+msgstr "per"
+
+#:
+msgid "Temporary use"
+msgstr "Temporary use"
+
+#:
+msgid "Fiber optic connection"
+msgstr "Fiber optic connection"
+
+#:
+msgid "Multimedia wiring"
+msgstr "Multimedia wiring"
+
+#:
+msgid "Charging station for electric car"
+msgstr "Charging station for electric car"
+
+#:
+msgid "Construction"
+msgstr "Construction"
+
+#:
+msgid "Agricultural land"
+msgstr "Agricultural land"
+
+#:
+msgid "Arcade"
+msgstr "Arcade"
+
+#:
+msgid "Bakery"
+msgstr "Bakery"
+
+#:
+msgid "Butcher"
+msgstr "Butcher"
+
+#:
+msgid "Car repair shop"
+msgstr "Car repair shop"
+
+#:
+msgid "Carpentry shop"
+msgstr "Carpentry shop"
+
+#:
+msgid "Casino"
+msgstr "Casino"
+
+#:
+msgid "Cheese factory"
+msgstr "Cheese factory"
+
+#:
+msgid "Club / Disco"
+msgstr "Club / Disco"
+
+#:
+msgid "Commercial building plot"
+msgstr "Commercial building plot"
+
+#:
+msgid "Commercial premises"
+msgstr "Commercial premises"
+
+#:
+msgid "Doctors office"
+msgstr "Doctors office"
+
+#:
+msgid "Earth sheltered dwelling"
+msgstr "Earth sheltered dwelling"
+
+#:
+msgid "Hair salon"
+msgstr "Hair salon"
+
+#:
+msgid "Industrial building plot"
+msgstr "Industrial building plot"
+
+#:
+msgid "Industrial property"
+msgstr "Industrial property"
+
+#:
+msgid "Kiosk"
+msgstr "Kiosk"
+
+#:
+msgid "Laboratory"
+msgstr "Laboratory"
+
+#:
+msgid "Library"
+msgstr "Library"
+
+#:
+msgid "Market garden"
+msgstr "Market garden"
+
+#:
+msgid "Motel"
+msgstr "Motel"
+
+#:
+msgid "Movie theatre"
+msgstr "Movie theatre"
+
+#:
+msgid "Multistorey car park"
+msgstr "Multistorey car park"
+
+#:
+msgid "Orphanage"
+msgstr "Orphanage"
+
+#:
+msgid "Party room"
+msgstr "Party room"
+
+#:
+msgid "Pub"
+msgstr "Pub"
+
+#:
+msgid "Stoeckli"
+msgstr "Stoeckli"
+
+#:
+msgid "Squash badminton"
+msgstr "Squash badminton"
+
+#:
+msgid "Storage room"
+msgstr "Storage room"
 
 #:
 msgid "Minergie A"
