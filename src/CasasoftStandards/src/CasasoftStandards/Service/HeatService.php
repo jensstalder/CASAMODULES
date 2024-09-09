@@ -78,7 +78,7 @@ class HeatService {
             'heatpump-brine-and-water' => [
                 'label' => $this->translator->translate('Brine-water heat pump', 'casasoft-standards')
             ],
-            'bhkw' => [
+            'bhkwr' => [
                 'label' => $this->translator->translate('Block-type thermal power station', 'casasoft-standards')
             ],
         ];
@@ -102,7 +102,7 @@ class HeatService {
                     'photovoltaics',
                     'coal',
                     'heatpump-brine-and-water',
-                    'bhkw'
+                    'bhkwr'
                 ],
             ],
             'heatDistribution' => [
