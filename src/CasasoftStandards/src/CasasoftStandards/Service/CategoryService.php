@@ -2,17 +2,21 @@
 namespace CasasoftStandards\Service;
 
 use Laminas\Http\Request;
-use Laminas\ServiceManager\FactoryInterface;
 use Laminas\ServiceManager\ServiceLocatorInterface;
-
+use Laminas\I18n\Translator\Translator;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Laminas\I18n\Translator\TranslatorInterface;
 
 class CategoryService {
+
+    /** @var Translator */
+    private $translator;
 
     public $items = array();
     public $groups = array();
 
-    public function __construct($translator){
+    public function __construct(TranslatorInterface $translator)
+    {
         $this->translator = $translator;
         $this->groups = $this->getDefaultGroupOptions();
     }
