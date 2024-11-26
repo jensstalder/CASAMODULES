@@ -74,6 +74,8 @@ class CategoryService {
             'castle' => array('label' => $this->translator->translate('Castle', 'casasoft-standards'),),
             'fuel-station' => array('label' => $this->translator->translate('Fuel station', 'casasoft-standards'),),
             'cafe-bar' => array('label' => $this->translator->translate('Café / Bar', 'casasoft-standards'),),
+            'cafe' => array('label' => $this->translator->translate('Café', 'casasoft-standards'),),
+            'bar' => array('label' => $this->translator->translate('Bar', 'casasoft-standards'),),
             'maisonette' => array('label' => $this->translator->translate('Maisonette', 'casasoft-standards'),),
             'penthouse' => array('label' => $this->translator->translate('Penthouse', 'casasoft-standards'),),
             'hobby-room' => array('label' => $this->translator->translate('Atelier', 'casasoft-standards'),),
